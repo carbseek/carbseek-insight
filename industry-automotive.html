@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汽车行业情报 | CarbSeek Insight</title>
+<style>
+:root {
+  --bg-primary: #0a0e17; --bg-secondary: #111827; --bg-card: #1a2332; --bg-card-hover: #1e293b;
+  --border-color: #253044; --text-primary: #e2e8f0; --text-secondary: #94a3b8;
+  --accent-green: #10b981; --accent-blue: #3b82f6; --accent-amber: #f59e0b; --accent-red: #ef4444;
+  --accent-purple: #8b5cf6; --accent-cyan: #06b6d4;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.6; min-height: 100vh; }
+.header { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text-primary); }
+.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.nav-tabs { display: flex; gap: 4px; }
+.nav-tab { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.2s; }
+.nav-tab:hover, .nav-tab.active { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.main { max-width: 1440px; margin: 0 auto; padding: 24px; }
+.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
+.card-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-body { padding: 16px 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+.section-title { font-size: 16px; font-weight: 700; margin: 32px 0 16px; display: flex; align-items: center; gap: 8px; }
+.section-title::before { content: ''; width: 4px; height: 20px; background: var(--accent-blue); border-radius: 2px; }
+.page-link { color: var(--accent-blue); text-decoration: none; font-size: 12px; }
+.page-link:hover { text-decoration: underline; }
+
+.industry-hero { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1)); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 12px; padding: 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+.industry-hero h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+.industry-hero p { font-size: 14px; color: var(--text-secondary); }
+.industry-stats { display: flex; gap: 24px; }
+.stat-box { text-align: center; }
+.stat-num { font-size: 28px; font-weight: 700; color: var(--accent-amber); font-family: var(--font-mono); }
+.stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+.evidence-item { padding: 14px 0; border-bottom: 1px solid var(--border-color); }
+.evidence-item:last-child { border-bottom: none; padding-bottom: 0; }
+.evidence-item:first-child { padding-top: 0; }
+.evidence-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.evidence-meta { display: flex; gap: 10px; align-items: center; font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+.evidence-tag { padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 500; }
+.evidence-tag.policy { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+.evidence-tag.academic { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+.evidence-tag.competitor { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+.evidence-abstract { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+.opp-card { padding: 14px; border-bottom: 1px solid var(--border-color); transition: background 0.2s; }
+.opp-card:hover { background: var(--bg-card-hover); }
+.opp-card:last-child { border-bottom: none; }
+.opp-card-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.opp-card-meta { display: flex; gap: 8px; font-size: 11px; color: var(--text-secondary); }
+
+.rec-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-color); align-items: flex-start; }
+.rec-item:last-child { border-bottom: none; }
+.rec-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.rec-icon.field { background: rgba(59, 130, 246, 0.15); }
+.rec-icon.template { background: rgba(16, 185, 129, 0.15); }
+.rec-icon.plugin { background: rgba(245, 158, 11, 0.15); }
+.rec-text { font-size: 12px; line-height: 1.6; flex: 1; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🌿</div>
+      <span>CarbSeek Insight</span>
+    </div>
+    <nav class="nav-tabs">
+      <a href="index.html" class="nav-tab">本周产业雷达</a>
+      <a href="industry-chemical.html" class="nav-tab">化工</a>
+      <a href="industry-electronics.html" class="nav-tab">电子电气</a>
+      <a href="industry-automotive.html" class="nav-tab active">汽车</a>
+      <a href="industry-eu-export.html" class="nav-tab">欧盟出口</a>
+      <a href="evidence.html" class="nav-tab">证据库</a>
+      <a href="opportunities.html" class="nav-tab">机会库</a>
+    </nav>
+    <div style="display:flex;gap:16px;font-size:12px;color:var(--text-secondary);"><span>WR-2026-W28</span></div>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="industry-hero">
+    <div>
+      <h1>🚗 汽车行业情报</h1>
+      <p>聚焦汽车 EPD、电池法规碳足迹声明、iNEDC/WLTP 数据对接与整车碳核算</p>
+    </div>
+    <div class="industry-stats">
+      <div class="stat-box"><div class="stat-num">2</div><div class="stat-label">本周动态</div></div>
+      <div class="stat-box"><div class="stat-num">1</div><div class="stat-label">产品机会</div></div>
+      <div class="stat-box"><div class="stat-num">82</div><div class="stat-label">热度指数</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">📋 最新政策</div></div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">欧盟汽车制造商协会发布 EPD 编制指南 V3.0</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag policy">政策</span><span>2026-06-30</span><span>ACEA</span>
+          </div>
+          <div class="evidence-abstract">ACEA 更新汽车 EPD 编制指南，要求包含电池生产、车辆使用、报废回收三阶段数据。V3.0 新增电池碳足迹章节，要求电芯级数据追溯。汽车行业 EPD 复杂度显著提升。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">📚 最新论文</div></div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">Transportation Research Part D：电动汽车全生命周期碳足迹敏感性分析</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag academic">学术</span><span>2026-06-22</span><span>TR Part D</span>
+          </div>
+          <div class="evidence-abstract">研究发现电动汽车碳足迹对电池容量、电网碳强度、行驶里程假设高度敏感。同一车型在不同国家使用时碳足迹可相差 2-3 倍。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">🏢 代表企业动作</div></div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">宁德时代发布 2025 碳足迹报告</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag competitor">竞品</span><span>2026-06-28</span><span>宁德时代</span>
+          </div>
+          <div class="evidence-abstract">发布行业首个电池全生命周期碳足迹报告。NCM 电池碳足迹 75 kg CO2e/kWh，LFP 电池 62 kg CO2e/kWh。详细披露了原材料获取、电芯生产、模组组装三阶段排放。</div>
+        </div>
+        <div class="evidence-item">
+          <div class="evidence-title">比亚迪启动电池碳足迹数字化平台</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag competitor">竞品</span><span>2026-06-20</span><span>比亚迪</span>
+          </div>
+          <div class="evidence-abstract">比亚迪内部启动电池碳足迹数字化平台建设项目，覆盖从锂矿开采到电池回收的全链条数据采集。计划 2027 年对外开放供应商数据接口。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">💡 CarbSeek 产品机会</div>
+        <a href="opportunities.html" class="page-link">查看全部 →</a>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <div class="opp-card">
+          <div class="opp-card-title">汽车行业 EPD 自动生成</div>
+          <div class="opp-card-meta">
+            <span style="color: var(--accent-red);">●</span> 待评审
+            <span>商业 7 | 技术 7 | 证据 B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">CarbSeek 行动建议</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔧 推荐新增字段</div></div>
+      <div class="card-body">
+        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>电池类型与容量</strong>：NCM/LFP/Solid State</div></div>
+        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>工况能耗数据</strong>：iNEDC/WLTP/CLTC</div></div>
+        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>报废回收率</strong>：电池回收、钢材回收比例</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">📄 推荐报告模板</div></div>
+      <div class="card-body">
+        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>汽车 EPD 自动生成报告</strong>：符合 ACEA V3.0 指南</div></div>
+        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>电池碳足迹声明报告</strong>：符合欧盟电池法规</div></div>
+        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>整车碳足迹对比报告</strong>：ICE vs BEV 同平台对比</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔌 推荐行业插件</div></div>
+      <div class="card-body">
+        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>工信部工况数据库</strong>：对接 iNEDC/WLTP 测试数据</div></div>
+        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>电池供应链数据库</strong>：电芯、正极、负极碳足迹</div></div>
+        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>报废回收企业对接</strong>：格林美等回收商数据</div></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

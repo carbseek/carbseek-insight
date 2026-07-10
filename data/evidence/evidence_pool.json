@@ -1,0 +1,254 @@
+[
+  {
+    "evidence_id": "EV-2026-0001",
+    "title": "欧盟 CBAM 2026 Q2 申报指南更新：新增钢铁下游产品追溯要求",
+    "source": "European Commission - TAXUD",
+    "source_url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
+    "date": "2026-07-01",
+    "industry": "欧盟出口",
+    "theme": "CBAM",
+    "abstract": "欧盟税务总司发布 CBAM 2026 Q2 申报指南更新，明确钢铁下游产品（螺丝、螺母、汽车零部件）需追溯上游原材料碳排放。",
+    "key_evidence": "新增 Annex IV-B，列出 47 类需追溯的钢铁下游产品 HS 编码",
+    "agent_explanation": "这意味着更多出口商需要精细化的供应链碳数据采集能力，CarbSeek Scan 的价值显著提升",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0001"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0002",
+    "title": "中国机电商会发布 CBAM 应对白皮书：80% 企业缺乏碳数据管理能力",
+    "source": "中国机电产品进出口商会",
+    "source_url": "https://www.cccme.org.cn",
+    "date": "2026-06-28",
+    "industry": "欧盟出口",
+    "theme": "CBAM",
+    "abstract": "机电商会调研 300 家对欧出口企业，发现 80% 尚未建立产品级碳足迹核算能力，仅 12% 完成 CBAM 就绪度评估。",
+    "key_evidence": "样本量 300 家，覆盖机电、钢铁、铝、化工四大行业",
+    "agent_explanation": "市场需求明确，CarbSeek 的 CBAM 模块有明确的付费客户基础",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0001"
+    ],
+    "evidence_type": "行业应用"
+  },
+  {
+    "evidence_id": "EV-2026-0003",
+    "title": "巴斯夫发布 2025 可持续供应链报告：要求上游供应商提供经核证碳数据",
+    "source": "BASF Annual Report",
+    "source_url": "https://www.basf.com/global/en/investors/publications.html",
+    "date": "2026-06-25",
+    "industry": "化工",
+    "theme": "Scope3",
+    "abstract": "巴斯夫要求 Tier 1 供应商 2027 年前提供经第三方核证的产品碳足迹数据，并将此纳入供应商评分体系。",
+    "key_evidence": "覆盖 7,500+ 供应商，占巴斯夫采购额的 85%",
+    "agent_explanation": "头部化工企业的 Scope 3 要求将传导至整个供应链，催生碳数据服务需求",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0002"
+    ],
+    "evidence_type": "竞品"
+  },
+  {
+    "evidence_id": "EV-2026-0004",
+    "title": "Nature Communications：化工行业 Scope 3 排放因子不确定性研究",
+    "source": "Nature Communications",
+    "source_url": "https://www.nature.com/ncomms/",
+    "date": "2026-06-20",
+    "industry": "化工",
+    "theme": "Scope3",
+    "abstract": "研究发现化工产品上游排放因子存在 ±40% 的不确定性，主要来源于区域电力结构和生产工艺差异。",
+    "key_evidence": "基于 1,200+ 化工产品的生命周期数据",
+    "agent_explanation": "这意味着精细化的区域/工艺级别因子库有巨大的学术价值和商业潜力",
+    "credibility": "高",
+    "in_product_pool": false,
+    "opportunity_ids": [
+      "OP-2026-0002"
+    ],
+    "evidence_type": "学术"
+  },
+  {
+    "evidence_id": "EV-2026-0005",
+    "title": "韩国产业通商资源部：电子电气产品碳标签强制实施令（2026.7.1 起）",
+    "source": "韩国产业通商资源部",
+    "source_url": "https://www.motie.go.kr",
+    "date": "2026-07-01",
+    "industry": "电子电气",
+    "theme": "碳标签",
+    "abstract": "韩国对进口电子电气产品实施强制碳标签，首批覆盖电视、冰箱、洗衣机、空调四大品类。",
+    "key_evidence": "违规产品将被禁止进入韩国市场，首批过渡期 6 个月",
+    "agent_explanation": "中国电子电气出口企业面临双重碳标签压力，互认服务需求迫切",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0003"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0006",
+    "title": "欧盟汽车制造商协会发布 EPD 编制指南 V3.0",
+    "source": "ACEA",
+    "source_url": "https://www.acea.auto",
+    "date": "2026-06-30",
+    "industry": "汽车",
+    "theme": "EPD",
+    "abstract": "ACEA 更新汽车 EPD 编制指南，要求包含电池生产、车辆使用、报废回收三阶段数据。",
+    "key_evidence": "V3.0 新增电池碳足迹章节，要求电芯级数据追溯",
+    "agent_explanation": "汽车行业 EPD 复杂度提升，自动化工具需求增加",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0004"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0007",
+    "title": "碳阻迹完成 B 轮融资：LCA 因子数据库为其核心资产",
+    "source": "36氪",
+    "source_url": "https://36kr.com",
+    "date": "2026-06-22",
+    "industry": "通用",
+    "theme": "LCA",
+    "abstract": "碳阻迹完成 2 亿元 B 轮融资，资金将用于扩充 LCA 因子数据库和开发 API 服务。",
+    "key_evidence": "估值 15 亿元，因子库覆盖 10 万+ 条数据",
+    "agent_explanation": "竞品验证 LCA 因子库的商业价值，CarbSeek 需加速因子库建设",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0005"
+    ],
+    "evidence_type": "竞品"
+  },
+  {
+    "evidence_id": "EV-2026-0008",
+    "title": "妙盈科技推出 LCA 因子 API：定价 0.5 元/次查询",
+    "source": "妙盈科技官网",
+    "source_url": "https://www.mioying.com",
+    "date": "2026-07-05",
+    "industry": "通用",
+    "theme": "LCA",
+    "abstract": "妙盈科技正式推出 LCA 因子 API 服务，面向第三方开发者提供碳排放因子查询接口。",
+    "key_evidence": "定价 0.5 元/次查询，月付 5,000 元不限量",
+    "agent_explanation": "竞品已验证 API 商业模式，CarbSeek 应加快推出类似服务",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0005"
+    ],
+    "evidence_type": "竞品"
+  },
+  {
+    "evidence_id": "EV-2026-0009",
+    "title": "ISO 发布 PCR 选择新标准 ISO 14025:2026",
+    "source": "ISO",
+    "source_url": "https://www.iso.org",
+    "date": "2026-06-15",
+    "industry": "通用",
+    "theme": "PCR",
+    "abstract": "ISO 14025:2026 新增 PCR 选择决策树，要求根据产品功能单位和 declared unit 选择对应 PCR。",
+    "key_evidence": "新增附录 C：PCR 选择流程图",
+    "agent_explanation": "PCR 选择的复杂性增加，自动化推荐工具有明确需求",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0006"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0010",
+    "title": "MSCI 推出碳数据质量评分：金融机构开始要求供应商数据质量评级",
+    "source": "MSCI ESG Research",
+    "source_url": "https://www.msci.com/esg",
+    "date": "2026-06-18",
+    "industry": "通用",
+    "theme": "碳核算",
+    "abstract": "MSCI 在其 ESG 评级体系中新增碳数据质量评分维度，评估企业碳数据的完整性、一致性和透明度。",
+    "key_evidence": "首批覆盖 S&P 500 成分股，2027 年扩展至全球 3,000 家",
+    "agent_explanation": "碳数据质量成为资本市场评价指标，评分工具需求上升",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0007"
+    ],
+    "evidence_type": "竞品"
+  },
+  {
+    "evidence_id": "EV-2026-0011",
+    "title": "苹果公司要求供应商 2027 年前提供经区块链存证的碳足迹数据",
+    "source": "Apple Supplier Responsibility Report",
+    "source_url": "https://www.apple.com/supplier-responsibility/",
+    "date": "2026-06-10",
+    "industry": "通用",
+    "theme": "碳足迹",
+    "abstract": "苹果在其供应商责任报告中新增碳足迹区块链存证要求，旨在确保供应链碳数据不可篡改。",
+    "key_evidence": "覆盖 200+ 核心供应商",
+    "agent_explanation": "品牌方对碳数据真实性要求提升，区块链存证是潜在解决方案",
+    "credibility": "高",
+    "in_product_pool": false,
+    "opportunity_ids": [
+      "OP-2026-0008"
+    ],
+    "evidence_type": "竞品"
+  },
+  {
+    "evidence_id": "EV-2026-0012",
+    "title": "中国电子节能技术协会发布《涂料产品碳标签评价技术规范》",
+    "source": "中国电子节能技术协会",
+    "source_url": "https://www.ceesta.org",
+    "date": "2026-06-20",
+    "industry": "化工",
+    "theme": "碳标签",
+    "abstract": "协会发布涂料行业首个碳标签团体标准，规定了涂料产品碳足迹核算方法和标签格式。",
+    "key_evidence": "标准号 T/DZJN 156-2026",
+    "agent_explanation": "化工行业碳标签标准从通通向细分行业延伸，CarbSeek 应跟进推出行业模板",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0009"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0013",
+    "title": "欧盟电池法规碳足迹计算规则（EU 2023/1542）实施细则发布",
+    "source": "EU Official Journal",
+    "source_url": "https://eur-lex.europa.eu",
+    "date": "2026-07-03",
+    "industry": "欧盟出口",
+    "theme": "碳足迹",
+    "abstract": "欧盟发布电池法规碳足迹计算实施细则，明确动力电池碳足迹需覆盖从采矿到回收的全生命周期。",
+    "key_evidence": "2027 年 2 月起强制实施，违规产品禁止进入欧盟市场",
+    "agent_explanation": "中国动力电池出口面临合规 deadline，工具需求紧迫",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0010"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0014",
+    "title": "宁德时代发布 2025 碳足迹报告：电池全生命周期碳足迹 60-80 kg CO2e/kWh",
+    "source": "宁德时代官网",
+    "source_url": "https://www.catl.com",
+    "date": "2026-06-28",
+    "industry": "汽车",
+    "theme": "碳足迹",
+    "abstract": "宁德时代发布行业首个电池全生命周期碳足迹报告，详细披露了原材料获取、电芯生产、模组组装三阶段排放。",
+    "key_evidence": "NCM 电池碳足迹 75 kg CO2e/kWh，LFP 电池 62 kg CO2e/kWh",
+    "agent_explanation": "行业标杆数据已发布，CarbSeek 需建立电池碳足迹数据库",
+    "credibility": "高",
+    "in_product_pool": false,
+    "opportunity_ids": [
+      "OP-2026-0010"
+    ],
+    "evidence_type": "行业应用"
+  }
+]

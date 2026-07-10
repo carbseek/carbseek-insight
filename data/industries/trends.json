@@ -1,0 +1,22 @@
+{
+  "化工": {
+    "score": 78,
+    "change": 5,
+    "top_theme": "Scope 3"
+  },
+  "电子电气": {
+    "score": 85,
+    "change": 12,
+    "top_theme": "碳标签"
+  },
+  "汽车": {
+    "score": 82,
+    "change": 8,
+    "top_theme": "EPD"
+  },
+  "欧盟出口": {
+    "score": 91,
+    "change": 15,
+    "top_theme": "CBAM"
+  }
+}

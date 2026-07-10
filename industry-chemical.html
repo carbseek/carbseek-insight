@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>化工行业情报 | CarbSeek Insight</title>
+<style>
+:root {
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-card: #1a2332;
+  --bg-card-hover: #1e293b;
+  --border-color: #253044;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-amber: #f59e0b;
+  --accent-red: #ef4444;
+  --accent-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+.logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+}
+.nav-tab {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-tab:hover, .nav-tab.active {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+}
+.main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-body {
+  padding: 16px 20px;
+}
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: var(--accent-blue);
+  border-radius: 2px;
+}
+.page-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 12px;
+}
+.page-link:hover { text-decoration: underline; }
+
+/* Industry Hero */
+.industry-hero {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.industry-hero h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.industry-hero p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.industry-stats {
+  display: flex;
+  gap: 24px;
+}
+.stat-box {
+  text-align: center;
+}
+.stat-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Evidence Items */
+.evidence-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.evidence-item:last-child { border-bottom: none; padding-bottom: 0; }
+.evidence-item:first-child { padding-top: 0; }
+.evidence-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.evidence-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.evidence-tag {
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.evidence-tag.policy { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+.evidence-tag.academic { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+.evidence-tag.patent { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+.evidence-tag.competitor { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+.evidence-abstract {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Opportunity Card */
+.opp-card {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s;
+}
+.opp-card:hover { background: var(--bg-card-hover); }
+.opp-card:last-child { border-bottom: none; }
+.opp-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.opp-card-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Recommendation List */
+.rec-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  align-items: flex-start;
+}
+.rec-item:last-child { border-bottom: none; }
+.rec-icon {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.rec-icon.field { background: rgba(59, 130, 246, 0.15); }
+.rec-icon.template { background: rgba(16, 185, 129, 0.15); }
+.rec-icon.plugin { background: rgba(245, 158, 11, 0.15); }
+.rec-text {
+  font-size: 12px;
+  line-height: 1.6;
+  flex: 1;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🌿</div>
+      <span>CarbSeek Insight</span>
+    </div>
+    <nav class="nav-tabs">
+      <a href="index.html" class="nav-tab">本周产业雷达</a>
+      <a href="industry-chemical.html" class="nav-tab active">化工</a>
+      <a href="industry-electronics.html" class="nav-tab">电子电气</a>
+      <a href="industry-automotive.html" class="nav-tab">汽车</a>
+      <a href="industry-eu-export.html" class="nav-tab">欧盟出口</a>
+      <a href="evidence.html" class="nav-tab">证据库</a>
+      <a href="opportunities.html" class="nav-tab">机会库</a>
+    </nav>
+    <div class="header-meta" style="display:flex;gap:16px;font-size:12px;color:var(--text-secondary);">
+      <span>WR-2026-W28</span>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Industry Hero -->
+  <div class="industry-hero">
+    <div>
+      <h1>🔬 化工行业情报</h1>
+      <p>聚焦化工行业碳足迹、碳标签、Scope 3 排放因子与供应链碳管理动态</p>
+    </div>
+    <div class="industry-stats">
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">本周动态</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">2</div>
+        <div class="stat-label">产品机会</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">78</div>
+        <div class="stat-label">热度指数</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Latest Policy -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">📋 最新政策</div>
+      </div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">中国电子节能技术协会发布《涂料产品碳标签评价技术规范》</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag policy">政策</span>
+            <span>2026-06-20</span>
+            <span>中国电子节能技术协会</span>
+          </div>
+          <div class="evidence-abstract">协会发布涂料行业首个碳标签团体标准（T/DZJN 156-2026），规定了涂料产品碳足迹核算方法和标签格式。标志着化工行业碳标签标准从通通向细分行业延伸。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Academic -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">📚 最新论文</div>
+      </div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">Nature Communications：化工行业 Scope 3 排放因子不确定性研究</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag academic">学术</span>
+            <span>2026-06-20</span>
+            <span>Nature Communications</span>
+          </div>
+          <div class="evidence-abstract">基于 1,200+ 化工产品的生命周期数据，发现化工产品上游排放因子存在 ±40% 的不确定性，主要来源于区域电力结构和生产工艺差异。精细化因子库有巨大的学术价值和商业潜力。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Competitor -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🏢 代表企业动作</div>
+      </div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">巴斯夫发布 2025 可持续供应链报告</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag competitor">竞品</span>
+            <span>2026-06-25</span>
+            <span>BASF</span>
+          </div>
+          <div class="evidence-abstract">要求 Tier 1 供应商 2027 年前提供经第三方核证的产品碳足迹数据，覆盖 7,500+ 供应商，占巴斯夫采购额的 85%。头部化工企业的 Scope 3 要求将传导至整个供应链。</div>
+        </div>
+        <div class="evidence-item">
+          <div class="evidence-title">中石化启动化工产品碳足迹核算试点</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag competitor">竞品</span>
+            <span>2026-06-15</span>
+            <span>中石化</span>
+          </div>
+          <div class="evidence-abstract">中石化在镇海炼化启动化工产品全生命周期碳足迹核算试点，覆盖乙烯、丙烯等基础化工原料。计划 2027 年前推广至全部核心产品。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CarbSeek Opportunities -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">💡 CarbSeek 产品机会</div>
+        <a href="opportunities.html" class="page-link">查看全部 →</a>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <div class="opp-card">
+          <div class="opp-card-title">化工行业 Scope 3 上游排放因子库</div>
+          <div class="opp-card-meta">
+            <span style="color: var(--accent-amber);">●</span> 已立项
+            <span>商业 9 | 技术 7 | 证据 A</span>
+          </div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-card-title">化工行业碳标签团体标准升级</div>
+          <div class="opp-card-meta">
+            <span style="color: var(--accent-green);">●</span> 已立项
+            <span>商业 7 | 技术 8 | 证据 B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommendations -->
+  <h2 class="section-title">CarbSeek 行动建议</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🔧 推荐新增字段</div>
+      </div>
+      <div class="card-body">
+        <div class="rec-item">
+          <div class="rec-icon field">📊</div>
+          <div class="rec-text"><strong>上游原材料碳足迹</strong>：按供应商/区域/工艺细分</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon field">📊</div>
+          <div class="rec-text"><strong>化工工艺类型</strong>：蒸汽裂解 vs 催化裂化 vs 煤化工</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon field">📊</div>
+          <div class="rec-text"><strong>区域电力结构</strong>：影响 Scope 2 计算精度</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">📄 推荐报告模板</div>
+      </div>
+      <div class="card-body">
+        <div class="rec-item">
+          <div class="rec-icon template">📋</div>
+          <div class="rec-text"><strong>化工产品碳足迹核算报告</strong>：符合 T/DZJN 156-2026</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon template">📋</div>
+          <div class="rec-text"><strong>供应链碳数据收集模板</strong>：面向 Tier 1/2 供应商</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon template">📋</div>
+          <div class="rec-text"><strong>化工行业 Scope 3 筛查报告</strong>：热点识别与改进建议</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🔌 推荐行业插件</div>
+      </div>
+      <div class="card-body">
+        <div class="rec-item">
+          <div class="rec-icon plugin">🔌</div>
+          <div class="rec-text"><strong>巴斯夫供应商数据对接</strong>：直接导入供应商碳数据</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon plugin">🔌</div>
+          <div class="rec-text"><strong>中国化工信息中心</strong>：对接行业生产数据</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon plugin">🔌</div>
+          <div class="rec-text"><strong>全国电力排放因子</strong>：按省份实时更新</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

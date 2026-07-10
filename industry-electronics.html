@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电子电气行业情报 | CarbSeek Insight</title>
+<style>
+:root {
+  --bg-primary: #0a0e17; --bg-secondary: #111827; --bg-card: #1a2332; --bg-card-hover: #1e293b;
+  --border-color: #253044; --text-primary: #e2e8f0; --text-secondary: #94a3b8;
+  --accent-green: #10b981; --accent-blue: #3b82f6; --accent-amber: #f59e0b; --accent-red: #ef4444;
+  --accent-purple: #8b5cf6; --accent-cyan: #06b6d4;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.6; min-height: 100vh; }
+.header { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text-primary); }
+.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.nav-tabs { display: flex; gap: 4px; }
+.nav-tab { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.2s; }
+.nav-tab:hover, .nav-tab.active { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.main { max-width: 1440px; margin: 0 auto; padding: 24px; }
+.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
+.card-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-body { padding: 16px 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+.section-title { font-size: 16px; font-weight: 700; margin: 32px 0 16px; display: flex; align-items: center; gap: 8px; }
+.section-title::before { content: ''; width: 4px; height: 20px; background: var(--accent-blue); border-radius: 2px; }
+.page-link { color: var(--accent-blue); text-decoration: none; font-size: 12px; }
+.page-link:hover { text-decoration: underline; }
+
+.industry-hero { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1)); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+.industry-hero h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+.industry-hero p { font-size: 14px; color: var(--text-secondary); }
+.industry-stats { display: flex; gap: 24px; }
+.stat-box { text-align: center; }
+.stat-num { font-size: 28px; font-weight: 700; color: var(--accent-purple); font-family: var(--font-mono); }
+.stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+.evidence-item { padding: 14px 0; border-bottom: 1px solid var(--border-color); }
+.evidence-item:last-child { border-bottom: none; padding-bottom: 0; }
+.evidence-item:first-child { padding-top: 0; }
+.evidence-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.evidence-meta { display: flex; gap: 10px; align-items: center; font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+.evidence-tag { padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 500; }
+.evidence-tag.policy { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+.evidence-tag.academic { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+.evidence-tag.competitor { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+.evidence-abstract { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+.opp-card { padding: 14px; border-bottom: 1px solid var(--border-color); transition: background 0.2s; }
+.opp-card:hover { background: var(--bg-card-hover); }
+.opp-card:last-child { border-bottom: none; }
+.opp-card-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.opp-card-meta { display: flex; gap: 8px; font-size: 11px; color: var(--text-secondary); }
+
+.rec-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-color); align-items: flex-start; }
+.rec-item:last-child { border-bottom: none; }
+.rec-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.rec-icon.field { background: rgba(59, 130, 246, 0.15); }
+.rec-icon.template { background: rgba(16, 185, 129, 0.15); }
+.rec-icon.plugin { background: rgba(245, 158, 11, 0.15); }
+.rec-text { font-size: 12px; line-height: 1.6; flex: 1; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🌿</div>
+      <span>CarbSeek Insight</span>
+    </div>
+    <nav class="nav-tabs">
+      <a href="index.html" class="nav-tab">本周产业雷达</a>
+      <a href="industry-chemical.html" class="nav-tab">化工</a>
+      <a href="industry-electronics.html" class="nav-tab active">电子电气</a>
+      <a href="industry-automotive.html" class="nav-tab">汽车</a>
+      <a href="industry-eu-export.html" class="nav-tab">欧盟出口</a>
+      <a href="evidence.html" class="nav-tab">证据库</a>
+      <a href="opportunities.html" class="nav-tab">机会库</a>
+    </nav>
+    <div style="display:flex;gap:16px;font-size:12px;color:var(--text-secondary);"><span>WR-2026-W28</span></div>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="industry-hero">
+    <div>
+      <h1>💻 电子电气行业情报</h1>
+      <p>聚焦电子电气产品碳标签、韩国强制碳标签、中欧互认与供应链碳管理</p>
+    </div>
+    <div class="industry-stats">
+      <div class="stat-box"><div class="stat-num">2</div><div class="stat-label">本周动态</div></div>
+      <div class="stat-box"><div class="stat-num">1</div><div class="stat-label">产品机会</div></div>
+      <div class="stat-box"><div class="stat-num">85</div><div class="stat-label">热度指数</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">📋 最新政策</div></div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">韩国产业通商资源部：电子电气产品碳标签强制实施令</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag policy">政策</span><span>2026-07-01</span><span>韩国产业通商资源部</span>
+          </div>
+          <div class="evidence-abstract">韩国对进口电子电气产品实施强制碳标签，首批覆盖电视、冰箱、洗衣机、空调四大品类。违规产品将被禁止进入韩国市场，首批过渡期 6 个月。中国电子电气出口企业面临双重碳标签压力。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">📚 最新论文</div></div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">IEEE：电子产品碳足迹评估方法论比较研究</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag academic">学术</span><span>2026-06-18</span><span>IEEE Transactions</span>
+          </div>
+          <div class="evidence-abstract">对比分析 IPCC、ISO 14067、韩国 K-EP 三种方法论在智能手机碳足迹评估中的差异，发现系统边界设定和 use phase 计算是主要差异来源。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">🏢 代表企业动作</div></div>
+      <div class="card-body">
+        <div class="evidence-item">
+          <div class="evidence-title">三星电子发布 2025 产品碳足迹白皮书</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag competitor">竞品</span><span>2026-06-20</span><span>三星电子</span>
+          </div>
+          <div class="evidence-abstract">三星发布涵盖 Galaxy 手机、电视、家电三大品类的碳足迹白皮书，详细披露了原材料获取、制造、运输、使用、回收五阶段排放数据。计划 2030 年前实现产品碳中和。</div>
+        </div>
+        <div class="evidence-item">
+          <div class="evidence-title">海尔智家通过 TÜV 南德碳标签认证</div>
+          <div class="evidence-meta">
+            <span class="evidence-tag competitor">竞品</span><span>2026-06-28</span><span>海尔智家</span>
+          </div>
+          <div class="evidence-abstract">海尔智家成为国内首批通过 TÜV 南德碳标签认证的家电企业，覆盖冰箱、洗衣机、空调三大品类。为出口韩国市场做准备。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">💡 CarbSeek 产品机会</div>
+        <a href="opportunities.html" class="page-link">查看全部 →</a>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <div class="opp-card">
+          <div class="opp-card-title">电子电气产品碳标签互认</div>
+          <div class="opp-card-meta">
+            <span style="color: var(--accent-red);">●</span> 待评审
+            <span>商业 8 | 技术 6 | 证据 B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">CarbSeek 行动建议</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔧 推荐新增字段</div></div>
+      <div class="card-body">
+        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>产品能效等级</strong>：影响 use phase 碳排放计算</div></div>
+        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>元器件 BOM 清单</strong>：PCB、芯片、电池碳足迹</div></div>
+        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>使用寿命假设</strong>：不同国家使用习惯差异</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">📄 推荐报告模板</div></div>
+      <div class="card-body">
+        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>中韩碳标签双标报告</strong>：同时满足两国要求</div></div>
+        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>电子电气产品碳足迹核算报告</strong>：符合 ISO 14067</div></div>
+        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>元器件碳热点分析报告</strong>：识别高排放 BOM</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔌 推荐行业插件</div></div>
+      <div class="card-body">
+        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>韩国 K-EP 数据库</strong>：对接韩国官方排放因子</div></div>
+        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>元器件碳足迹库</strong>：芯片、显示屏、电池</div></div>
+        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>全球能效标准库</strong>：中国能效、欧盟 ERP、美国 Energy Star</div></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

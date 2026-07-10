@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>机会库 | CarbSeek Insight</title>
+<style>
+:root {
+  --bg-primary: #0a0e17; --bg-secondary: #111827; --bg-card: #1a2332; --bg-card-hover: #1e293b;
+  --border-color: #253044; --text-primary: #e2e8f0; --text-secondary: #94a3b8;
+  --accent-green: #10b981; --accent-blue: #3b82f6; --accent-amber: #f59e0b; --accent-red: #ef4444;
+  --accent-purple: #8b5cf6; --accent-cyan: #06b6d4;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.6; min-height: 100vh; }
+.header { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text-primary); }
+.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.nav-tabs { display: flex; gap: 4px; }
+.nav-tab { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.2s; }
+.nav-tab:hover, .nav-tab.active { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.main { max-width: 1440px; margin: 0 auto; padding: 24px; }
+.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
+.card-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-body { padding: 16px 20px; }
+.page-link { color: var(--accent-blue); text-decoration: none; font-size: 12px; }
+.page-link:hover { text-decoration: underline; }
+
+/* Stats Bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-align: center;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+.stat-value.p0 { color: var(--accent-red); }
+.stat-value.p1 { color: var(--accent-amber); }
+.stat-value.p2 { color: var(--accent-green); }
+.stat-value.total { color: var(--accent-blue); }
+.stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Opportunity Detail Card */
+.opportunity-detail {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.opportunity-detail:hover { border-color: var(--accent-blue); }
+.opportunity-detail:last-child { margin-bottom: 0; }
+
+.opp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.opp-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+.opp-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.opp-badge {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.opp-badge.status-pending { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+.opp-badge.status-approved { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+.opp-badge.status-done { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+.opp-badge.grade-a { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+.opp-badge.grade-b { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+.opp-badge.grade-c { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+.opp-badge.industry {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.opp-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.opp-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* Score Grid */
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.score-cell {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+.score-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.score-value {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+.score-value.high { color: var(--accent-green); }
+.score-value.medium { color: var(--accent-amber); }
+.score-value.low { color: var(--accent-red); }
+
+@media (max-width: 600px) {
+  .score-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Impact Section */
+.impact-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+.impact-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.impact-cell {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 12px;
+  border-left: 3px solid;
+}
+.impact-cell.pro { border-color: var(--accent-blue); }
+.impact-cell.scan { border-color: var(--accent-green); }
+.impact-cell.db { border-color: var(--accent-purple); }
+.impact-cell-title {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.impact-cell-title.pro { color: var(--accent-blue); }
+.impact-cell-title.scan { color: var(--accent-green); }
+.impact-cell-title.db { color: var(--accent-purple); }
+.impact-cell-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .impact-grid { grid-template-columns: 1fr; }
+}
+
+/* Meta Row */
+.opp-meta-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+.opp-meta-row a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+/* Priority Tabs */
+.priority-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+.priority-tab {
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.priority-tab:hover { background: var(--bg-card); }
+.priority-tab.active.p0-tab { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+.priority-tab.active.p1-tab { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+.priority-tab.active.p2-tab { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+.priority-tab.active.all-tab { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🌿</div>
+      <span>CarbSeek Insight</span>
+    </div>
+    <nav class="nav-tabs">
+      <a href="index.html" class="nav-tab">本周产业雷达</a>
+      <a href="industry-chemical.html" class="nav-tab">化工</a>
+      <a href="industry-electronics.html" class="nav-tab">电子电气</a>
+      <a href="industry-automotive.html" class="nav-tab">汽车</a>
+      <a href="industry-eu-export.html" class="nav-tab">欧盟出口</a>
+      <a href="evidence.html" class="nav-tab">证据库</a>
+      <a href="opportunities.html" class="nav-tab active">机会库</a>
+    </nav>
+    <div style="display:flex;gap:16px;font-size:12px;color:var(--text-secondary);"><span>共 10 个机会</span></div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value p0">3</div>
+      <div class="stat-label">P0 紧急机会</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value p1">5</div>
+      <div class="stat-label">P1 重要机会</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value p2">2</div>
+      <div class="stat-label">P2 观察机会</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value total">10</div>
+      <div class="stat-label">总计</div>
+    </div>
+  </div>
+
+  <!-- Priority Tabs -->
+  <div class="priority-tabs">
+    <button class="priority-tab all-tab active" data-filter="all">全部</button>
+    <button class="priority-tab p0-tab" data-filter="p0">P0 紧急</button>
+    <button class="priority-tab p1-tab" data-filter="p1">P1 重要</button>
+    <button class="priority-tab p2-tab" data-filter="p2">P2 观察</button>
+  </div>
+
+  <!-- P0 Opportunities -->
+  <div class="opportunity-detail" data-priority="p0" id="OP-2026-0001">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0001</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">🇪🇺 欧盟出口</span>
+        <span class="opp-badge grade-a">证据 A</span>
+        <span class="opp-badge status-pending">待评审</span>
+      </div>
+    </div>
+    <div class="opp-title">CBAM 过渡期申报自动化工具：欧盟出口企业急需一键生成 Q1-Q4 碳排放报告</div>
+    <div class="opp-description">
+      CBAM 2026年正式实施，出口商需按季度提交嵌入碳排放报告。当前市场缺乏针对中国出口企业的自动化申报工具，存在显著产品机会。机电商会调研显示 80% 对欧出口企业尚未建立产品级碳足迹核算能力。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value high">9</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value high">8</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value high">高</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">8</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可作为核心模块，直接对接 CBAM 申报系统</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可嵌入扫描报告，自动输出 CBAM 合规建议</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需补充欧盟官方排放因子库、行业默认值库</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：产品经理-Scan</span>
+      <span>📅 创建于 2026-07-01</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p0" id="OP-2026-0002">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0002</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">🔬 化工</span>
+        <span class="opp-badge grade-a">证据 A</span>
+        <span class="opp-badge status-approved">已立项</span>
+      </div>
+    </div>
+    <div class="opp-title">化工行业 Scope 3 上游排放因子库：打通供应链碳数据孤岛</div>
+    <div class="opp-description">
+      化工行业 Scope 3 上游排放占全生命周期碳足迹 60-80%，但当前缺乏精细化的上游原材料排放因子。巴斯夫、中石化等头部企业正在自建因子库，Nature Communications 研究显示因子不确定性高达 ±40%。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value high">9</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value high">高</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">6</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可推出化工行业专用 Scope 3 计算模板</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可增加供应链上游排放热点识别</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">核心需求，需建立化工原料-因子映射表</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：产品经理-DB</span>
+      <span>📅 创建于 2026-06-15</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p0" id="OP-2026-0010">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0010</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">🇪🇺 欧盟出口</span>
+        <span class="opp-badge grade-a">证据 A</span>
+        <span class="opp-badge status-approved">已立项</span>
+      </div>
+    </div>
+    <div class="opp-title">欧盟新电池法规碳足迹声明：动力电池出口合规工具</div>
+    <div class="opp-description">
+      欧盟新电池法规要求 2027 年起动力电池必须提供碳足迹声明。中国动力电池出口量占全球 60%，合规工具需求巨大。宁德时代已发布行业首个电池碳足迹报告，为行业树立标杆。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value high">9</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value high">高</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">6</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可作为核心模块</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可增加电池法规合规检查</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需建立电池全生命周期因子库</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：产品经理-Pro</span>
+      <span>📅 创建于 2026-05-20</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <!-- P1 Opportunities -->
+  <div class="opportunity-detail" data-priority="p1" id="OP-2026-0003">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0003</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">💻 电子电气</span>
+        <span class="opp-badge grade-b">证据 B</span>
+        <span class="opp-badge status-pending">待评审</span>
+      </div>
+    </div>
+    <div class="opp-title">电子电气产品碳标签互认：对接韩国碳标签、法国 Greenly 认证体系</div>
+    <div class="opp-description">
+      韩国于2026年7月1日起对进口电子电气产品强制要求碳标签。中国出口企业需同时满足中国碳标签和韩国碳标签要求，互认需求迫切。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value high">8</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value medium">6</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value medium">中</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">5</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可增加中韩碳标签互认模块，一键输出双标报告</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可增加韩国碳标签合规性检查</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需补充韩国官方排放因子和认证规则库</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：产品经理-Pro</span>
+      <span>📅 创建于 2026-06-20</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p1" id="OP-2026-0005">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0005</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">通用</span>
+        <span class="opp-badge grade-a">证据 A</span>
+        <span class="opp-badge status-approved">已立项</span>
+      </div>
+    </div>
+    <div class="opp-title">LCA 数据库 API 服务：面向第三方 SaaS 的因子查询接口</div>
+    <div class="opp-description">
+      多家碳管理 SaaS 厂商（碳阻迹、妙盈）正在寻求高质量 LCA 因子数据源。碳阻迹完成 2 亿元 B 轮融资，妙盈推出 0.5 元/次查询的 API 服务，验证因子库商业化路径。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value high">8</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value high">9</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value high">高</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">7</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">作为 API 增值服务</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">Scan 调用内部 API</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">核心能力建设，需标准化 API 接口</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：技术负责人</span>
+      <span>📅 创建于 2026-06-01</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p1" id="OP-2026-0007">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0007</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">通用</span>
+        <span class="opp-badge grade-b">证据 B</span>
+        <span class="opp-badge status-approved">已立项</span>
+      </div>
+    </div>
+    <div class="opp-title">碳数据质量评分模型：解决企业碳数据可信度痛点</div>
+    <div class="opp-description">
+      MSCI 在 ESG 评级中新增碳数据质量评分，首批覆盖 S&P 500 成分股。金融机构和下游品牌 increasingly 要求供应商提供经第三方核证的碳数据。碳数据质量评分可成为差异化卖点。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value high">8</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value medium">中</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">5</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可增加数据质量评分报告</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可增加数据质量扫描</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需建立评分规则库</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：算法工程师</span>
+      <span>📅 创建于 2026-06-10</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p1" id="OP-2026-0004">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0004</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">🚗 汽车</span>
+        <span class="opp-badge grade-b">证据 B</span>
+        <span class="opp-badge status-pending">待评审</span>
+      </div>
+    </div>
+    <div class="opp-title">汽车行业 EPD 自动生成：对接 iNEDC 和 WLTP 测试数据</div>
+    <div class="opp-description">
+      汽车 EPD 需包含 iNEDC/WLTP 工况能耗数据。ACEA 发布 V3.0 指南新增电池碳足迹章节。目前车企需手工整理测试数据并转换为 EPD 格式，效率低下。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value medium">中</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">4</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可增加汽车 EPD 自动生成功能</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可增加 EPD 完整性检查</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需建立车型-能耗测试数据库</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：产品经理-Pro</span>
+      <span>📅 创建于 2026-06-25</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p1" id="OP-2026-0006">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0006</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">通用</span>
+        <span class="opp-badge grade-b">证据 B</span>
+        <span class="opp-badge status-pending">待评审</span>
+      </div>
+    </div>
+    <div class="opp-title">PCR 智能推荐引擎：基于产品 HS 编码自动匹配 PCR</div>
+    <div class="opp-description">
+      EPD 编制第一步是确定 PCR。ISO 14025:2026 新增 PCR 选择决策树，要求根据产品功能单位和 declared unit 选择对应 PCR。企业常因 PCR 选择错误导致 EPD 不被认可。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value high">8</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value medium">中</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">4</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可增加 PCR 智能推荐功能</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可增加 PCR 合规性检查</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需建立 HS 编码-PCR 映射库</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：产品经理-Pro</span>
+      <span>📅 创建于 2026-07-02</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <!-- P2 Opportunities -->
+  <div class="opportunity-detail" data-priority="p2" id="OP-2026-0009">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0009</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">🔬 化工</span>
+        <span class="opp-badge grade-b">证据 B</span>
+        <span class="opp-badge status-approved">已立项</span>
+      </div>
+    </div>
+    <div class="opp-title">化工行业碳标签团体标准升级：从通则到分行业标准</div>
+    <div class="opp-description">
+      当前化工行业碳标签标准过于笼统，需按细分行业（涂料、塑料、化肥）制定更精细的标准。中国电子节能技术协会已发布涂料行业首个碳标签团体标准 T/DZJN 156-2026。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value medium">7</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value high">8</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value medium">中</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">4</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可按新标准推出行业模板</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">可按新标准扫描</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需补充细分行业因子</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：标准部</span>
+      <span>📅 创建于 2026-06-18</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+  <div class="opportunity-detail" data-priority="p2" id="OP-2026-0008">
+    <div class="opp-header">
+      <span class="opp-id">OP-2026-0008</span>
+      <div class="opp-badges">
+        <span class="opp-badge industry">通用</span>
+        <span class="opp-badge grade-c">证据 C</span>
+        <span class="opp-badge status-pending">待评审</span>
+      </div>
+    </div>
+    <div class="opp-title">碳足迹区块链存证：满足品牌方供应链审计需求</div>
+    <div class="opp-description">
+      苹果在其供应商责任报告中新增碳足迹区块链存证要求，覆盖 200+ 核心供应商。品牌方对碳数据真实性要求提升，区块链存证是潜在解决方案，但技术成熟度有待观察。
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-label">商业价值</div>
+        <div class="score-value medium">6</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">技术可行性</div>
+        <div class="score-value low">5</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">收益潜力</div>
+        <div class="score-value low">低</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-label">证据条数</div>
+        <div class="score-value">3</div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="impact-title">对 CarbSeek 产品影响</div>
+      <div class="impact-grid">
+        <div class="impact-cell pro">
+          <div class="impact-cell-title pro">CarbSeek Pro</div>
+          <div class="impact-cell-text">可作为高端增值服务</div>
+        </div>
+        <div class="impact-cell scan">
+          <div class="impact-cell-title scan">CarbSeek Scan</div>
+          <div class="impact-cell-text">无直接影响</div>
+        </div>
+        <div class="impact-cell db">
+          <div class="impact-cell-title db">数据库建设</div>
+          <div class="impact-cell-text">需对接区块链存证服务</div>
+        </div>
+      </div>
+    </div>
+    <div class="opp-meta-row">
+      <span>👤 建议负责人：技术负责人</span>
+      <span>📅 创建于 2026-07-03</span>
+      <a href="evidence.html">查看证据 →</a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const tabs = document.querySelectorAll('.priority-tab');
+const opps = document.querySelectorAll('.opportunity-detail');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    opps.forEach(opp => {
+      if (filter === 'all' || opp.dataset.priority === filter) {
+        opp.style.display = '';
+      } else {
+        opp.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>

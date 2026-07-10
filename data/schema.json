@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-07-09",
+  "models": {
+    "opportunity": {
+      "opportunity_id": "string (OP-YYYY-NNNN)",
+      "title": "string",
+      "industry": "enum: 化工|电子电气|汽车|欧盟出口|通用",
+      "theme": "enum: 碳足迹|碳标签|LCA|CBAM|EPD|PCR|Scope3|碳核算|碳数据平台|政策",
+      "source_count": "integer",
+      "evidence_grade": "enum: A|B|C|D",
+      "business_value": "integer (1-10)",
+      "tech_feasibility": "integer (1-10)",
+      "revenue_potential": "enum: 高|中|低",
+      "suggested_owner": "string",
+      "status": "enum: 待评审|已立项|已上线|已归档",
+      "created_at": "ISO date",
+      "updated_at": "ISO date",
+      "evidence_ids": ["string"],
+      "description": "string",
+      "impact_pro": "string",
+      "impact_scan": "string",
+      "impact_db": "string"
+    },
+    "evidence": {
+      "evidence_id": "string (EV-YYYY-NNNN)",
+      "title": "string",
+      "source": "string",
+      "source_url": "string",
+      "date": "ISO date",
+      "industry": "string",
+      "theme": "string",
+      "abstract": "string",
+      "key_evidence": "string",
+      "agent_explanation": "string",
+      "credibility": "enum: 高|中|低",
+      "in_product_pool": "boolean",
+      "opportunity_ids": ["string"],
+      "evidence_type": "enum: 政策|学术|专利|竞品|行业应用|新闻"
+    },
+    "radar_item": {
+      "radar_id": "string",
+      "title": "string",
+      "category": "enum: 政策变化|学术前沿|专利动态|竞品动作|行业应用|风险预警",
+      "severity": "enum: critical|high|medium|low",
+      "industry": "string",
+      "date": "ISO date",
+      "summary": "string",
+      "evidence_ids": ["string"],
+      "action_required": "boolean"
+    },
+    "weekly_report": {
+      "report_id": "string (WR-YYYY-WNN)",
+      "week_ending": "ISO date",
+      "one_sentence_judgment": "string",
+      "policy_changes": ["radar_item"],
+      "academic_frontier": ["radar_item"],
+      "patent_dynamics": ["radar_item"],
+      "competitor_dynamics": ["radar_item"],
+      "industry_applications": {
+        "化工": ["radar_item"],
+        "电子电气": ["radar_item"],
+        "汽车": ["radar_item"],
+        "欧盟出口": ["radar_item"]
+      },
+      "impact_pro": "string",
+      "impact_scan": "string",
+      "impact_db": "string",
+      "top_opportunities": ["opportunity"],
+      "rd_suggestions": ["string"],
+      "appendix": ["evidence"]
+    }
+  }
+}
