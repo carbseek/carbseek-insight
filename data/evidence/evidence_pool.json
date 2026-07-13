@@ -250,5 +250,77 @@
       "OP-2026-0010"
     ],
     "evidence_type": "行业应用"
+  },
+  {
+    "evidence_id": "EV-2026-0015",
+    "title": "生态环境部发布《产品碳足迹管理体系建设进展报告（2026）》：20余省市已编制地方碳足迹管理方案",
+    "source": "生态环境部",
+    "source_url": "https://www.mee.gov.cn",
+    "date": "2026-06-18",
+    "industry": "通用",
+    "theme": "碳足迹",
+    "abstract": "报告系统总结2025年我国产品碳足迹管理体系建设的最新进展。20余个省（区、市）已研究编制地方碳足迹管理方案，广东省发布水泥、磷酸铁锂等8个产品碳足迹评价技术规范团体标准，浙江省建成纺织服装产品本土化碳足迹数据库。",
+    "key_evidence": "粤港澳大湾区已签发500余张碳足迹标识认证证书",
+    "agent_explanation": "碳足迹管理从中央到地方全面铺开，CarbSeek 需要加速对接各地碳足迹公共服务平台",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0007"
+    ],
+    "evidence_type": "政策"
+  },
+  {
+    "evidence_id": "EV-2026-0016",
+    "title": "宁德时代 EnerD+ 储能产品拿下锂电池行业首张产品碳足迹标识认证证书",
+    "source": "宁德时代官网",
+    "source_url": "https://www.catl.com",
+    "date": "2026-06-29",
+    "industry": "汽车",
+    "theme": "碳标签",
+    "abstract": "宁德时代EnerD+系列储能产品拿下锂电池行业首张产品碳足迹标识认证证书，认证的功能单位产品碳足迹为0.053 kgCO₂e/kWh。依托自主开发的'时代碳链'平台，深入上游供应链收集数据并建立原材料碳足迹数据库。",
+    "key_evidence": "产品碳足迹 0.053 kgCO₂e/kWh，覆盖从原矿开采到废旧电池回收全价值链",
+    "agent_explanation": "行业标杆碳数据已发布，CarbSeek 需建立电池全生命周期因子库以对标宁德时代",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0010"
+    ],
+    "evidence_type": "竞品"
+  },
+  {
+    "evidence_id": "EV-2026-0017",
+    "title": "上海工程技术大学发布星云（Nebula）开源 LCA 框架：基于清华大学'天工'数据系统",
+    "source": "上观新闻",
+    "source_url": "https://web.shobserver.com",
+    "date": "2026-03-27",
+    "industry": "通用",
+    "theme": "LCA",
+    "abstract": "星云LCA框架以数字化、标准化、开源化技术手段破解产品碳足迹核算难题。具备三大优势：开源开放、标准规范（兼容国际通用数据库标准）、高效易用（模块化设计集成可视化建模）。",
+    "key_evidence": "基于清华大学'天工'数据系统，图形化界面像'搭积木'一样连接生产环节",
+    "agent_explanation": "国内开源LCA框架出现，CarbSeek 需要评估是否对接或合作，避免因子库被开源方案替代",
+    "credibility": "高",
+    "in_product_pool": false,
+    "opportunity_ids": [
+      "OP-2026-0005"
+    ],
+    "evidence_type": "学术"
+  },
+  {
+    "evidence_id": "EV-2026-0018",
+    "title": "CBAM 正式实施引入 50 吨豁免门槛：约 80% 进口商豁免申报义务",
+    "source": "欧盟委员会 Omnibus 法案",
+    "source_url": "https://commission.europa.eu",
+    "date": "2026-06-30",
+    "industry": "欧盟出口",
+    "theme": "CBAM",
+    "abstract": "Omnibus法案对CBAM实施做出关键调整：引入年排放50吨二氧化碳等值的豁免门槛，约80%的进口商将豁免CBAM申报规定。同时简化合规流程，提供统一缺省值供中小企业选用，机加工环节碳排放排除在申报范围外。",
+    "key_evidence": "50吨门槛惠及约18.2万家欧盟中小企业；机加工排放仅占CBAM产品总排放10%以下",
+    "agent_explanation": "CBAM申报门槛降低，但大企业仍需精细化碳数据；CarbSeek 的CBAM模块应区分大企业/中小企业版本",
+    "credibility": "高",
+    "in_product_pool": true,
+    "opportunity_ids": [
+      "OP-2026-0001"
+    ],
+    "evidence_type": "政策"
   }
 ]
