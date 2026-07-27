@@ -612,7 +612,6 @@ body {
     </div>
     <nav class="nav-tabs">
       <a href="index.html" class="nav-tab active">本周产业雷达</a>
-      <a href="intelligence.html" class="nav-tab">实时情报</a>
       <a href="industry-chemical.html" class="nav-tab">化工</a>
       <a href="industry-electronics.html" class="nav-tab">电子电气</a>
       <a href="industry-automotive.html" class="nav-tab">汽车</a>
@@ -767,129 +766,6 @@ body {
     </div>
   </div>
 
-
-  <!-- Intelligence Center Status -->
-  <h2 class="section-title" style="margin-top: 32px;">🤖 情报中心实时状态</h2>
-  <div class="grid-3">
-    <!-- Agent Status -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-green);"></span>
-          Agent 运行状态
-        </div>
-        <span style="font-size: 11px; color: var(--accent-green);">● 正常运行</span>
-      </div>
-      <div class="card-body">
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">📰 BaiduNews-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">📚 CNKI-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">🔬 Patent-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">🏭 Industry-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
-            <span style="font-size: 12px;">📋 Policy-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <a href="intelligence.html" class="page-link">进入实时情报中心 →</a>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-blue);"></span>
-          本周情报统计
-        </div>
-      </div>
-      <div class="card-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center;">
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue);">24</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">总情报数</div>
-          </div>
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-green);">17</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">高价值情报</div>
-          </div>
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-purple);">6</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">政策更新</div>
-          </div>
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-amber);">2</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">专利动态</div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        更新频率: 每周一/五 10:00 自动采集
-      </div>
-    </div>
-
-    <!-- Latest Intel -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-cyan);"></span>
-          最新采集情报
-        </div>
-      </div>
-      <div class="card-body" style="padding: 0;">
-        <div class="radar-item" style="padding: 10px 16px;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">生态环境部：产品碳足迹管理体系建设进展报告</div>
-            <div class="radar-meta">
-              <span class="radar-tag">政策</span>
-              <span>20+省市已编制方案</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item" style="padding: 10px 16px;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">欧盟CBAM Q3申报指南：新增铝制品追溯</div>
-            <div class="radar-meta">
-              <span class="radar-tag">CBAM</span>
-              <span>12类产品新增要求</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item" style="padding: 10px 16px;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">宁德时代电池碳足迹降低18%</div>
-            <div class="radar-meta">
-              <span class="radar-tag">行业</span>
-              <span>年度可持续发展报告</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item" style="padding: 10px 16px; border-bottom: none;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">韩国K-碳标签新增家电类别</div>
-            <div class="radar-meta">
-              <span class="radar-tag">碳标签</span>
-              <span>2027年1月强制实施</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Industry Trends -->
   <h2 class="section-title">行业热度趋势</h2>
   <div class="grid-4">
@@ -1248,7 +1124,7 @@ body {
 
   <!-- Footer -->
   <div style="margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center; font-size: 12px; color: var(--text-secondary);">
-    <p>CarbSeek Insight · 碳产业研发情报智能体 · <a href="intelligence.html" style="color: var(--accent-blue);">实时情报中心</a> · 每周自动更新</p>
+    <p>CarbSeek Insight · 碳产业研发情报智能体 · 每周自动更新</p>
     <p style="margin-top: 4px;">数据来源：欧盟官方公报、Nature、ISO、36氪、企业年报、行业协会 | 证据等级：A=官方/学术 B=行业报告 C=新闻推测</p>
   </div>
 
