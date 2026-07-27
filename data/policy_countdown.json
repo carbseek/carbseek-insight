@@ -2,25 +2,25 @@
   {
     "policy": "CBAM 正式征收（取消免费配额）",
     "deadline": "2026-10-01",
-    "days_left": 73,
+    "days_left": 66,
     "urgency": "critical"
   },
   {
     "policy": "韩国电子电气碳标签过渡期结束",
     "deadline": "2026-12-31",
-    "days_left": 164,
+    "days_left": 157,
     "urgency": "high"
   },
   {
     "policy": "欧盟电池法规碳足迹强制声明",
     "deadline": "2027-02-18",
-    "days_left": 213,
+    "days_left": 206,
     "urgency": "critical"
   },
   {
     "policy": "CBAM 扩大至有机化学品、塑料",
     "deadline": "2027-01-01",
-    "days_left": 165,
+    "days_left": 158,
     "urgency": "high"
   }
 ]
