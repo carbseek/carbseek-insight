@@ -2,21 +2,21 @@
   "化工": {
     "score": 78,
     "change": 5,
-    "top_theme": "Scope 3"
+    "top_theme": "Scope 3 排放因子精细化"
   },
   "电子电气": {
     "score": 85,
     "change": 12,
-    "top_theme": "碳标签"
+    "top_theme": "韩国碳标签强制实施"
   },
   "汽车": {
     "score": 82,
     "change": 8,
-    "top_theme": "EPD"
+    "top_theme": "电池法规碳足迹声明"
   },
   "欧盟出口": {
     "score": 91,
     "change": 15,
-    "top_theme": "CBAM"
+    "top_theme": "CBAM 追溯范围扩大"
   }
 }

@@ -1,0 +1,29 @@
+{
+  "demo": true,
+  "competitors": [
+    {
+      "avatar": "宁德",
+      "name": "宁德时代",
+      "action": "EnerD+ 储能产品拿下锂电池行业首张碳足迹标识认证",
+      "impact": "💡 产品碳足迹 0.053 kgCO₂e/kWh，行业标杆数据"
+    },
+    {
+      "avatar": "妙盈",
+      "name": "妙盈科技",
+      "action": "推出 LCA 因子 API 服务，定价 0.5 元/次查询",
+      "impact": "💡 验证因子库商业化路径，CarbSeek 应加速 API 立项"
+    },
+    {
+      "avatar": "碳阻迹",
+      "name": "碳阻迹",
+      "action": "完成 2 亿元 B 轮融资，因子库覆盖 10 万+ 数据",
+      "impact": "💡 竞品估值 15 亿元，因子库为核心资产"
+    },
+    {
+      "avatar": "MSCI",
+      "name": "MSCI",
+      "action": "ESG 评级新增碳数据质量评分维度",
+      "impact": "💡 碳数据质量成为资本市场评价指标"
+    }
+  ]
+}

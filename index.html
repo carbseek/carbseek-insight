@@ -622,7 +622,7 @@ body {
     </nav>
     <div class="header-meta">
       <span class="badge badge-live">● 实时追踪</span>
-      <span>WR-2026-W30 | 截至 2026.07.27</span>
+      <span id="report-meta"></span>
     </div>
   </div>
 </header>
@@ -635,11 +635,11 @@ body {
     <div class="judgment-icon">💡</div>
     <div class="judgment-content">
       <h2>本周一句话判断</h2>
-      <p>生态环境部发布《产品碳足迹管理体系建设进展报告（2026）》，20余省市已编制地方碳足迹管理方案；宁德时代拿下锂电池行业首张碳足迹标识认证；CBAM 正式实施后引入 50 吨豁免门槛和机加工排除规则， CarbSeek 需在 Q3 完成因子库 API 和 CBAM 自动化模块立项。</p>
+      <p id="judgment-text">加载中…</p>
     </div>
   </div>
 
-  <!-- Top Section: Radar + Countdown + Trends -->
+  <!-- Top Section: Radar + Countdown -->
   <div class="grid-3">
     <!-- Radar Top 5 -->
     <div class="card" style="grid-column: span 2;">
@@ -650,68 +650,7 @@ body {
         </div>
         <a href="evidence.html" class="page-link">查看全部 →</a>
       </div>
-      <div class="card-body">
-        <div class="radar-item">
-          <div class="radar-number">1</div>
-          <div class="radar-content">
-            <div class="radar-title">欧盟 CBAM Q2 申报指南更新：新增 47 类钢铁下游产品追溯</div>
-            <div class="radar-meta">
-              <span class="severity severity-critical">CRITICAL</span>
-              <span class="radar-tag">政策变化</span>
-              <span>欧盟出口</span>
-              <span>2026-07-01</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item">
-          <div class="radar-number">2</div>
-          <div class="radar-content">
-            <div class="radar-title">生态环境部发布《产品碳足迹管理体系建设进展报告（2026）》：20 余省市已编制地方碳足迹管理方案</div>
-            <div class="radar-meta">
-              <span class="severity severity-critical">CRITICAL</span>
-              <span class="radar-tag">政策变化</span>
-              <span>通用</span>
-              <span>2026-06-18</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item">
-          <div class="radar-number">3</div>
-          <div class="radar-content">
-            <div class="radar-title">宁德时代 EnerD+ 储能产品拿下锂电池行业首张产品碳足迹标识认证证书</div>
-            <div class="radar-meta">
-              <span class="severity severity-high">HIGH</span>
-              <span class="radar-tag">竞品动作</span>
-              <span>汽车</span>
-              <span>2026-06-29</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item">
-          <div class="radar-number">4</div>
-          <div class="radar-content">
-            <div class="radar-title">欧盟电池法规碳足迹性能分级（A-E 级）将于 2026 年 8 月 18 日实施</div>
-            <div class="radar-meta">
-              <span class="severity severity-high">HIGH</span>
-              <span class="radar-tag">政策变化</span>
-              <span>汽车</span>
-              <span>2026-06-25</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item">
-          <div class="radar-number">5</div>
-          <div class="radar-content">
-            <div class="radar-title">CBAM 正式实施引入 50 吨豁免门槛：约 80% 进口商豁免申报</div>
-            <div class="radar-meta">
-              <span class="severity severity-high">HIGH</span>
-              <span class="radar-tag">政策变化</span>
-              <span>欧盟出口</span>
-              <span>2026-06-30</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="card-body" id="radar-list"></div>
     </div>
 
     <!-- Policy Countdown -->
@@ -722,48 +661,7 @@ body {
           政策倒计时
         </div>
       </div>
-      <div class="card-body">
-        <div class="countdown-item">
-          <div class="countdown-days critical">
-            <span class="days-num">66</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">CBAM 正式征收（取消免费配额）</div>
-            <div class="countdown-deadline">Deadline: 2026-10-01</div>
-          </div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-days high">
-            <span class="days-num">157</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">韩国电子电气碳标签过渡期结束</div>
-            <div class="countdown-deadline">Deadline: 2026-12-31</div>
-          </div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-days critical">
-            <span class="days-num">206</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">欧盟电池法规碳足迹强制声明</div>
-            <div class="countdown-deadline">Deadline: 2027-02-18</div>
-          </div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-days high">
-            <span class="days-num">158</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">CBAM 扩大至有机化学品、塑料</div>
-            <div class="countdown-deadline">Deadline: 2027-01-01</div>
-          </div>
-        </div>
-      </div>
+      <div class="card-body" id="countdown-list"></div>
     </div>
   </div>
 
@@ -781,28 +679,7 @@ body {
         <span style="font-size: 11px; color: var(--accent-green);">● 正常运行</span>
       </div>
       <div class="card-body">
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">📰 BaiduNews-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">📚 CNKI-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">🔬 Patent-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-            <span style="font-size: 12px;">🏭 Industry-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
-            <span style="font-size: 12px;">📋 Policy-Agent</span>
-            <span style="font-size: 11px; color: var(--accent-green);">✓ 今日已更新</span>
-          </div>
-        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;" id="agent-status"></div>
       </div>
       <div class="card-footer">
         <a href="intelligence.html" class="page-link">进入实时情报中心 →</a>
@@ -818,28 +695,9 @@ body {
         </div>
       </div>
       <div class="card-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center;">
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-blue);">24</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">总情报数</div>
-          </div>
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-green);">17</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">高价值情报</div>
-          </div>
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-purple);">6</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">政策更新</div>
-          </div>
-          <div style="padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-            <div style="font-size: 24px; font-weight: 700; color: var(--accent-amber);">2</div>
-            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">专利动态</div>
-          </div>
-        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center;" id="intel-stats"></div>
       </div>
-      <div class="card-footer">
-        更新频率: 每周一/五 10:00 自动采集
-      </div>
+      <div class="card-footer" id="intel-freq"></div>
     </div>
 
     <!-- Latest Intel -->
@@ -850,118 +708,13 @@ body {
           最新采集情报
         </div>
       </div>
-      <div class="card-body" style="padding: 0;">
-        <div class="radar-item" style="padding: 10px 16px;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">生态环境部：产品碳足迹管理体系建设进展报告</div>
-            <div class="radar-meta">
-              <span class="radar-tag">政策</span>
-              <span>20+省市已编制方案</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item" style="padding: 10px 16px;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">欧盟CBAM Q3申报指南：新增铝制品追溯</div>
-            <div class="radar-meta">
-              <span class="radar-tag">CBAM</span>
-              <span>12类产品新增要求</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item" style="padding: 10px 16px;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">宁德时代电池碳足迹降低18%</div>
-            <div class="radar-meta">
-              <span class="radar-tag">行业</span>
-              <span>年度可持续发展报告</span>
-            </div>
-          </div>
-        </div>
-        <div class="radar-item" style="padding: 10px 16px; border-bottom: none;">
-          <div class="radar-content">
-            <div class="radar-title" style="font-size: 12px;">韩国K-碳标签新增家电类别</div>
-            <div class="radar-meta">
-              <span class="radar-tag">碳标签</span>
-              <span>2027年1月强制实施</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="card-body" style="padding: 0;" id="latest-intel"></div>
     </div>
   </div>
+
   <!-- Industry Trends -->
   <h2 class="section-title">行业热度趋势</h2>
-  <div class="grid-4">
-    <div class="card">
-      <div class="card-body">
-        <div class="trend-bar">
-          <div class="trend-header">
-            <span class="trend-name">🔬 化工</span>
-            <span>
-              <span class="trend-score">78</span>
-              <span class="trend-change up">↑5</span>
-            </span>
-          </div>
-          <div class="trend-track">
-            <div class="trend-fill chemical" style="width: 78%;"></div>
-          </div>
-          <div class="trend-theme">热点：Scope 3 排放因子精细化</div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="trend-bar">
-          <div class="trend-header">
-            <span class="trend-name">💻 电子电气</span>
-            <span>
-              <span class="trend-score">85</span>
-              <span class="trend-change up">↑12</span>
-            </span>
-          </div>
-          <div class="trend-track">
-            <div class="trend-fill electronics" style="width: 85%;"></div>
-          </div>
-          <div class="trend-theme">热点：韩国碳标签强制实施</div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="trend-bar">
-          <div class="trend-header">
-            <span class="trend-name">🚗 汽车</span>
-            <span>
-              <span class="trend-score">82</span>
-              <span class="trend-change up">↑8</span>
-            </span>
-          </div>
-          <div class="trend-track">
-            <div class="trend-fill automotive" style="width: 82%;"></div>
-          </div>
-          <div class="trend-theme">热点：电池法规碳足迹声明</div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="trend-bar">
-          <div class="trend-header">
-            <span class="trend-name">🇪🇺 欧盟出口</span>
-            <span>
-              <span class="trend-score">91</span>
-              <span class="trend-change up">↑15</span>
-            </span>
-          </div>
-          <div class="trend-track">
-            <div class="trend-fill eu-export" style="width: 91%;"></div>
-          </div>
-          <div class="trend-theme">热点：CBAM 追溯范围扩大</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="grid-4" id="trend-grid"></div>
 
   <!-- Top Opportunities -->
   <h2 class="section-title">本周产品机会 Top 10</h2>
@@ -973,168 +726,7 @@ body {
       </div>
       <a href="opportunities.html" class="page-link">进入机会库 →</a>
     </div>
-    <div class="card-body" style="padding: 0;">
-      <div class="opp-item">
-        <div class="opp-rank p0">1</div>
-        <div class="opp-content">
-          <div class="opp-title">CBAM 过渡期申报自动化工具：欧盟出口企业急需一键生成 Q1-Q4 碳排放报告</div>
-          <div class="opp-meta">
-            <span style="color: var(--accent-amber);">●</span> 欧盟出口
-            <span class="opp-score">
-              <span class="score-pill biz">商业 9</span>
-              <span class="score-pill tech">技术 8</span>
-              <span class="score-pill grade-a">证据 A</span>
-            </span>
-            <span>8 条证据</span>
-            <span style="color: var(--accent-red);">待评审</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p0">2</div>
-        <div class="opp-content">
-          <div class="opp-title">化工行业 Scope 3 上游排放因子库：打通供应链碳数据孤岛</div>
-          <div class="opp-meta">
-            <span style="color: var(--accent-blue);">●</span> 化工
-            <span class="opp-score">
-              <span class="score-pill biz">商业 9</span>
-              <span class="score-pill tech">技术 7</span>
-              <span class="score-pill grade-a">证据 A</span>
-            </span>
-            <span>6 条证据</span>
-            <span style="color: var(--accent-green);">已立项</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p0">3</div>
-        <div class="opp-content">
-          <div class="opp-title">欧盟新电池法规碳足迹声明：动力电池出口合规工具</div>
-          <div class="opp-meta">
-            <span style="color: var(--accent-amber);">●</span> 欧盟出口
-            <span class="opp-score">
-              <span class="score-pill biz">商业 9</span>
-              <span class="score-pill tech">技术 7</span>
-              <span class="score-pill grade-a">证据 A</span>
-            </span>
-            <span>6 条证据</span>
-            <span style="color: var(--accent-green);">已立项</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p1">4</div>
-        <div class="opp-content">
-          <div class="opp-title">电子电气产品碳标签互认：对接韩国碳标签、法国 Greenly 认证体系</div>
-          <div class="opp-meta">
-            <span style="color: var(--accent-purple);">●</span> 电子电气
-            <span class="opp-score">
-              <span class="score-pill biz">商业 8</span>
-              <span class="score-pill tech">技术 6</span>
-              <span class="score-pill grade-a">证据 B</span>
-            </span>
-            <span>5 条证据</span>
-            <span style="color: var(--accent-red);">待评审</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p1">5</div>
-        <div class="opp-content">
-          <div class="opp-title">LCA 数据库 API 服务：面向第三方 SaaS 的因子查询接口</div>
-          <div class="opp-meta">
-            <span style="color: var(--text-secondary);">●</span> 通用
-            <span class="opp-score">
-              <span class="score-pill biz">商业 8</span>
-              <span class="score-pill tech">技术 9</span>
-              <span class="score-pill grade-a">证据 A</span>
-            </span>
-            <span>7 条证据</span>
-            <span style="color: var(--accent-green);">已立项</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p1">6</div>
-        <div class="opp-content">
-          <div class="opp-title">碳数据质量评分模型：解决企业碳数据可信度痛点</div>
-          <div class="opp-meta">
-            <span style="color: var(--text-secondary);">●</span> 通用
-            <span class="opp-score">
-              <span class="score-pill biz">商业 8</span>
-              <span class="score-pill tech">技术 7</span>
-              <span class="score-pill grade-a">证据 B</span>
-            </span>
-            <span>5 条证据</span>
-            <span style="color: var(--accent-green);">已立项</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p1">7</div>
-        <div class="opp-content">
-          <div class="opp-title">汽车行业 EPD 自动生成：对接 iNEDC 和 WLTP 测试数据</div>
-          <div class="opp-meta">
-            <span style="color: var(--accent-cyan);">●</span> 汽车
-            <span class="opp-score">
-              <span class="score-pill biz">商业 7</span>
-              <span class="score-pill tech">技术 7</span>
-              <span class="score-pill grade-a">证据 B</span>
-            </span>
-            <span>4 条证据</span>
-            <span style="color: var(--accent-red);">待评审</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p1">8</div>
-        <div class="opp-content">
-          <div class="opp-title">PCR 智能推荐引擎：基于产品 HS 编码自动匹配 PCR</div>
-          <div class="opp-meta">
-            <span style="color: var(--text-secondary);">●</span> 通用
-            <span class="opp-score">
-              <span class="score-pill biz">商业 7</span>
-              <span class="score-pill tech">技术 8</span>
-              <span class="score-pill grade-a">证据 B</span>
-            </span>
-            <span>4 条证据</span>
-            <span style="color: var(--accent-red);">待评审</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p2">9</div>
-        <div class="opp-content">
-          <div class="opp-title">化工行业碳标签团体标准升级：从通则到分行业标准</div>
-          <div class="opp-meta">
-            <span style="color: var(--accent-blue);">●</span> 化工
-            <span class="opp-score">
-              <span class="score-pill biz">商业 7</span>
-              <span class="score-pill tech">技术 8</span>
-              <span class="score-pill grade-a">证据 B</span>
-            </span>
-            <span>4 条证据</span>
-            <span style="color: var(--accent-green);">已立项</span>
-          </div>
-        </div>
-      </div>
-      <div class="opp-item">
-        <div class="opp-rank p2">10</div>
-        <div class="opp-content">
-          <div class="opp-title">碳足迹区块链存证：满足品牌方供应链审计需求</div>
-          <div class="opp-meta">
-            <span style="color: var(--text-secondary);">●</span> 通用
-            <span class="opp-score">
-              <span class="score-pill biz">商业 6</span>
-              <span class="score-pill tech">技术 5</span>
-              <span class="score-pill grade-a">证据 C</span>
-            </span>
-            <span>3 条证据</span>
-            <span style="color: var(--accent-red);">待评审</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="card-body" style="padding: 0;" id="opp-list"></div>
   </div>
 
   <!-- Competitor Intel + RD Suggestions -->
@@ -1148,40 +740,7 @@ body {
         </div>
         <a href="evidence.html?filter=竞品" class="page-link">查看全部 →</a>
       </div>
-      <div class="card-body">
-        <div class="comp-item">
-          <div class="comp-avatar">宁德</div>
-          <div class="comp-content">
-            <div class="comp-name">宁德时代</div>
-            <div class="comp-action">EnerD+ 储能产品拿下锂电池行业首张碳足迹标识认证</div>
-            <div class="comp-impact">💡 产品碳足迹 0.053 kgCO₂e/kWh，行业标杆数据</div>
-          </div>
-        </div>
-        <div class="comp-item">
-          <div class="comp-avatar">妙盈</div>
-          <div class="comp-content">
-            <div class="comp-name">妙盈科技</div>
-            <div class="comp-action">推出 LCA 因子 API 服务，定价 0.5 元/次查询</div>
-            <div class="comp-impact">💡 验证因子库商业化路径，CarbSeek 应加速 API 立项</div>
-          </div>
-        </div>
-        <div class="comp-item">
-          <div class="comp-avatar">碳阻迹</div>
-          <div class="comp-content">
-            <div class="comp-name">碳阻迹</div>
-            <div class="comp-action">完成 2 亿元 B 轮融资，因子库覆盖 10 万+ 数据</div>
-            <div class="comp-impact">💡 竞品估值 15 亿元，因子库为核心资产</div>
-          </div>
-        </div>
-        <div class="comp-item">
-          <div class="comp-avatar">MSCI</div>
-          <div class="comp-content">
-            <div class="comp-name">MSCI</div>
-            <div class="comp-action">ESG 评级新增碳数据质量评分维度</div>
-            <div class="comp-impact">💡 碳数据质量成为资本市场评价指标</div>
-          </div>
-        </div>
-      </div>
+      <div class="card-body" id="comp-list"></div>
     </div>
 
     <!-- RD Suggestions -->
@@ -1192,28 +751,7 @@ body {
           下周研发建议
         </div>
       </div>
-      <div class="card-body">
-        <div class="rd-item">
-          <span class="rd-priority p0">P0</span>
-          <div class="rd-text">CBAM 申报自动化模块：对接欧盟 CBAM 系统，支持 Q1-Q4 报告一键生成（建议 8 月立项）</div>
-        </div>
-        <div class="rd-item">
-          <span class="rd-priority p0">P0</span>
-          <div class="rd-text">电池法规合规工具：覆盖动力电池碳足迹声明全流程（建议 8 月立项）</div>
-        </div>
-        <div class="rd-item">
-          <span class="rd-priority p1">P1</span>
-          <div class="rd-text">LCA 因子 API：参照妙盈定价模型，设计 CarbSeek 因子查询接口（建议 9 月发布 Beta）</div>
-        </div>
-        <div class="rd-item">
-          <span class="rd-priority p1">P1</span>
-          <div class="rd-text">韩国碳标签互认：研究中韩碳标签映射规则，设计双标报告模板（建议 9 月启动）</div>
-        </div>
-        <div class="rd-item">
-          <span class="rd-priority p2">P2</span>
-          <div class="rd-text">PCR 智能推荐：基于 HS 编码和关键词匹配 PCR（建议 Q4 立项）</div>
-        </div>
-      </div>
+      <div class="card-body" id="rd-list"></div>
     </div>
   </div>
 
@@ -1224,47 +762,31 @@ body {
       <div class="impact-title pro">
         <span>🔷</span> CarbSeek Pro
       </div>
-      <div class="impact-text">
-        需优先开发 CBAM 申报自动化和电池法规合规模块；PCR 智能推荐和 EPD 自动生成可作为 Q4 规划。韩国碳标签互认模块建议纳入 9 月 roadmap。
-      </div>
+      <div class="impact-text" id="impact-pro"></div>
     </div>
     <div class="impact-card scan">
       <div class="impact-title scan">
         <span>🔶</span> CarbSeek Scan
       </div>
-      <div class="impact-text">
-        需增加韩国碳标签、CBAM 钢铁下游产品追溯、电池法规三项扫描规则。同时增加数据质量评分扫描维度，提升扫描报告的深度和差异化价值。
-      </div>
+      <div class="impact-text" id="impact-scan"></div>
     </div>
     <div class="impact-card db">
       <div class="impact-title db">
         <span>🔮</span> 数据库建设
       </div>
-      <div class="impact-text">
-        Q3 重点补充欧盟官方排放因子、化工上游 Scope 3 因子、电池全生命周期因子；启动 API 接口标准化设计，为因子库商业化做准备。
-      </div>
+      <div class="impact-text" id="impact-db"></div>
     </div>
   </div>
 
   <!-- Footer -->
   <div style="margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center; font-size: 12px; color: var(--text-secondary);">
-    <p>CarbSeek Insight · 碳产业研发情报智能体 · <a href="intelligence.html" style="color: var(--accent-blue);">实时情报中心</a> · 每周自动更新</p>
+    <p>CarbSeek Insight · 碳产业研发情报智能体 · <a href="intelligence.html" style="color: var(--accent-blue);">实时情报中心</a> · 每周自动更新<span id="demo-badge"></span></p>
     <p style="margin-top: 4px;">数据来源：欧盟官方公报、Nature、ISO、36氪、企业年报、行业协会 | 证据等级：A=官方/学术 B=行业报告 C=新闻推测</p>
   </div>
 
 </main>
 
-<script>
-// 简单的数据刷新动画
- document.addEventListener('DOMContentLoaded', function() {
-  const fills = document.querySelectorAll('.trend-fill');
-  fills.forEach(fill => {
-    const width = fill.style.width;
-    fill.style.width = '0%';
-    setTimeout(() => { fill.style.width = width; }, 300);
-  });
-});
-</script>
+<script src="assets/js/dashboard.js"></script>
 
 </body>
 </html>

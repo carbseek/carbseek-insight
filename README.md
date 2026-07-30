@@ -35,12 +35,28 @@ https://YOUR_USERNAME.github.io/carbseek-insight/
 ## 🛠️ 本地开发
 
 ```bash
-# 启动本地预览
+# 启动本地预览(必须通过 http 访问,fetch 不支持 file:// 直接打开)
 cd insight
 python3 -m http.server 8080
 
 # 浏览器打开 http://localhost:8080
 ```
+
+## 🔄 数据流(Step A 数据驱动化后)
+
+`index.html` 不再硬编码任何情报内容,页面加载时由 `assets/js/dashboard.js` 读取以下 JSON 并渲染,**JSON 是唯一真相源**:
+
+```
+data/reports/WR-2026-W30.json   # 本周判断、研发建议、影响分析、Top10 机会排序
+data/radar/this_week.json       # 本周重大变化 Top 5
+data/policy_countdown.json      # 政策倒计时(天数由前端按 deadline 实时计算)
+data/industries/trends.json     # 行业热度趋势
+data/opportunities/opportunity_pool.json  # 机会池(10 条)
+data/intel_center.json          # 情报中心状态(演示数据)
+data/competitors.json           # 竞品动态(演示数据)
+```
+
+更新内容 = 改 JSON,无需动 HTML。其余 6 个页面暂未数据驱动化,后续照搬同模式。
 
 ## 📦 部署指南
 

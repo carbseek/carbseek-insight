@@ -1,93 +1,57 @@
 [
   {
-    "radar_id": "RD-2026-0709-01",
+    "radar_id": "RD-2026-W30-01",
     "title": "欧盟 CBAM Q2 申报指南更新：新增 47 类钢铁下游产品追溯",
     "category": "政策变化",
     "severity": "critical",
     "industry": "欧盟出口",
     "date": "2026-07-01",
     "summary": "欧盟税务总司更新 CBAM 申报指南，新增钢铁下游产品追溯要求，影响大量出口企业。",
-    "evidence_ids": [
-      "EV-2026-0001"
-    ],
+    "evidence_ids": ["EV-2026-0001"],
     "action_required": true
   },
   {
-    "radar_id": "RD-2026-0709-02",
-    "title": "韩国电子电气产品碳标签强制实施",
-    "category": "政策变化",
-    "severity": "high",
-    "industry": "电子电气",
-    "date": "2026-07-01",
-    "summary": "韩国对进口电子电气产品实施强制碳标签，中国出口企业面临新合规压力。",
-    "evidence_ids": [
-      "EV-2026-0005"
-    ],
-    "action_required": true
-  },
-  {
-    "radar_id": "RD-2026-0709-03",
-    "title": "妙盈科技推出 LCA 因子 API，定价 0.5 元/次",
-    "category": "竞品动作",
-    "severity": "high",
-    "industry": "通用",
-    "date": "2026-07-05",
-    "summary": "妙盈科技正式推出 LCA 因子 API 服务，验证因子库商业化路径。",
-    "evidence_ids": [
-      "EV-2026-0008"
-    ],
-    "action_required": true
-  },
-  {
-    "radar_id": "RD-2026-0709-04",
-    "title": "欧盟电池法规碳足迹实施细则发布",
+    "radar_id": "RD-2026-W30-02",
+    "title": "生态环境部发布《产品碳足迹管理体系建设进展报告（2026）》：20 余省市已编制地方碳足迹管理方案",
     "category": "政策变化",
     "severity": "critical",
-    "industry": "汽车",
-    "date": "2026-07-03",
-    "summary": "欧盟发布电池法规碳足迹计算实施细则，2027年2月起强制实施。",
-    "evidence_ids": [
-      "EV-2026-0013"
-    ],
+    "industry": "通用",
+    "date": "2026-06-18",
+    "summary": "生态环境部发布产品碳足迹管理体系建设进展报告，20 余省市已编制地方碳足迹管理方案，国内碳足迹管理体系建设全面提速。",
+    "evidence_ids": [],
     "action_required": true
   },
   {
-    "radar_id": "RD-2026-0709-05",
-    "title": "Nature Communications：化工 Scope 3 排放因子不确定性 ±40%",
-    "category": "学术前沿",
-    "severity": "medium",
-    "industry": "化工",
-    "date": "2026-06-20",
-    "summary": "学术研究揭示化工行业 Scope 3 排放因子存在巨大不确定性，精细化因子库有明确需求。",
-    "evidence_ids": [
-      "EV-2026-0004"
-    ],
+    "radar_id": "RD-2026-W30-03",
+    "title": "宁德时代 EnerD+ 储能产品拿下锂电池行业首张产品碳足迹标识认证证书",
+    "category": "竞品动作",
+    "severity": "high",
+    "industry": "汽车",
+    "date": "2026-06-29",
+    "summary": "宁德时代 EnerD+ 储能产品获得锂电池行业首张产品碳足迹标识认证证书，树立行业标杆数据。",
+    "evidence_ids": [],
     "action_required": false
   },
   {
-    "radar_id": "RD-2026-0709-06",
-    "title": "巴斯夫要求供应商提供经核证碳数据",
-    "category": "竞品动作",
+    "radar_id": "RD-2026-W30-04",
+    "title": "欧盟电池法规碳足迹性能分级（A-E 级）将于 2026 年 8 月 18 日实施",
+    "category": "政策变化",
     "severity": "high",
-    "industry": "化工",
+    "industry": "汽车",
     "date": "2026-06-25",
-    "summary": "巴斯夫将碳数据纳入供应商评分体系，头部企业 Scope 3 要求传导至供应链。",
-    "evidence_ids": [
-      "EV-2026-0003"
-    ],
+    "summary": "欧盟电池法规碳足迹性能分级（A-E 级）将于 2026 年 8 月 18 日实施，动力电池出口企业需提前准备碳足迹声明。",
+    "evidence_ids": [],
     "action_required": true
   },
   {
-    "radar_id": "RD-2026-0709-07",
-    "title": "MSCI 推出碳数据质量评分",
-    "category": "行业应用",
-    "severity": "medium",
-    "industry": "通用",
-    "date": "2026-06-18",
-    "summary": "MSCI 在 ESG 评级中新增碳数据质量评分，碳数据可信度成为资本市场关注指标。",
-    "evidence_ids": [
-      "EV-2026-0010"
-    ],
+    "radar_id": "RD-2026-W30-05",
+    "title": "CBAM 正式实施引入 50 吨豁免门槛：约 80% 进口商豁免申报",
+    "category": "政策变化",
+    "severity": "high",
+    "industry": "欧盟出口",
+    "date": "2026-06-30",
+    "summary": "CBAM 正式实施引入 50 吨豁免门槛，约 80% 进口商豁免申报，同时引入机加工排除规则。",
+    "evidence_ids": [],
     "action_required": false
   }
 ]
