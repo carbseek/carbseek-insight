@@ -1,118 +1,131 @@
-# 🌿 CarbSeek Insight
+# CarbSeek Insight 部署文档
 
-> 碳产业研发情报智能体 | 每周自动追踪全球碳足迹、碳标签、LCA、CBAM、产品碳核算、行业应用、专利和竞品动态
-
-## 🚀 在线访问
+碳产业研发情报驾驶舱。整体由三部分组成：
 
 ```
-https://YOUR_USERNAME.github.io/carbseek-insight/
+├── 静态前端（根目录 *.html + data/*.json）   → GitHub Pages 托管
+├── server/   Express + SQLite 后端 API        → 本地/服务器常驻运行
+└── admin/    Vite + React 管理后台 SPA        → 构建后由后端 /admin 路径托管
 ```
 
-## 📸 页面预览
+---
 
-### 首页：本周产业雷达
-- 本周重大变化 Top 5
-- 产品机会 Top 10
-- 政策倒计时
-- 行业热度趋势
-- 竞品动态
-- 研发建议
+## 1. 环境要求
 
-### 行业页
-- 🔬 化工
-- 💻 电子电气
-- 🚗 汽车
-- 🇪🇺 欧盟出口
+- Node.js **≥ 22.13**（后端使用内置 `node:sqlite`，无需安装数据库；本机验证版本 v22.23.1）
+- npm（随 Node 安装）
+- Windows 可直接使用仓库自带的 `deploy.bat` / `auto_update.bat`
 
-### 证据库
-- 14 条高质量证据，支持按行业/类型/可信度筛选
-- 每条含：原文标题、来源、日期、摘要、关键证据、Agent 解释、可信度
+## 2. 后端服务（server/）
 
-### 机会库
-- 10 个产品机会按 P0/P1/P2 分级
-- 含商业价值、技术可行性、对 Pro/Scan/DB 的影响分析
-
-## 🛠️ 本地开发
+### 2.1 安装与配置
 
 ```bash
-# 启动本地预览(必须通过 http 访问,fetch 不支持 file:// 直接打开)
-cd insight
-python3 -m http.server 8080
-
-# 浏览器打开 http://localhost:8080
+cd server
+npm install
+cp .env.example .env   # Windows: copy .env.example .env
 ```
 
-## 🔄 数据流(Step A 数据驱动化后)
+编辑 `server/.env`：
 
-`index.html` 不再硬编码任何情报内容,页面加载时由 `assets/js/dashboard.js` 读取以下 JSON 并渲染,**JSON 是唯一真相源**:
+| 变量 | 说明 | 默认值 |
+|---|---|---|
+| `PORT` | 服务端口 | `3001` |
+| `JWT_SECRET` | JWT 签名密钥，**生产必须改成随机长字符串** | `dev-only-insecure-secret` |
+| `ADMIN_USERNAME` | 初始管理员用户名 | `admin` |
+| `ADMIN_PASSWORD` | 兜底管理员密码（仅当 users 表中无该用户时生效） | `changeme` |
+| `ADMIN_INITIAL_PASSWORD` | 首次启动播种 users 表时的初始密码 | `admin123` |
 
-```
-data/reports/WR-2026-W30.json   # 本周判断、研发建议、影响分析、Top10 机会排序
-data/radar/this_week.json       # 本周重大变化 Top 5
-data/policy_countdown.json      # 政策倒计时(天数由前端按 deadline 实时计算)
-data/industries/trends.json     # 行业热度趋势
-data/opportunities/opportunity_pool.json  # 机会池(10 条)
-data/intel_center.json          # 情报中心状态(演示数据)
-data/competitors.json           # 竞品动态(演示数据)
-```
+### 2.2 数据库
 
-更新内容 = 改 JSON,无需动 HTML。其余 6 个页面暂未数据驱动化,后续照搬同模式。
+- 数据库文件：`server/data/carbseek.db`（首次启动自动创建，schema 见 `server/db/schema.sql`）
+- **users 表**：首次启动时若不存在 admin 用户，自动播种 `admin` / `admin123`（scrypt 哈希存储）。
+  生产部署请登录后立即修改密码，或事先设置 `ADMIN_INITIAL_PASSWORD`。
+- `carbseek.db`、`-shm`、`-wal` 均在 `.gitignore` 中，不会提交到仓库。
 
-## 📦 部署指南
-
-详见 [DEPLOY.md](DEPLOY.md)
-
-### 快速部署（GitHub Pages）
-
-1. 在 GitHub 创建公开仓库 `carbseek-insight`
-2. 运行 `deploy.bat`（Windows）或执行以下命令：
+### 2.3 启动
 
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/carbseek-insight.git
-git push -u origin main
+cd server
+npm start        # node --env-file=.env index.js
+# 或开发模式（文件变更自动重启）
+npm run dev
 ```
 
-3. 在 GitHub Settings → Pages → Source 选择 **GitHub Actions**
-4. 等待 1-2 分钟后访问 `https://YOUR_USERNAME.github.io/carbseek-insight/`
+验证：
 
-## 🔄 每周自动更新
+```bash
+curl http://localhost:3001/api/health
+# {"ok":true}
 
-系统已配置 cron job，每周一 08:17 自动：
-1. 采集全球碳产业情报
-2. 更新证据库和机会库
-3. 生成新的 HTML 周报
-
-## 📁 文件结构
-
-```
-insight/
-├── index.html                  # 首页（本周产业雷达）
-├── industry-chemical.html      # 化工行业页
-├── industry-electronics.html   # 电子电气行业页
-├── industry-automotive.html    # 汽车行业页
-├── industry-eu-export.html     # 欧盟出口行业页
-├── evidence.html               # 证据库
-├── opportunities.html          # 机会库
-├── data/
-│   ├── schema.json             # 数据模型定义
-│   ├── evidence/               # 证据数据
-│   ├── opportunities/          # 机会数据
-│   ├── radar/                  # 雷达数据
-│   └── reports/                # 周报数据
-├── scripts/
-│   └── insight_engine.py       # 情报采集引擎
-└── .github/workflows/
-    └── pages.yml               # GitHub Actions 自动部署
+curl -X POST http://localhost:3001/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin123"}'
+# {"token":"<JWT>","expires_in":"7d"}
 ```
 
-## 📝 数据来源
+### 2.4 主要 API
 
-- 欧盟官方公报、European Commission TAXUD
-- Nature Communications、IEEE、Transportation Research
-- 企业年报/ESG报告（巴斯夫、宁德时代、三星等）
-- 行业协会（ACEA、中国机电商会等）
-- 竞品动态（碳阻迹、妙盈科技、MSCI 等）
+| 接口 | 鉴权 | 说明 |
+|---|---|---|
+| `POST /api/auth/login` | 无 | 登录，返回 JWT（7 天有效） |
+| `GET /api/dashboard` | 无 | 首页聚合数据 |
+| `GET /api/evidence` `/api/opportunities` `/api/radar-items` 等 | 无 | 公开读取，支持筛选参数 |
+| `POST/PUT/DELETE /api/<entity>` | Bearer | 增删改（evidence、opportunities、radar_items、policies、articles、competitors、trends、recommendations、reports、intel-center） |
+| `POST /api/admin/export` | Bearer | 将 SQLite 导出回 `data/*.json` |
 
-## 📄 License
+写操作请求头需携带：`Authorization: Bearer <login 返回的 token>`。
 
-© 2026 CarbSeek. All rights reserved.
+### 2.5 数据同步（SQLite ↔ JSON）
+
+静态站点以 `data/*.json` 为唯一真相源，后端提供双向同步：
+
+```bash
+cd server
+npm run import   # data/*.json → SQLite
+npm run export   # SQLite → data/*.json（也可 POST /api/admin/export）
+```
+
+后台改完数据 → 调用 export → `git commit && push` → GitHub Pages 自动更新。
+
+## 3. 管理后台（admin/）
+
+```bash
+cd admin
+npm install
+npm run dev      # 本地开发（Vite，默认代理到 :3001）
+npm run build    # 产出 admin/dist/
+```
+
+构建后后端会自动把 `admin/dist/` 挂载到 `http://localhost:3001/admin`，
+用 admin 账号登录即可在线维护证据库、机会库、雷达、周报等数据。
+
+## 4. 静态站点部署（GitHub Pages）
+
+1. 仓库：https://github.com/carbseek/carbseek-insight （分支 `master`）
+2. Settings → Pages → Source 选择 **GitHub Actions**（工作流见 `.github/workflows/`）
+3. 推送后 1-2 分钟访问 `https://carbseek.github.io/carbseek-insight/`
+
+详细步骤与其他托管方式（Netlify / Vercel / 自定义域名）见 [DEPLOY.md](DEPLOY.md)。
+
+## 5. 每周自动更新
+
+`auto_update.bat` / `scheduler.bat`（Windows 计划任务，每周一 08:17）：
+采集情报 → 更新 `data/*.json` → 生成周报 → commit & push。
+
+## 6. 生产部署清单
+
+- [ ] `.env` 中设置强随机 `JWT_SECRET`（如 `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`）
+- [ ] 修改默认管理员密码（不要长期使用 `admin123`）
+- [ ] 用反向代理（Nginx/Caddy）为后端启用 HTTPS，并将 CORS `Access-Control-Allow-Origin` 收紧到站点域名
+- [ ] 定期备份 `server/data/carbseek.db`
+- [ ] 用进程管理器常驻运行，如 `pm2 start index.js --name carbseek-insight --cwd server`
+
+## 7. 故障排查
+
+| 现象 | 处理 |
+|---|---|
+| 启动报 `node:sqlite` 找不到 | Node 版本过低，升级到 ≥ 22.13 |
+| 登录返回 401 | 确认 users 表中有该用户；或删掉 `carbseek.db` 重启重新播种 |
+| 端口被占用 | 改 `.env` 中 `PORT` |
+| 后台页面 404 | 先在 `admin/` 执行 `npm run build` |
