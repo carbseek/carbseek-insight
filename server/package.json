@@ -1,0 +1,17 @@
+{
+  "name": "carbseek-insight-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CarbSeek Insight local backend (Express + node:sqlite)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=.env index.js",
+    "dev": "node --env-file=.env --watch index.js",
+    "import": "node scripts/import_json.js",
+    "export": "node scripts/export_json.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
