@@ -4,76 +4,153 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>欧盟出口行业情报 | CarbSeek Insight</title>
+<link rel="stylesheet" href="assets/css/base.css">
 <style>
-:root {
-  --bg-primary: #0a0e17; --bg-secondary: #111827; --bg-card: #1a2332; --bg-card-hover: #1e293b;
-  --border-color: #253044; --text-primary: #e2e8f0; --text-secondary: #94a3b8;
-  --accent-green: #10b981; --accent-blue: #3b82f6; --accent-amber: #f59e0b; --accent-red: #ef4444;
-  --accent-purple: #8b5cf6; --accent-cyan: #06b6d4;
-  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+/* ===== 行业页专属样式(框架样式见 assets/css/base.css) ===== */
+
+/* Industry Hero(默认化工蓝,其他行业由 body[data-industry] 覆盖) */
+.industry-hero {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.6; min-height: 100vh; }
-.header { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
-.header-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text-primary); }
-.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-.nav-tabs { display: flex; gap: 4px; }
-.nav-tab { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.2s; }
-.nav-tab:hover, .nav-tab.active { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
-.main { max-width: 1440px; margin: 0 auto; padding: 24px; }
-.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
-.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
-.card-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.card-body { padding: 16px 20px; }
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-@media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-.section-title { font-size: 16px; font-weight: 700; margin: 32px 0 16px; display: flex; align-items: center; gap: 8px; }
-.section-title::before { content: ''; width: 4px; height: 20px; background: var(--accent-blue); border-radius: 2px; }
-.page-link { color: var(--accent-blue); text-decoration: none; font-size: 12px; }
-.page-link:hover { text-decoration: underline; }
+.industry-hero h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.industry-hero p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.industry-stats {
+  display: flex;
+  gap: 24px;
+}
+.stat-box {
+  text-align: center;
+}
+.stat-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
 
-.industry-hero { background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1)); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
-.industry-hero h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-.industry-hero p { font-size: 14px; color: var(--text-secondary); }
-.industry-stats { display: flex; gap: 24px; }
-.stat-box { text-align: center; }
-.stat-num { font-size: 28px; font-weight: 700; color: var(--accent-red); font-family: var(--font-mono); }
-.stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+/* 电子电气:紫 */
+body[data-industry="电子电气"] .industry-hero {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+  border-color: rgba(139, 92, 246, 0.2);
+}
+body[data-industry="电子电气"] .stat-num { color: var(--accent-purple); }
 
-.evidence-item { padding: 14px 0; border-bottom: 1px solid var(--border-color); }
+/* 汽车:琥珀 */
+body[data-industry="汽车"] .industry-hero {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+  border-color: rgba(245, 158, 11, 0.2);
+}
+body[data-industry="汽车"] .stat-num { color: var(--accent-amber); }
+
+/* 欧盟出口:红 */
+body[data-industry="欧盟出口"] .industry-hero {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
+  border-color: rgba(239, 68, 68, 0.2);
+}
+body[data-industry="欧盟出口"] .stat-num { color: var(--accent-red); }
+
+/* Evidence Items */
+.evidence-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-color);
+}
 .evidence-item:last-child { border-bottom: none; padding-bottom: 0; }
 .evidence-item:first-child { padding-top: 0; }
-.evidence-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-.evidence-meta { display: flex; gap: 10px; align-items: center; font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
-.evidence-tag { padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 500; }
+.evidence-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.evidence-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.evidence-tag {
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 500;
+}
 .evidence-tag.policy { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
 .evidence-tag.academic { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+.evidence-tag.patent { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
 .evidence-tag.competitor { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
-.evidence-abstract { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.evidence-abstract {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
 
-.opp-card { padding: 14px; border-bottom: 1px solid var(--border-color); transition: background 0.2s; }
+/* Opportunity Card */
+.opp-card {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s;
+}
 .opp-card:hover { background: var(--bg-card-hover); }
 .opp-card:last-child { border-bottom: none; }
-.opp-card-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-.opp-card-meta { display: flex; gap: 8px; font-size: 11px; color: var(--text-secondary); }
+.opp-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.opp-card-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
 
-.rec-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-color); align-items: flex-start; }
+/* Recommendation List */
+.rec-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  align-items: flex-start;
+}
 .rec-item:last-child { border-bottom: none; }
-.rec-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.rec-icon {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
 .rec-icon.field { background: rgba(59, 130, 246, 0.15); }
 .rec-icon.template { background: rgba(16, 185, 129, 0.15); }
 .rec-icon.plugin { background: rgba(245, 158, 11, 0.15); }
-.rec-text { font-size: 12px; line-height: 1.6; flex: 1; }
-
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+.rec-text {
+  font-size: 12px;
+  line-height: 1.6;
+  flex: 1;
+}
 </style>
 </head>
-<body>
+<body data-industry="欧盟出口">
 
 <header class="header">
   <div class="header-inner">
@@ -90,138 +167,102 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <a href="evidence.html" class="nav-tab">证据库</a>
       <a href="opportunities.html" class="nav-tab">机会库</a>
     </nav>
-    <div style="display:flex;gap:16px;font-size:12px;color:var(--text-secondary);"><span>WR-2026-W29</span></div>
+    <div class="header-meta">
+      <span id="report-id"></span>
+    </div>
   </div>
 </header>
 
 <main class="main">
 
+  <!-- Industry Hero -->
   <div class="industry-hero">
     <div>
-      <h1>🇪🇺 欧盟出口行业情报</h1>
-      <p>聚焦 CBAM、电池法规、REACH 与欧盟碳合规工具需求</p>
+      <h1 id="hero-title"></h1>
+      <p id="hero-tagline"></p>
     </div>
     <div class="industry-stats">
-      <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">本周动态</div></div>
-      <div class="stat-box"><div class="stat-num">2</div><div class="stat-label">产品机会</div></div>
-      <div class="stat-box"><div class="stat-num">91</div><div class="stat-label">热度指数</div></div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-evidence">-</div>
+        <div class="stat-label">本周动态</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-opps">-</div>
+        <div class="stat-label">产品机会</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-score">-</div>
+        <div class="stat-label">热度指数</div>
+      </div>
     </div>
   </div>
 
   <div class="grid-2">
+    <!-- Latest Policy -->
     <div class="card">
-      <div class="card-header"><div class="card-title">📋 最新政策</div></div>
-      <div class="card-body">
-        <div class="evidence-item">
-          <div class="evidence-title">欧盟 CBAM 2026 Q2 申报指南更新：新增钢铁下游产品追溯要求</div>
-          <div class="evidence-meta">
-            <span class="evidence-tag policy">政策</span><span>2026-07-01</span><span>European Commission</span>
-          </div>
-          <div class="evidence-abstract">欧盟税务总司发布 CBAM 申报指南更新，新增 Annex IV-B，列出 47 类需追溯的钢铁下游产品 HS 编码。螺丝、螺母、汽车零部件等需追溯上游原材料碳排放。</div>
-        </div>
-        <div class="evidence-item">
-          <div class="evidence-title">欧盟电池法规碳足迹计算规则实施细则发布</div>
-          <div class="evidence-meta">
-            <span class="evidence-tag policy">政策</span><span>2026-07-03</span><span>EU Official Journal</span>
-          </div>
-          <div class="evidence-abstract">欧盟发布电池法规碳足迹计算实施细则，明确动力电池碳足迹需覆盖从采矿到回收的全生命周期。2027 年 2 月起强制实施，违规产品禁止进入欧盟市场。
-        </div>
-        <div class="evidence-item">
-          <div class="evidence-title">CBAM 正式实施引入 50 吨豁免门槛：约 80% 进口商豁免申报</div>
-          <div class="evidence-meta">
-            <span class="evidence-tag policy">政策</span><span>2026-06-30</span><span>欧盟委员会</span>
-          </div>
-          <div class="evidence-abstract">Omnibus法案引入年排放50吨等值豁免门槛，约80%进口商豁免申报。机加工环节排放排除在申报范围外，提供统一缺省值供中小企业选用。2027 年 2 月起强制实施，违规产品禁止进入欧盟市场。</div>
-        </div>
+      <div class="card-header">
+        <div class="card-title">📋 最新政策</div>
       </div>
+      <div class="card-body" id="policy-list"></div>
     </div>
 
+    <!-- Latest Academic -->
     <div class="card">
-      <div class="card-header"><div class="card-title">📚 最新论文</div></div>
-      <div class="card-body">
-        <div class="evidence-item">
-          <div class="evidence-title">Climate Policy：CBAM 对中国出口企业竞争力的影响评估</div>
-          <div class="evidence-meta">
-            <span class="evidence-tag academic">学术</span><span>2026-06-25</span><span>Climate Policy</span>
-          </div>
-          <div class="evidence-abstract">模型估算 CBAM 全面实施后，中国对欧出口钢铁成本将增加 8-12%，铝增加 6-9%。拥有产品级碳足迹数据的企业可获得竞争优势。</div>
-        </div>
+      <div class="card-header">
+        <div class="card-title">📚 最新论文</div>
       </div>
+      <div class="card-body" id="academic-list"></div>
     </div>
 
+    <!-- Latest Competitor -->
     <div class="card">
-      <div class="card-header"><div class="card-title">🏢 代表企业动作</div></div>
-      <div class="card-body">
-        <div class="evidence-item">
-          <div class="evidence-title">机电商会发布 CBAM 应对白皮书</div>
-          <div class="evidence-meta">
-            <span class="evidence-tag competitor">行业</span><span>2026-06-28</span><span>中国机电商会</span>
-          </div>
-          <div class="evidence-abstract">调研 300 家对欧出口企业，发现 80% 尚未建立产品级碳足迹核算能力，仅 12% 完成 CBAM 就绪度评估。市场需求明确。</div>
-        </div>
-        <div class="evidence-item">
-          <div class="evidence-title">TÜV 南德推出 CBAM 一站式合规服务</div>
-          <div class="evidence-meta">
-            <span class="evidence-tag competitor">竞品</span><span>2026-07-01</span><span>TÜV SÜD</span>
-          </div>
-          <div class="evidence-abstract">TÜV 南德推出涵盖碳足迹核算、第三方核证、CBAM 申报全流程的一站式服务。定价 5-15 万元/产品，验证高端合规服务市场。</div>
-        </div>
+      <div class="card-header">
+        <div class="card-title">🏢 代表企业动作</div>
       </div>
+      <div class="card-body" id="company-list"></div>
     </div>
 
+    <!-- CarbSeek Opportunities -->
     <div class="card">
       <div class="card-header">
         <div class="card-title">💡 CarbSeek 产品机会</div>
         <a href="opportunities.html" class="page-link">查看全部 →</a>
       </div>
-      <div class="card-body" style="padding: 0;">
-        <div class="opp-card">
-          <div class="opp-card-title">CBAM 过渡期申报自动化工具</div>
-          <div class="opp-card-meta">
-            <span style="color: var(--accent-red);">●</span> 待评审
-            <span>商业 9 | 技术 8 | 证据 A</span>
-          </div>
-        </div>
-        <div class="opp-card">
-          <div class="opp-card-title">欧盟新电池法规碳足迹声明</div>
-          <div class="opp-card-meta">
-            <span style="color: var(--accent-green);">●</span> 已立项
-            <span>商业 9 | 技术 7 | 证据 A</span>
-          </div>
-        </div>
-      </div>
+      <div class="card-body" style="padding: 0;" id="opp-list"></div>
     </div>
   </div>
 
+  <!-- Recommendations -->
   <h2 class="section-title">CarbSeek 行动建议</h2>
   <div class="grid-3">
     <div class="card">
-      <div class="card-header"><div class="card-title">🔧 推荐新增字段</div></div>
-      <div class="card-body">
-        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>HS 编码映射</strong>：产品到 CBAM 产品类别的自动匹配</div></div>
-        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>欧盟官方排放因子</strong>：按国家/行业/工艺的默认值</div></div>
-        <div class="rec-item"><div class="rec-icon field">📊</div><div class="rec-text"><strong>进口量数据</strong>：用于 CBAM 税费计算</div></div>
+      <div class="card-header">
+        <div class="card-title">🔧 推荐新增字段</div>
       </div>
+      <div class="card-body" id="rec-field"></div>
     </div>
     <div class="card">
-      <div class="card-header"><div class="card-title">📄 推荐报告模板</div></div>
-      <div class="card-body">
-        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>CBAM 季度申报报告</strong>：Q1-Q4 嵌入碳排放报告</div></div>
-        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>电池碳足迹声明报告</strong>：符合 EU 2023/1542</div></div>
-        <div class="rec-item"><div class="rec-icon template">📋</div><div class="rec-text"><strong>CBAM 就绪度评估报告</strong>：企业合规差距分析</div></div>
+      <div class="card-header">
+        <div class="card-title">📄 推荐报告模板</div>
       </div>
+      <div class="card-body" id="rec-template"></div>
     </div>
     <div class="card">
-      <div class="card-header"><div class="card-title">🔌 推荐行业插件</div></div>
-      <div class="card-body">
-        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>欧盟 CBAM 注册系统</strong>：直接对接 Transitional Registry</div></div>
-        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>海关进出口数据</strong>：自动获取 HS 编码和进口量</div></div>
-        <div class="rec-item"><div class="rec-icon plugin">🔌</div><div class="rec-text"><strong>TÜV/SGS 核证对接</strong>：一键提交第三方核证</div></div>
+      <div class="card-header">
+        <div class="card-title">🔌 推荐行业插件</div>
       </div>
+      <div class="card-body" id="rec-plugin"></div>
     </div>
   </div>
 
+  <!-- Footer -->
+  <div style="margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center; font-size: 12px; color: var(--text-secondary);">
+    <p>CarbSeek Insight · 碳产业研发情报智能体 · 每周自动更新 <span class="badge" style="background: rgba(245,158,11,0.15); color: var(--accent-amber);">演示数据</span></p>
+  </div>
+
 </main>
+
+<script src="assets/js/industry.js"></script>
 
 </body>
 </html>

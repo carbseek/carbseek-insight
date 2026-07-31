@@ -4,118 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CarbSeek Insight | 碳产业研发情报驾驶舱</title>
+<link rel="stylesheet" href="assets/css/base.css">
 <style>
-:root {
-  --bg-primary: #0a0e17;
-  --bg-secondary: #111827;
-  --bg-card: #1a2332;
-  --bg-card-hover: #1e293b;
-  --border-color: #253044;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --accent-green: #10b981;
-  --accent-blue: #3b82f6;
-  --accent-amber: #f59e0b;
-  --accent-red: #ef4444;
-  --accent-purple: #8b5cf6;
-  --accent-cyan: #06b6d4;
-  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  line-height: 1.6;
-  min-height: 100vh;
-}
-
-/* ===== Header ===== */
-.header {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  padding: 0 24px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--text-primary);
-}
-
-.logo-icon {
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px;
-}
-
-.nav-tabs {
-  display: flex;
-  gap: 4px;
-}
-
-.nav-tab {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.nav-tab:hover, .nav-tab.active {
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--accent-blue);
-}
-
-.header-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.badge {
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.badge-live {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--accent-green);
-}
-
-/* ===== Main Layout ===== */
-.main {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 24px;
-}
-
 /* ===== Hero: One Sentence Judgment ===== */
 .judgment-banner {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
@@ -149,58 +39,6 @@ body {
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-primary);
-}
-
-/* ===== Grid Layout ===== */
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-
-@media (max-width: 1200px) {
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 768px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-}
-
-/* ===== Cards ===== */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.card-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-title {
-  font-size: 14px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card-title-icon {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-}
-
-.card-body {
-  padding: 16px 20px;
-}
-
-.card-footer {
-  padding: 12px 20px;
-  border-top: 1px solid var(--border-color);
-  font-size: 12px;
-  color: var(--text-secondary);
 }
 
 /* ===== Severity Indicators ===== */
@@ -566,39 +404,6 @@ body {
   color: var(--text-secondary);
 }
 
-/* ===== Section Divider ===== */
-.section-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 32px 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.section-title::before {
-  content: '';
-  width: 4px; height: 20px;
-  background: var(--accent-blue);
-  border-radius: 2px;
-}
-
-/* ===== Links ===== */
-.page-link {
-  color: var(--accent-blue);
-  text-decoration: none;
-  font-size: 12px;
-}
-
-.page-link:hover {
-  text-decoration: underline;
-}
-
-/* ===== Scrollbar ===== */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #334155; }
 </style>
 </head>
 <body>

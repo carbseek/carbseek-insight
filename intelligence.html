@@ -4,84 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CarbSeek Intelligence | 碳足迹研发情报中心</title>
+<link rel="stylesheet" href="assets/css/base.css">
 <style>
-:root {
-  --bg: #0a0e17;
-  --bg-card: #111827;
-  --bg-hover: #1a2332;
-  --border: #253044;
-  --text: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --green: #10b981;
-  --blue: #3b82f6;
-  --amber: #f59e0b;
-  --red: #ef4444;
-  --purple: #8b5cf6;
-  --cyan: #06b6d4;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
-}
-
-/* Header */
-.header {
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 24px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 700;
-}
-.logo-icon {
-  width: 36px; height: 36px;
-  background: linear-gradient(135deg, var(--green), var(--cyan));
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.header-meta {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-.badge-live {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--green);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-/* Stats Grid */
+/* ===== Stats Grid(页面专属) ===== */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  max-width: 1400px;
-  margin: 24px auto;
+  max-width: 1440px;
+  margin: 24px auto 0;
   padding: 0 24px;
 }
 .stat-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
@@ -95,49 +31,26 @@ body {
   font-size: 13px;
   color: var(--text-secondary);
 }
-.stat-total { color: var(--blue); }
-.stat-today { color: var(--green); }
-.stat-week { color: var(--purple); }
-.stat-high { color: var(--amber); }
-.stat-urgent { color: var(--red); }
+.stat-total { color: var(--accent-blue); }
+.stat-today { color: var(--accent-green); }
+.stat-week { color: var(--accent-purple); }
+.stat-high { color: var(--accent-amber); }
+.stat-urgent { color: var(--accent-red); }
 
-/* Main Layout */
+/* ===== Main Layout(页面专属:双栏) ===== */
 .main {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px 40px;
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 24px;
+  padding-bottom: 40px;
 }
+.main .card { margin-bottom: 20px; }
+.main .card:last-child { margin-bottom: 0; }
 
-/* Cards */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.card-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.card-title {
-  font-size: 15px;
-  font-weight: 600;
-}
-.card-body {
-  padding: 16px 20px;
-}
-
-/* Article Item */
+/* ===== Article Item ===== */
 .article-item {
   padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   gap: 12px;
 }
@@ -150,11 +63,11 @@ body {
   flex-shrink: 0;
   height: fit-content;
 }
-.badge-news { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
-.badge-academic { background: rgba(139, 92, 246, 0.15); color: var(--purple); }
-.badge-patent { background: rgba(6, 182, 212, 0.15); color: var(--cyan); }
-.badge-policy { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.badge-industry { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+.badge-news { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.badge-academic { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+.badge-patent { background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); }
+.badge-policy { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+.badge-industry { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
 
 .article-content { flex: 1; }
 .article-title {
@@ -179,23 +92,24 @@ body {
   display: inline-block;
   width: 40px;
   height: 4px;
-  background: var(--border);
+  background: var(--border-color);
   border-radius: 2px;
   vertical-align: middle;
   margin-left: 4px;
 }
 .score-fill {
+  display: block;
   height: 100%;
   border-radius: 2px;
 }
 
-/* Policy Countdown */
+/* ===== Policy Countdown ===== */
 .countdown-item {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-color);
 }
 .countdown-item:last-child { border-bottom: none; }
 .countdown-days {
@@ -206,30 +120,32 @@ body {
   font-weight: 700;
   flex-shrink: 0;
 }
-.days-critical { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.days-high { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+.days-critical { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+.days-high { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
 .days-num { font-size: 16px; line-height: 1; }
 .days-label { font-size: 9px; margin-top: 2px; }
 .countdown-info { flex: 1; }
 .countdown-title { font-size: 13px; font-weight: 600; }
 .countdown-deadline { font-size: 11px; color: var(--text-secondary); }
 
-/* Source Distribution */
+/* ===== Source / Industry Distribution ===== */
 .source-bar {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
 }
+.source-bar:last-child { margin-bottom: 0; }
 .source-name {
   width: 60px;
   font-size: 12px;
   color: var(--text-secondary);
+  flex-shrink: 0;
 }
 .source-track {
   flex: 1;
   height: 8px;
-  background: var(--bg);
+  background: var(--bg-primary);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -242,9 +158,10 @@ body {
   font-size: 12px;
   text-align: right;
   color: var(--text-secondary);
+  flex-shrink: 0;
 }
 
-/* Weekly Report */
+/* ===== Weekly Judgment ===== */
 .judgment-box {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
   border: 1px solid rgba(59, 130, 246, 0.2);
@@ -255,7 +172,7 @@ body {
 .judgment-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--blue);
+  color: var(--accent-blue);
   margin-bottom: 6px;
 }
 .judgment-text {
@@ -263,12 +180,11 @@ body {
   line-height: 1.7;
 }
 
-/* Tabs */
+/* ===== Tabs ===== */
 .tabs {
   display: flex;
   gap: 4px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-color);
   padding: 0 20px;
 }
 .tab {
@@ -280,14 +196,32 @@ body {
   transition: all 0.2s;
 }
 .tab:hover, .tab.active {
-  color: var(--blue);
-  border-bottom-color: var(--blue);
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+/* ===== R&D Suggestions ===== */
+.rd-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 13px;
+  line-height: 1.6;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.rd-item:last-child { border-bottom: none; }
+.rd-priority {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.rd-priority.p0 { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
+.rd-priority.p1 { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+.rd-priority.p2 { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
 
 @media (max-width: 1024px) {
   .main { grid-template-columns: 1fr; }
@@ -296,13 +230,12 @@ body {
 </style>
 </head>
 <body>
-  <div style="background:#0a0e17;border-bottom:1px solid #253044;padding:12px 24px;">
-    <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px;">
-      <a href="index.html" style="color:#3b82f6;text-decoration:none;font-size:14px;font-weight:600;">← 返回驾驶舱首页</a>
-      <span style="color:#94a3b8;font-size:12px;">CarbSeek Intelligence 实时情报中心</span>
+  <div style="background:var(--bg-primary);border-bottom:1px solid var(--border-color);padding:12px 24px;">
+    <div style="max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:16px;">
+      <a href="index.html" style="color:var(--accent-blue);text-decoration:none;font-size:14px;font-weight:600;">← 返回驾驶舱首页</a>
+      <span style="color:var(--text-secondary);font-size:12px;">CarbSeek Intelligence 实时情报中心</span>
     </div>
   </div>
-  <div style=background:#0a0e17;border-bottom:1px solid #253044;padding:12px 24px;><div style=max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px;> <a href=index.html style=color:#3b82f6;text-decoration:none;font-size:14px;font-weight:600;>← 返回驾驶舱首页</a> <span style=color:#94a3b8;font-size:12px;>CarbSeek Intelligence 实时情报中心</span> </div></div>
 
 <!-- Header -->
 <header class="header">
@@ -312,8 +245,8 @@ body {
       <span>CarbSeek Intelligence</span>
     </div>
     <div class="header-meta">
-      <span class="badge-live">● 实时追踪</span>
-      <span>情报中心 v2.0 | 2026-07-27</span>
+      <span class="badge badge-live">● 实时追踪</span>
+      <span id="report-meta">情报中心 v2.0</span>
     </div>
   </div>
 </header>
@@ -321,23 +254,23 @@ body {
 <!-- Stats -->
 <div class="stats-grid">
   <div class="stat-card">
-    <div class="stat-value stat-total">24</div>
+    <div class="stat-value stat-total" id="stat-total">-</div>
     <div class="stat-label">总情报数</div>
   </div>
   <div class="stat-card">
-    <div class="stat-value stat-today">24</div>
+    <div class="stat-value stat-today" id="stat-today">-</div>
     <div class="stat-label">今日新增</div>
   </div>
   <div class="stat-card">
-    <div class="stat-value stat-week">24</div>
+    <div class="stat-value stat-week" id="stat-week">-</div>
     <div class="stat-label">本周新增</div>
   </div>
   <div class="stat-card">
-    <div class="stat-value stat-high">17</div>
+    <div class="stat-value stat-high" id="stat-high">-</div>
     <div class="stat-label">高价值情报</div>
   </div>
   <div class="stat-card">
-    <div class="stat-value stat-urgent">1</div>
+    <div class="stat-value stat-urgent" id="stat-urgent">-</div>
     <div class="stat-label">紧急政策</div>
   </div>
 </div>
@@ -349,304 +282,22 @@ body {
 
     <div class="judgment-box">
       <div class="judgment-label">📊 本周一句话判断</div>
-      <div class="judgment-text">本周CBAM 正式征收（取消免费配额）进入66天倒计时，CarbonSeek需加速CBAM合规模块开发；同时新增10条高价值情报，建议优先关注电池法规和碳标签互认进展。</div>
+      <div class="judgment-text" id="judgment-text"></div>
     </div>
 
     <div class="card">
       <div class="card-header">
         <div class="card-title">📰 最新情报流</div>
-        <span style="font-size:12px;color:#94a3b8">按相关度排序</span>
+        <span style="font-size:12px;color:var(--text-secondary);">按相关度排序</span>
       </div>
-      <div class="tabs">
-        <div class="tab active">全部</div>
-        <div class="tab">政策</div>
-        <div class="tab">学术</div>
-        <div class="tab">专利</div>
-        <div class="tab">行业</div>
+      <div class="tabs" id="article-tabs">
+        <div class="tab active" data-type="all">全部</div>
+        <div class="tab" data-type="policy">政策</div>
+        <div class="tab" data-type="academic">学术</div>
+        <div class="tab" data-type="patent">专利</div>
+        <div class="tab" data-type="industry">行业</div>
       </div>
-      <div class="card-body">
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">TCL电子加入产品碳足迹数字化试点项目</div>
-            <div class="article-summary">TCL电子参与工信部产品碳足迹数字化试点，通过数字化手段实现电视产品全生命周期碳数据的自动采集和分析。...</div>
-            <div class="article-meta">
-              <span>TCL电子</span>
-              <span>电子电气</span>
-              <span>2026-07-06</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:99%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">巴斯夫与SABIC签署化工行业Scope 3碳数据共享协议</div>
-            <div class="article-summary">两家化工巨头将共享上游原材料的碳排放数据，推动化工行业供应链碳透明度，涉及1000余种基础化学品。...</div>
-            <div class="article-meta">
-              <span>巴斯夫官网</span>
-              <span>化工</span>
-              <span>2026-07-21</span>
-              <span>相关度: 0.85<span class="score-bar"><span class="score-fill" style="width:85%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">生态环境部：产品碳足迹管理体系建设进展报告（2026）发布</div>
-            <div class="article-summary">报告指出，截至2026年7月，全国已有20余个省市编制地方碳足迹管理方案，覆盖钢铁、化工、电子电气等重点行业。...</div>
-            <div class="article-meta">
-              <span>生态环境部官网</span>
-              <span>通用</span>
-              <span>2026-07-25</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:100%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">欧盟电池法规碳足迹声明平台正式上线</div>
-            <div class="article-summary">欧盟电池法规要求的碳足迹声明平台正式启用，电池制造商需通过平台提交产品碳足迹报告，首批涉及动力电池和储能电池。...</div>
-            <div class="article-meta">
-              <span>EU Battery Observatory</span>
-              <span>汽车</span>
-              <span>2026-07-23</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:100%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">中化国际发布2026年可持续发展报告：化工产品碳足迹降低12%</div>
-            <div class="article-summary">报告显示，中化国际主要化工产品碳足迹较2023年基准降低12%，完成首批5种产品的碳标签认证。...</div>
-            <div class="article-meta">
-              <span>中化国际</span>
-              <span>化工</span>
-              <span>2026-07-09</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:100%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">海尔智家启动欧盟出口产品CBAM合规项目</div>
-            <div class="article-summary">海尔智家针对冰箱、洗衣机等出口欧盟的家电产品启动CBAM合规项目，建立产品碳足迹核算体系和供应商碳数据收集机制。...</div>
-            <div class="article-meta">
-              <span>海尔智家</span>
-              <span>欧盟出口</span>
-              <span>2026-07-13</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:100%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">比亚迪与SGS合作开展动力电池碳足迹核算</div>
-            <div class="article-summary">比亚迪与SGS通标标准技术服务有限公司签署合作协议，对其刀片电池产品开展全生命周期碳足迹核算，以应对欧盟电池法规要求。...</div>
-            <div class="article-meta">
-              <span>比亚迪</span>
-              <span>汽车</span>
-              <span>2026-07-17</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:100%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-policy">政策</span>
-          <div class="article-content">
-            <div class="article-title">生态环境部印发《2026年碳足迹管理重点工作清单》</div>
-            <div class="article-summary">清单明确2026年下半年碳足迹管理五项重点工作：推进重点产品碳足迹核算、建设国家碳足迹因子数据库、完善碳标识认证制度、推动碳足迹国际互认、加强碳足迹数据质量监管。...</div>
-            <div class="article-meta">
-              <span>生态环境部</span>
-              <span>通用</span>
-              <span>2026-07-22</span>
-              <span>相关度: 1.00<span class="score-bar"><span class="score-fill" style="width:100%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-academic">学术</span>
-          <div class="article-content">
-            <div class="article-title">基于LCA的锂电池全生命周期碳足迹核算方法研究</div>
-            <div class="article-summary">构建了涵盖原材料获取、电池制造、使用阶段和回收处理四个阶段的生命周期评价模型，量化分析磷酸铁锂电池的碳足迹分布特征。...</div>
-            <div class="article-meta">
-              <span>环境科学学报</span>
-              <span>汽车</span>
-              <span>2026-07-15</span>
-              <span>相关度: 0.95<span class="score-bar"><span class="score-fill" style="width:95%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-policy">政策</span>
-          <div class="article-content">
-            <div class="article-title">美国EPA发布产品碳足迹核算指南草案</div>
-            <div class="article-summary">指南草案借鉴ISO 14067和欧盟PEF框架，提出面向美国市场的产品碳足迹核算方法，重点覆盖消费品和电子产品。...</div>
-            <div class="article-meta">
-              <span>US EPA</span>
-              <span>通用</span>
-              <span>2026-07-02</span>
-              <span>相关度: 0.95<span class="score-bar"><span class="score-fill" style="width:95%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-policy">政策</span>
-          <div class="article-content">
-            <div class="article-title">国家发改委：将产品碳足迹纳入绿色工厂评价指标</div>
-            <div class="article-summary">新版《绿色工厂评价通则》将产品碳足迹核算和碳标签认证作为绿色工厂评价的重要指标，推动制造业绿色低碳转型。...</div>
-            <div class="article-meta">
-              <span>国家发改委</span>
-              <span>通用</span>
-              <span>2026-07-07</span>
-              <span>相关度: 0.95<span class="score-bar"><span class="score-fill" style="width:95%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">中国机电商会：欧盟CBAM对机电产品出口影响评估报告</div>
-            <div class="article-summary">报告测算，CBAM全面实施后，中国机电产品对欧出口成本将增加3-8%，建议企业加快碳足迹核算能力建设。...</div>
-            <div class="article-meta">
-              <span>中国机电商会</span>
-              <span>欧盟出口</span>
-              <span>2026-07-19</span>
-              <span>相关度: 0.90<span class="score-bar"><span class="score-fill" style="width:90%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">第18届中国国际低碳产业博览会将于8月举办</div>
-            <div class="article-summary">展会聚焦碳足迹核算、碳标签认证、碳数据平台等主题，预计将吸引500余家国内外企业参展。...</div>
-            <div class="article-meta">
-              <span>中国低碳经济发展促进会</span>
-              <span>通用</span>
-              <span>2026-07-02</span>
-              <span>相关度: 0.90<span class="score-bar"><span class="score-fill" style="width:90%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">万华化学发布化工行业碳足迹管理平台2.0</div>
-            <div class="article-summary">平台新增MDI、TDI等12种聚氨酯产品的碳足迹核算模块，实现从原材料采购到终端产品的全链条碳数据追踪。...</div>
-            <div class="article-meta">
-              <span>万华化学</span>
-              <span>化工</span>
-              <span>2026-07-20</span>
-              <span>相关度: 0.90<span class="score-bar"><span class="score-fill" style="width:90%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">宁德时代发布2026年碳中和进展报告：电池碳足迹降低18%</div>
-            <div class="article-summary">宁德时代发布年度可持续发展报告，显示其动力电池产品碳足迹较2023年基准降低18%，并完成首个海外工厂碳中和认证。...</div>
-            <div class="article-meta">
-              <span>宁德时代官网</span>
-              <span>汽车</span>
-              <span>2026-07-26</span>
-              <span>相关度: 0.90<span class="score-bar"><span class="score-fill" style="width:89%;background:#ef4444"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-patent">专利</span>
-          <div class="article-content">
-            <div class="article-title">一种化工产品碳足迹核算方法</div>
-            <div class="article-summary">针对化工行业多联产、副产品分摊等复杂场景，提出基于质量平衡和能量平衡的碳足迹核算方法，适用于乙烯、甲醇等基础化工产品。...</div>
-            <div class="article-meta">
-              <span>incopat</span>
-              <span>通用</span>
-              <span>2026-03-10</span>
-              <span>相关度: 0.80<span class="score-bar"><span class="score-fill" style="width:80%;background:#f59e0b"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-industry">行业</span>
-          <div class="article-content">
-            <div class="article-title">美的集团获家电行业首张产品碳足迹标识认证</div>
-            <div class="article-summary">美的空调产品通过中国质量认证中心（CQC）碳足迹认证，成为家电行业首家获得产品碳足迹标识的企业。认证覆盖原材料获取、生产制造、运输分销和产品使用四个阶段。...</div>
-            <div class="article-meta">
-              <span>美的集团</span>
-              <span>电子电气</span>
-              <span>2026-07-24</span>
-              <span>相关度: 0.80<span class="score-bar"><span class="score-fill" style="width:80%;background:#f59e0b"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">清华大学研究团队：中国产品碳足迹因子库建设路径研究</div>
-            <div class="article-summary">研究提出分阶段建设国家产品碳足迹因子库的建议，包括基础数据层、核算方法层和应用服务层三层架构。...</div>
-            <div class="article-meta">
-              <span>百度学术</span>
-              <span>通用</span>
-              <span>2026-07-17</span>
-              <span>相关度: 0.65<span class="score-bar"><span class="score-fill" style="width:64%;background:#f59e0b"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-news">资讯</span>
-          <div class="article-content">
-            <div class="article-title">韩国K-碳标签制度7月更新：新增家电产品类别</div>
-            <div class="article-summary">韩国产业通商资源部更新K-碳标签产品目录，新增空调、洗衣机等白色家电类别，2027年1月起强制实施。...</div>
-            <div class="article-meta">
-              <span>韩国产业通商资源部</span>
-              <span>电子电气</span>
-              <span>2026-07-22</span>
-              <span>相关度: 0.55<span class="score-bar"><span class="score-fill" style="width:54%;background:#3b82f6"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="article-item">
-          <span class="article-badge badge-policy">政策</span>
-          <div class="article-content">
-            <div class="article-title">欧盟委员会发布CBAM Q3过渡期实施细则修订版</div>
-            <div class="article-summary">修订版明确过渡期申报的碳排放核算边界、默认排放因子适用条件和实际排放数据替代规则，首次引入机加工排除条款和50吨微量豁免门槛。...</div>
-            <div class="article-meta">
-              <span>European Commission</span>
-              <span>通用</span>
-              <span>2026-07-19</span>
-              <span>相关度: 0.55<span class="score-bar"><span class="score-fill" style="width:54%;background:#3b82f6"></span></span></span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <div class="card-body" id="article-list"></div>
     </div>
   </div>
 
@@ -657,194 +308,39 @@ body {
       <div class="card-header">
         <div class="card-title">⏰ 政策倒计时</div>
       </div>
-      <div class="card-body">
-
-        <div class="countdown-item">
-          <div class="countdown-days days-critical">
-            <span class="days-num">66</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">CBAM 正式征收（取消免费配额）</div>
-            <div class="countdown-deadline">European Commission | 截止: 2026-10-01</div>
-          </div>
-        </div>
-
-        <div class="countdown-item">
-          <div class="countdown-days days-high">
-            <span class="days-num">157</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">韩国电子电气碳标签强制实施</div>
-            <div class="countdown-deadline">韩国产业通商资源部 | 截止: 2026-12-31</div>
-          </div>
-        </div>
-
-        <div class="countdown-item">
-          <div class="countdown-days days-high">
-            <span class="days-num">158</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">CBAM 扩大至有机化学品、塑料</div>
-            <div class="countdown-deadline">European Commission | 截止: 2027-01-01</div>
-          </div>
-        </div>
-
-        <div class="countdown-item">
-          <div class="countdown-days days-high">
-            <span class="days-num">206</span>
-            <span class="days-label">天</span>
-          </div>
-          <div class="countdown-info">
-            <div class="countdown-title">欧盟新电池法规碳足迹强制声明</div>
-            <div class="countdown-deadline">European Parliament | 截止: 2027-02-18</div>
-          </div>
-        </div>
-
-      </div>
+      <div class="card-body" id="countdown-list"></div>
     </div>
 
     <div class="card">
       <div class="card-header">
         <div class="card-title">📊 情报来源分布</div>
       </div>
-      <div class="card-body">
-
-        <div class="source-bar">
-          <span class="source-name">资讯</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:37.5%;background:#3b82f6"></div>
-          </div>
-          <span class="source-count">9</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">行业</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:29.166666666666668%;background:#10b981"></div>
-          </div>
-          <span class="source-count">7</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">政策</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:25.0%;background:#ef4444"></div>
-          </div>
-          <span class="source-count">6</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">学术</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:4.166666666666666%;background:#8b5cf6"></div>
-          </div>
-          <span class="source-count">1</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">专利</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:4.166666666666666%;background:#06b6d4"></div>
-          </div>
-          <span class="source-count">1</span>
-        </div>
-
-      </div>
+      <div class="card-body" id="source-dist"></div>
     </div>
 
     <div class="card">
       <div class="card-header">
         <div class="card-title">🏭 行业覆盖</div>
       </div>
-      <div class="card-body">
-
-        <div class="source-bar">
-          <span class="source-name">通用</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:100.0%;background:#8b5cf6"></div>
-          </div>
-          <span class="source-count">10</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">电子电气</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:40.0%;background:#8b5cf6"></div>
-          </div>
-          <span class="source-count">4</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">化工</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:40.0%;background:#8b5cf6"></div>
-          </div>
-          <span class="source-count">4</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">汽车</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:40.0%;background:#8b5cf6"></div>
-          </div>
-          <span class="source-count">4</span>
-        </div>
-
-        <div class="source-bar">
-          <span class="source-name">欧盟出口</span>
-          <div class="source-track">
-            <div class="source-fill" style="width:20.0%;background:#8b5cf6"></div>
-          </div>
-          <span class="source-count">2</span>
-        </div>
-
-      </div>
+      <div class="card-body" id="industry-dist"></div>
     </div>
 
     <div class="card">
       <div class="card-header">
         <div class="card-title">💡 研发建议</div>
       </div>
-      <div class="card-body">
-
-        <div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6;">
-          【P0】启动CBAM Q3申报模块开发，对接欧盟官方API
-        </div>
-
-        <div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6;">
-          【P0】完成电池碳足迹核算工具原型，支持LCA四个阶段
-        </div>
-
-        <div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6;">
-          【P1】扩展化工行业因子库，覆盖乙烯、甲醇等基础产品
-        </div>
-
-        <div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6;">
-          【P1】开发韩国碳标签对接模块，预研互认机制
-        </div>
-
-        <div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.6;">
-          【P2】建设碳数据质量评分模型，提升数据可信度
-        </div>
-
-      </div>
+      <div class="card-body" id="rd-list"></div>
     </div>
 
   </div>
 </div>
 
-<script>
-// 简单的标签切换
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-</script>
+<!-- Footer -->
+<div style="max-width:1440px;margin:0 auto;padding:20px 24px;border-top:1px solid var(--border-color);text-align:center;font-size:12px;color:var(--text-secondary);">
+  <p>CarbSeek Intelligence · 碳足迹研发情报中心 · <a href="index.html" class="page-link">返回驾驶舱首页</a> · 每周自动更新 <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--accent-amber);">演示数据</span></p>
+</div>
+
+<script src="assets/js/intelligence.js"></script>
 
 </body>
 </html>

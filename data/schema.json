@@ -14,6 +14,7 @@
       "revenue_potential": "enum: 高|中|低",
       "suggested_owner": "string",
       "status": "enum: 待评审|已立项|已上线|已归档",
+      "priority": "enum: P0|P1|P2",
       "created_at": "ISO date",
       "updated_at": "ISO date",
       "evidence_ids": ["string"],
@@ -69,6 +70,29 @@
       "top_opportunities": ["opportunity"],
       "rd_suggestions": ["string"],
       "appendix": ["evidence"]
+    },
+    "policy_countdown": {
+      "policy": "string",
+      "issuing_body": "string",
+      "deadline": "ISO date",
+      "days_left": "integer",
+      "urgency": "enum: critical|high|medium|low"
+    },
+    "article": {
+      "article_id": "string (ART-YYYY-NNN)",
+      "title": "string",
+      "summary": "string",
+      "source": "string",
+      "source_type": "enum: industry|news|policy|academic|patent",
+      "industry": "string",
+      "publish_date": "ISO date",
+      "relevance_score": "number (0-1)",
+      "url": "string"
+    },
+    "recommendation": {
+      "type": "enum: field|template|plugin",
+      "name": "string",
+      "desc": "string"
     }
   }
 }
