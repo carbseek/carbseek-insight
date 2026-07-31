@@ -7,7 +7,9 @@
     "industry": "欧盟出口",
     "date": "2026-07-01",
     "summary": "欧盟税务总司更新 CBAM 申报指南，新增钢铁下游产品追溯要求，影响大量出口企业。",
-    "evidence_ids": ["EV-2026-0001"],
+    "evidence_ids": [
+      "EV-2026-0001"
+    ],
     "action_required": true
   },
   {

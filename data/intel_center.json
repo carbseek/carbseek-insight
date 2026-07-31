@@ -3,22 +3,74 @@
   "overall_status": "正常运行",
   "update_frequency": "每周一/五 10:00 自动采集",
   "agents": [
-    { "icon": "📰", "name": "BaiduNews-Agent", "status": "✓ 今日已更新" },
-    { "icon": "📚", "name": "CNKI-Agent", "status": "✓ 今日已更新" },
-    { "icon": "🔬", "name": "Patent-Agent", "status": "✓ 今日已更新" },
-    { "icon": "🏭", "name": "Industry-Agent", "status": "✓ 今日已更新" },
-    { "icon": "📋", "name": "Policy-Agent", "status": "✓ 今日已更新" }
+    {
+      "icon": "📰",
+      "name": "BaiduNews-Agent",
+      "status": "✓ 今日已更新"
+    },
+    {
+      "icon": "📚",
+      "name": "CNKI-Agent",
+      "status": "✓ 今日已更新"
+    },
+    {
+      "icon": "🔬",
+      "name": "Patent-Agent",
+      "status": "✓ 今日已更新"
+    },
+    {
+      "icon": "🏭",
+      "name": "Industry-Agent",
+      "status": "✓ 今日已更新"
+    },
+    {
+      "icon": "📋",
+      "name": "Policy-Agent",
+      "status": "✓ 今日已更新"
+    }
   ],
   "stats": [
-    { "value": 24, "label": "总情报数", "color": "blue" },
-    { "value": 17, "label": "高价值情报", "color": "green" },
-    { "value": 6, "label": "政策更新", "color": "purple" },
-    { "value": 2, "label": "专利动态", "color": "amber" }
+    {
+      "value": 24,
+      "label": "总情报数",
+      "color": "blue"
+    },
+    {
+      "value": 17,
+      "label": "高价值情报",
+      "color": "green"
+    },
+    {
+      "value": 6,
+      "label": "政策更新",
+      "color": "purple"
+    },
+    {
+      "value": 2,
+      "label": "专利动态",
+      "color": "amber"
+    }
   ],
   "latest": [
-    { "title": "生态环境部：产品碳足迹管理体系建设进展报告", "tag": "政策", "meta": "20+省市已编制方案" },
-    { "title": "欧盟CBAM Q3申报指南：新增铝制品追溯", "tag": "CBAM", "meta": "12类产品新增要求" },
-    { "title": "宁德时代电池碳足迹降低18%", "tag": "行业", "meta": "年度可持续发展报告" },
-    { "title": "韩国K-碳标签新增家电类别", "tag": "碳标签", "meta": "2027年1月强制实施" }
+    {
+      "title": "生态环境部：产品碳足迹管理体系建设进展报告",
+      "tag": "政策",
+      "meta": "20+省市已编制方案"
+    },
+    {
+      "title": "欧盟CBAM Q3申报指南：新增铝制品追溯",
+      "tag": "CBAM",
+      "meta": "12类产品新增要求"
+    },
+    {
+      "title": "宁德时代电池碳足迹降低18%",
+      "tag": "行业",
+      "meta": "年度可持续发展报告"
+    },
+    {
+      "title": "韩国K-碳标签新增家电类别",
+      "tag": "碳标签",
+      "meta": "2027年1月强制实施"
+    }
   ]
 }

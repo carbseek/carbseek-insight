@@ -1,46 +1,190 @@
 {
   "化工": [
-    {"type": "field", "name": "上游原材料碳足迹", "desc": "按供应商/区域/工艺细分"},
-    {"type": "field", "name": "化工工艺类型", "desc": "蒸汽裂解 vs 催化裂化 vs 煤化工"},
-    {"type": "field", "name": "区域电力结构", "desc": "影响 Scope 2 计算精度"},
-    {"type": "template", "name": "化工产品碳足迹核算报告", "desc": "符合 T/DZJN 156-2026"},
-    {"type": "template", "name": "供应链碳数据收集模板", "desc": "面向 Tier 1/2 供应商"},
-    {"type": "template", "name": "化工行业 Scope 3 筛查报告", "desc": "热点识别与改进建议"},
-    {"type": "plugin", "name": "巴斯夫供应商数据对接", "desc": "直接导入供应商碳数据"},
-    {"type": "plugin", "name": "中国化工信息中心", "desc": "对接行业生产数据"},
-    {"type": "plugin", "name": "全国电力排放因子", "desc": "按省份实时更新"}
+    {
+      "type": "field",
+      "name": "上游原材料碳足迹",
+      "desc": "按供应商/区域/工艺细分"
+    },
+    {
+      "type": "field",
+      "name": "化工工艺类型",
+      "desc": "蒸汽裂解 vs 催化裂化 vs 煤化工"
+    },
+    {
+      "type": "field",
+      "name": "区域电力结构",
+      "desc": "影响 Scope 2 计算精度"
+    },
+    {
+      "type": "template",
+      "name": "化工产品碳足迹核算报告",
+      "desc": "符合 T/DZJN 156-2026"
+    },
+    {
+      "type": "template",
+      "name": "供应链碳数据收集模板",
+      "desc": "面向 Tier 1/2 供应商"
+    },
+    {
+      "type": "template",
+      "name": "化工行业 Scope 3 筛查报告",
+      "desc": "热点识别与改进建议"
+    },
+    {
+      "type": "plugin",
+      "name": "巴斯夫供应商数据对接",
+      "desc": "直接导入供应商碳数据"
+    },
+    {
+      "type": "plugin",
+      "name": "中国化工信息中心",
+      "desc": "对接行业生产数据"
+    },
+    {
+      "type": "plugin",
+      "name": "全国电力排放因子",
+      "desc": "按省份实时更新"
+    }
   ],
   "电子电气": [
-    {"type": "field", "name": "产品能效等级", "desc": "影响 use phase 碳排放计算"},
-    {"type": "field", "name": "元器件 BOM 清单", "desc": "PCB、芯片、电池碳足迹"},
-    {"type": "field", "name": "使用寿命假设", "desc": "不同国家使用习惯差异"},
-    {"type": "template", "name": "中韩碳标签双标报告", "desc": "同时满足两国要求"},
-    {"type": "template", "name": "电子电气产品碳足迹核算报告", "desc": "符合 ISO 14067"},
-    {"type": "template", "name": "元器件碳热点分析报告", "desc": "识别高排放 BOM"},
-    {"type": "plugin", "name": "韩国 K-EP 数据库", "desc": "对接韩国官方排放因子"},
-    {"type": "plugin", "name": "元器件碳足迹库", "desc": "芯片、显示屏、电池"},
-    {"type": "plugin", "name": "全球能效标准库", "desc": "中国能效、欧盟 ERP、美国 Energy Star"}
+    {
+      "type": "field",
+      "name": "产品能效等级",
+      "desc": "影响 use phase 碳排放计算"
+    },
+    {
+      "type": "field",
+      "name": "元器件 BOM 清单",
+      "desc": "PCB、芯片、电池碳足迹"
+    },
+    {
+      "type": "field",
+      "name": "使用寿命假设",
+      "desc": "不同国家使用习惯差异"
+    },
+    {
+      "type": "template",
+      "name": "中韩碳标签双标报告",
+      "desc": "同时满足两国要求"
+    },
+    {
+      "type": "template",
+      "name": "电子电气产品碳足迹核算报告",
+      "desc": "符合 ISO 14067"
+    },
+    {
+      "type": "template",
+      "name": "元器件碳热点分析报告",
+      "desc": "识别高排放 BOM"
+    },
+    {
+      "type": "plugin",
+      "name": "韩国 K-EP 数据库",
+      "desc": "对接韩国官方排放因子"
+    },
+    {
+      "type": "plugin",
+      "name": "元器件碳足迹库",
+      "desc": "芯片、显示屏、电池"
+    },
+    {
+      "type": "plugin",
+      "name": "全球能效标准库",
+      "desc": "中国能效、欧盟 ERP、美国 Energy Star"
+    }
   ],
   "汽车": [
-    {"type": "field", "name": "电池类型与容量", "desc": "NCM/LFP/Solid State"},
-    {"type": "field", "name": "工况能耗数据", "desc": "iNEDC/WLTP/CLTC"},
-    {"type": "field", "name": "报废回收率", "desc": "电池回收、钢材回收比例"},
-    {"type": "template", "name": "汽车 EPD 自动生成报告", "desc": "符合 ACEA V3.0 指南"},
-    {"type": "template", "name": "电池碳足迹声明报告", "desc": "符合欧盟电池法规"},
-    {"type": "template", "name": "整车碳足迹对比报告", "desc": "ICE vs BEV 同平台对比"},
-    {"type": "plugin", "name": "工信部工况数据库", "desc": "对接 iNEDC/WLTP 测试数据"},
-    {"type": "plugin", "name": "电池供应链数据库", "desc": "电芯、正极、负极碳足迹"},
-    {"type": "plugin", "name": "报废回收企业对接", "desc": "格林美等回收商数据"}
+    {
+      "type": "field",
+      "name": "电池类型与容量",
+      "desc": "NCM/LFP/Solid State"
+    },
+    {
+      "type": "field",
+      "name": "工况能耗数据",
+      "desc": "iNEDC/WLTP/CLTC"
+    },
+    {
+      "type": "field",
+      "name": "报废回收率",
+      "desc": "电池回收、钢材回收比例"
+    },
+    {
+      "type": "template",
+      "name": "汽车 EPD 自动生成报告",
+      "desc": "符合 ACEA V3.0 指南"
+    },
+    {
+      "type": "template",
+      "name": "电池碳足迹声明报告",
+      "desc": "符合欧盟电池法规"
+    },
+    {
+      "type": "template",
+      "name": "整车碳足迹对比报告",
+      "desc": "ICE vs BEV 同平台对比"
+    },
+    {
+      "type": "plugin",
+      "name": "工信部工况数据库",
+      "desc": "对接 iNEDC/WLTP 测试数据"
+    },
+    {
+      "type": "plugin",
+      "name": "电池供应链数据库",
+      "desc": "电芯、正极、负极碳足迹"
+    },
+    {
+      "type": "plugin",
+      "name": "报废回收企业对接",
+      "desc": "格林美等回收商数据"
+    }
   ],
   "欧盟出口": [
-    {"type": "field", "name": "HS 编码映射", "desc": "产品到 CBAM 产品类别的自动匹配"},
-    {"type": "field", "name": "欧盟官方排放因子", "desc": "按国家/行业/工艺的默认值"},
-    {"type": "field", "name": "进口量数据", "desc": "用于 CBAM 税费计算"},
-    {"type": "template", "name": "CBAM 季度申报报告", "desc": "Q1-Q4 嵌入碳排放报告"},
-    {"type": "template", "name": "电池碳足迹声明报告", "desc": "符合 EU 2023/1542"},
-    {"type": "template", "name": "CBAM 就绪度评估报告", "desc": "企业合规差距分析"},
-    {"type": "plugin", "name": "欧盟 CBAM 注册系统", "desc": "直接对接 Transitional Registry"},
-    {"type": "plugin", "name": "海关进出口数据", "desc": "自动获取 HS 编码和进口量"},
-    {"type": "plugin", "name": "TÜV/SGS 核证对接", "desc": "一键提交第三方核证"}
+    {
+      "type": "field",
+      "name": "HS 编码映射",
+      "desc": "产品到 CBAM 产品类别的自动匹配"
+    },
+    {
+      "type": "field",
+      "name": "欧盟官方排放因子",
+      "desc": "按国家/行业/工艺的默认值"
+    },
+    {
+      "type": "field",
+      "name": "进口量数据",
+      "desc": "用于 CBAM 税费计算"
+    },
+    {
+      "type": "template",
+      "name": "CBAM 季度申报报告",
+      "desc": "Q1-Q4 嵌入碳排放报告"
+    },
+    {
+      "type": "template",
+      "name": "电池碳足迹声明报告",
+      "desc": "符合 EU 2023/1542"
+    },
+    {
+      "type": "template",
+      "name": "CBAM 就绪度评估报告",
+      "desc": "企业合规差距分析"
+    },
+    {
+      "type": "plugin",
+      "name": "欧盟 CBAM 注册系统",
+      "desc": "直接对接 Transitional Registry"
+    },
+    {
+      "type": "plugin",
+      "name": "海关进出口数据",
+      "desc": "自动获取 HS 编码和进口量"
+    },
+    {
+      "type": "plugin",
+      "name": "TÜV/SGS 核证对接",
+      "desc": "一键提交第三方核证"
+    }
   ]
 }

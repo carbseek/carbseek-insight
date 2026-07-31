@@ -7,7 +7,7 @@
     "source_type": "industry",
     "industry": "电子电气",
     "publish_date": "2026-07-06",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
@@ -29,7 +29,7 @@
     "source_type": "news",
     "industry": "通用",
     "publish_date": "2026-07-25",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
@@ -40,7 +40,7 @@
     "source_type": "news",
     "industry": "汽车",
     "publish_date": "2026-07-23",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
@@ -51,7 +51,7 @@
     "source_type": "industry",
     "industry": "化工",
     "publish_date": "2026-07-09",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
@@ -62,7 +62,7 @@
     "source_type": "industry",
     "industry": "欧盟出口",
     "publish_date": "2026-07-13",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
@@ -73,7 +73,7 @@
     "source_type": "industry",
     "industry": "汽车",
     "publish_date": "2026-07-17",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
@@ -84,7 +84,7 @@
     "source_type": "policy",
     "industry": "通用",
     "publish_date": "2026-07-22",
-    "relevance_score": 1.0,
+    "relevance_score": 1,
     "url": ""
   },
   {
