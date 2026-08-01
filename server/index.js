@@ -400,6 +400,7 @@ app.post('/api/admin/export', authMiddleware, (req, res) => {
 });
 
 // --- Health + 404 + error handling ---
+app.get('/health', (req, res) => res.json({ ok: true }));
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 app.use('/api', (req, res) => res.status(404).json({ error: 'not found' }));

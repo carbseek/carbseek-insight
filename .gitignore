@@ -4,5 +4,4 @@ server/data/*.db
 server/data/*.db-shm
 server/data/*.db-wal
 
-# Admin SPA build output
-admin/dist/
+# admin/dist/ is committed so Render free tier can serve it without a build step

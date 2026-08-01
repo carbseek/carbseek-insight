@@ -4,8 +4,11 @@
   "private": true,
   "description": "CarbSeek Insight local backend (Express + node:sqlite)",
   "main": "index.js",
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
-    "start": "node --env-file=.env index.js",
+    "start": "node index.js",
     "dev": "node --env-file=.env --watch index.js",
     "import": "node scripts/import_json.js",
     "export": "node scripts/export_json.js"

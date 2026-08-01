@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: carbseek-insight-server
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    # Seed SQLite from the committed data/*.json on every boot (free-tier
+    # disk is ephemeral, so the DB must be rebuilt from git-tracked data).
+    startCommand: npm run import && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true

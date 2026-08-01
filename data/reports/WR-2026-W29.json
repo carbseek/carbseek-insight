@@ -1,6 +1,7 @@
 {
   "report_id": "WR-2026-W29",
   "week_ending": "2026-07-13",
+  "demo": true,
   "one_sentence_judgment": "CBAM 与电池法规的双重 deadline 逼近，欧盟出口型行业碳合规需求进入爆发前夜；竞品加速 LCA 因子 API 商业化，CarbSeek 需在 Q3 完成因子库 API 和 CBAM 自动化模块立项。",
   "impact_pro": "需优先开发 CBAM 申报自动化和电池法规合规模块；PCR 智能推荐和 EPD 自动生成可作为 Q4 规划。",
   "impact_scan": "需增加韩国碳标签、CBAM 钢铁下游产品追溯、电池法规三项扫描规则。",
