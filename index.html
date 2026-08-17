@@ -4,594 +4,532 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CarbSeek Insight | 碳产业研发情报驾驶舱</title>
-<link rel="stylesheet" href="assets/css/base.css">
 <style>
-/* ===== Hero: One Sentence Judgment ===== */
-.judgment-banner {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.judgment-icon {
-  width: 40px; height: 40px;
-  background: rgba(59, 130, 246, 0.15);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.judgment-content h2 {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent-blue);
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
-
-.judgment-content p {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text-primary);
-}
-
-/* ===== Severity Indicators ===== */
-.severity {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.severity-critical {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--accent-red);
-}
-
-.severity-high {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--accent-amber);
-}
-
-.severity-medium {
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--accent-blue);
-}
-
-.severity-low {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--accent-green);
-}
-
-/* ===== Radar List ===== */
-.radar-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.radar-item:last-child { border-bottom: none; padding-bottom: 0; }
-.radar-item:first-child { padding-top: 0; }
-
-.radar-number {
-  width: 24px; height: 24px;
-  background: var(--bg-secondary);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.radar-content { flex: 1; }
-
-.radar-title {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 4px;
-  line-height: 1.5;
-}
-
-.radar-meta {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.radar-tag {
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 10px;
-  font-weight: 500;
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--accent-blue);
-}
-
-/* ===== Opportunity Cards ===== */
-.opp-item {
-  display: flex;
-  gap: 14px;
-  padding: 16px;
-  border-bottom: 1px solid var(--border-color);
-  transition: background 0.2s;
-}
-
-.opp-item:hover {
-  background: var(--bg-card-hover);
-}
-
-.opp-item:last-child { border-bottom: none; }
-
-.opp-rank {
-  width: 32px; height: 32px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.opp-rank.p0 { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
-.opp-rank.p1 { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
-.opp-rank.p2 { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
-
-.opp-content { flex: 1; }
-
-.opp-title {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  line-height: 1.5;
-}
-
-.opp-meta {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  font-size: 11px;
-  color: var(--text-secondary);
-  flex-wrap: wrap;
-}
-
-.opp-score {
-  display: flex;
-  gap: 8px;
-}
-
-.score-pill {
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.score-pill.biz { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
-.score-pill.tech { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
-.score-pill.grade-a { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
-
-/* ===== Countdown ===== */
-.countdown-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.countdown-item:last-child { border-bottom: none; padding-bottom: 0; }
-.countdown-item:first-child { padding-top: 0; }
-
-.countdown-days {
-  width: 48px; height: 48px;
-  border-radius: 10px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-family: var(--font-mono);
-  flex-shrink: 0;
-}
-
-.countdown-days.critical {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--accent-red);
-}
-
-.countdown-days.high {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--accent-amber);
-}
-
-.countdown-days .days-num {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.countdown-days .days-label {
-  font-size: 9px;
-  margin-top: 2px;
-}
-
-.countdown-info { flex: 1; }
-
-.countdown-title {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.countdown-deadline {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-/* ===== Industry Trend ===== */
-.trend-bar {
-  margin-bottom: 16px;
-}
-
-.trend-bar:last-child { margin-bottom: 0; }
-
-.trend-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.trend-name {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.trend-score {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.trend-change {
-  font-size: 11px;
-  margin-left: 6px;
-}
-
-.trend-change.up { color: var(--accent-red); }
-
-.trend-track {
-  height: 6px;
-  background: var(--bg-secondary);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.trend-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.5s ease;
-}
-
-.trend-fill.chemical { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
-.trend-fill.electronics { background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue)); }
-.trend-fill.automotive { background: linear-gradient(90deg, var(--accent-amber), var(--accent-red)); }
-.trend-fill.eu-export { background: linear-gradient(90deg, var(--accent-red), var(--accent-amber)); }
-
-.trend-theme {
-  font-size: 11px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-/* ===== Competitor Intel ===== */
-.comp-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.comp-item:last-child { border-bottom: none; padding-bottom: 0; }
-.comp-item:first-child { padding-top: 0; }
-
-.comp-avatar {
-  width: 36px; height: 36px;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-}
-
-.comp-content { flex: 1; }
-
-.comp-name {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.comp-action {
-  font-size: 12px;
-  color: var(--text-primary);
-  margin-bottom: 2px;
-}
-
-.comp-impact {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-/* ===== RD Suggestions ===== */
-.rd-item {
-  display: flex;
-  gap: 10px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-color);
-  align-items: flex-start;
-}
-
-.rd-item:last-child { border-bottom: none; padding-bottom: 0; }
-.rd-item:first-child { padding-top: 0; }
-
-.rd-priority {
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.rd-priority.p0 {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--accent-red);
-}
-
-.rd-priority.p1 {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--accent-amber);
-}
-
-.rd-priority.p2 {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--accent-green);
-}
-
-.rd-text {
-  font-size: 12px;
-  line-height: 1.6;
-  flex: 1;
-}
-
-/* ===== Impact Cards ===== */
-.impact-card {
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-}
-
-.impact-card.pro { border-color: rgba(59, 130, 246, 0.3); }
-.impact-card.scan { border-color: rgba(16, 185, 129, 0.3); }
-.impact-card.db { border-color: rgba(139, 92, 246, 0.3); }
-
-.impact-title {
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.impact-title.pro { color: var(--accent-blue); }
-.impact-title.scan { color: var(--accent-green); }
-.impact-title.db { color: var(--accent-purple); }
-
-.impact-text {
-  font-size: 12px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;min-height:100vh}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(10,14,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);position:sticky;top:0;z-index:100}
+.nav-left{display:flex;align-items:center;gap:48px}
+.logo{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:700;color:#fff;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#34d399,#059669);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px rgba(52,211,153,0.2)}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{padding:10px 20px;border-radius:10px;font-size:0.9rem;color:#94a3b8;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none;background:transparent;font-family:inherit;font-weight:500}
+.nav-tab:hover{color:#e2e8f0;background:rgba(255,255,255,0.03)}
+.nav-tab.active{color:#60a5fa;background:rgba(59,130,246,0.1);font-weight:600}
+.nav-right{display:flex;align-items:center;gap:24px}
+.live-badge{display:flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);border-radius:20px;font-size:0.82rem;color:#34d399;font-weight:500}
+.live-dot{width:7px;height:7px;background:#34d399;border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px rgba(52,211,153,0.4)}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.week-info{font-size:0.88rem;color:#64748b;font-weight:500;letter-spacing:0.02em}
+.main{max-width:1440px;margin:0 auto;padding:32px 40px}
+.one-liner-card{background:linear-gradient(135deg,rgba(30,41,59,0.5),rgba(15,23,42,0.6));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px 32px;margin-bottom:28px;display:flex;gap:20px;align-items:flex-start}
+.one-liner-icon{width:48px;height:48px;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.one-liner-content{flex:1}
+.one-liner-label{font-size:0.9rem;font-weight:700;color:#60a5fa;margin-bottom:10px;letter-spacing:0.02em}
+.one-liner-text{font-size:1rem;color:#cbd5e1;line-height:1.85}
+.content-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-bottom:28px}
+@media(max-width:1100px){.content-grid{grid-template-columns:1fr}}
+.section-card{background:rgba(30,41,59,0.3);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:24px}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.section-title{font-size:1.05rem;font-weight:700;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+.section-title .dot{width:8px;height:8px;border-radius:50%}
+.dot-red{background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.4)}
+.dot-orange{background:#f59e0b;box-shadow:0 0 6px rgba(245,158,11,0.4)}
+.section-link{font-size:0.82rem;color:#60a5fa;text-decoration:none;font-weight:500}
+.section-link:hover{text-decoration:underline}
+.change-list{display:flex;flex-direction:column;gap:12px}
+.change-item{display:flex;gap:14px;padding:14px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:3px solid transparent;transition:all 0.2s}
+.change-item:hover{background:rgba(255,255,255,0.04)}
+.change-rank{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;flex-shrink:0}
+.rank-1{background:rgba(239,68,68,0.12);color:#f87171}
+.rank-2{background:rgba(245,158,11,0.12);color:#fbbf24}
+.rank-3{background:rgba(59,130,246,0.12);color:#60a5fa}
+.rank-other{background:rgba(100,116,139,0.12);color:#94a3b8}
+.change-content{flex:1}
+.change-title{font-size:0.92rem;font-weight:600;color:#e2e8f0;margin-bottom:5px;line-height:1.4}
+.change-desc{font-size:0.82rem;color:#94a3b8;line-height:1.6}
+.change-tag{display:inline-block;padding:3px 10px;border-radius:4px;font-size:0.72rem;font-weight:500;margin-top:8px}
+.tag-policy{background:rgba(59,130,246,0.1);color:#60a5fa}
+.tag-market{background:rgba(16,185,129,0.1);color:#34d399}
+.tag-tech{background:rgba(139,92,246,0.1);color:#a78bfa}
+.tag-alert{background:rgba(239,68,68,0.1);color:#f87171}
+.countdown-list{display:flex;flex-direction:column;gap:16px}
+.countdown-item{padding:16px;background:rgba(255,255,255,0.02);border-radius:10px}
+.countdown-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.countdown-name{font-size:0.88rem;font-weight:600;color:#e2e8f0}
+.countdown-status{font-size:0.72rem;padding:3px 10px;border-radius:4px;font-weight:500}
+.status-active{background:rgba(16,185,129,0.1);color:#34d399}
+.status-urgent{background:rgba(239,68,68,0.1);color:#f87171}
+.status-soon{background:rgba(245,158,11,0.1);color:#fbbf24}
+.countdown-bar{height:5px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden;margin-bottom:10px}
+.countdown-bar-fill{height:100%;border-radius:3px;transition:width 0.3s}
+.fill-red{background:linear-gradient(90deg,#ef4444,#f87171)}
+.fill-orange{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.fill-green{background:linear-gradient(90deg,#10b981,#34d399)}
+.countdown-meta{display:flex;justify-content:space-between;font-size:0.75rem;color:#64748b}
+.db-section{margin-bottom:28px}
+.db-tabs{display:flex;gap:8px;margin-bottom:20px;padding:0 4px}
+.db-tab{padding:8px 18px;border-radius:8px;font-size:0.85rem;color:#94a3b8;background:transparent;border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:all 0.2s;font-family:inherit;font-weight:500}
+.db-tab:hover{color:#e2e8f0;border-color:rgba(255,255,255,0.12)}
+.db-tab.active{color:#fff;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(139,92,246,0.15));border-color:rgba(59,130,246,0.25)}
+.db-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:768px){.db-grid{grid-template-columns:1fr}}
+.db-card{background:linear-gradient(135deg,rgba(30,41,59,0.4),rgba(15,23,42,0.5));border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:20px;position:relative;overflow:hidden;transition:all 0.3s}
+.db-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.db-card.cn::before{background:linear-gradient(90deg,#ef4444,#f59e0b)}
+.db-card.intl::before{background:linear-gradient(90deg,#3b82f6,#8b5cf6)}
+.db-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.25)}
+.db-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.db-name{font-size:0.95rem;font-weight:700;color:#f1f5f9}
+.db-org{font-size:0.75rem;color:#64748b;margin-top:3px}
+.db-desc{font-size:0.82rem;color:#94a3b8;line-height:1.65;margin-bottom:12px}
+.db-meta{display:flex;flex-wrap:wrap;gap:6px}
+.db-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:500}
+.db-tag-blue{background:rgba(59,130,246,0.1);color:#60a5fa}
+.db-tag-green{background:rgba(16,185,129,0.1);color:#34d399}
+.db-tag-purple{background:rgba(139,92,246,0.1);color:#a78bfa}
+.db-tag-orange{background:rgba(245,158,11,0.1);color:#fbbf24}
+.db-tag-red{background:rgba(239,68,68,0.1);color:#f87171}
+.compare-table{width:100%;border-collapse:collapse;font-size:0.82rem}
+.compare-table th{text-align:left;padding:12px;color:#94a3b8;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.015)}
+.compare-table td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);color:#cbd5e1;line-height:1.5}
+.compare-table tr:hover td{background:rgba(255,255,255,0.015)}
+.compare-table td:first-child{font-weight:600;color:#e2e8f0}
+.score-bar{display:inline-block;width:60px;height:5px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden;vertical-align:middle;margin-right:6px}
+.score-bar-fill{height:100%;border-radius:3px}
+.score-high{background:#10b981}
+.score-mid{background:#f59e0b}
+.score-low{background:#ef4444}
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:rgba(255,255,255,0.06)}
+.timeline-item{position:relative;padding-bottom:18px}
+.timeline-item::before{content:"";position:absolute;left:-22px;top:6px;width:10px;height:10px;border-radius:50%;background:#3b82f6;border:2px solid #0a0e1a;box-shadow:0 0 6px rgba(59,130,246,0.3)}
+.timeline-date{font-size:0.75rem;color:#64748b;margin-bottom:4px;font-weight:500}
+.timeline-content{font-size:0.85rem;color:#cbd5e1;line-height:1.6}
+.footer{text-align:center;padding:32px;color:#475569;font-size:0.78rem;border-top:1px solid rgba(255,255,255,0.03);margin-top:20px;line-height:1.8}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#0a0e1a}
+::-webkit-scrollbar-thumb{background:#1e293b;border-radius:3px}
+.db-panel{display:none}
+.db-panel.active{display:block}
 </style>
+<base target="_blank">
 </head>
 <body>
+<nav class="navbar">
+<div class="nav-left">
+<a href="#" class="logo"><div class="logo-icon">🌿</div><span>CarbSeek Insight</span></a>
+<div class="nav-tabs">
+<button class="nav-tab active">本周产业雷达</button>
+<button class="nav-tab">实时情报</button>
+<button class="nav-tab">化工</button>
+<button class="nav-tab">电子电气</button>
+<button class="nav-tab">汽车</button>
+<button class="nav-tab">欧盟出口</button>
+<button class="nav-tab">证据库</button>
+<button class="nav-tab">机会库</button>
+</div>
+</div>
+<div class="nav-right">
+<div class="live-badge"><span class="live-dot"></span>实时追踪</div>
+<div class="week-info">WR-2026-W32 | 截至 2026.08.17</div>
+</div>
+</nav>
 
-<!-- Header -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">🌿</div>
-      <span>CarbSeek Insight</span>
-    </div>
-    <nav class="nav-tabs">
-      <a href="index.html" class="nav-tab active">本周产业雷达</a>
-      <a href="intelligence.html" class="nav-tab">实时情报</a>
-      <a href="industry-chemical.html" class="nav-tab">化工</a>
-      <a href="industry-electronics.html" class="nav-tab">电子电气</a>
-      <a href="industry-automotive.html" class="nav-tab">汽车</a>
-      <a href="industry-eu-export.html" class="nav-tab">欧盟出口</a>
-      <a href="evidence.html" class="nav-tab">证据库</a>
-      <a href="opportunities.html" class="nav-tab">机会库</a>
-    </nav>
-    <div class="header-meta">
-      <span class="badge badge-live">● 实时追踪</span>
-      <span id="report-meta"></span>
-    </div>
-  </div>
-</header>
+<div class="main">
+<div class="one-liner-card">
+<div class="one-liner-icon">💡</div>
+<div class="one-liner-content">
+<div class="one-liner-label">本周一句话判断</div>
+<div class="one-liner-text">
+国家温室气体排放因子数据库第二版上线（576因子），电力碳足迹因子降至 0.5777 kgCO₂e/kWh；欧盟新电池法碳足迹标签 8 月正式生效，宁德时代拿下锂电池行业首张碳足迹标识认证；CBAM 全面实施后引入 50 吨豁免门槛和机加工排除规则。CarbSeek 需在 Q3 完成因子库 API 和 CBAM 自动化模块立项，并加速碳足迹数据库全景建设。
+</div>
+</div>
+</div>
 
-<!-- Main Content -->
-<main class="main">
+<div class="content-grid">
+<div class="section-card">
+<div class="section-header">
+<div class="section-title"><span class="dot dot-red"></span>本周重大变化 Top 5</div>
+<a href="#" class="section-link">查看全部 →</a>
+</div>
+<div class="change-list">
+<div class="change-item">
+<div class="change-rank rank-1">1</div>
+<div class="change-content">
+<div class="change-title">国家温室气体排放因子数据库第二版正式上线</div>
+<div class="change-desc">因子总数增至 576 个，新增能源活动、工业生产过程、农业等领域直接排放因子，电力消费间接排放因子更新至 0.5777 kgCO₂e/kWh。</div>
+<span class="change-tag tag-policy">政策变化</span>
+<span class="change-tag tag-alert">CRITICAL</span>
+</div>
+</div>
+<div class="change-item">
+<div class="change-rank rank-2">2</div>
+<div class="change-content">
+<div class="change-title">欧盟新电池法碳足迹标签正式生效</div>
+<div class="change-desc">2026 年 8 月起，电动汽车电池、可充电工业电池、LMT 电池必须标示碳足迹性能等级，未达标产品禁止进入欧盟市场。</div>
+<span class="change-tag tag-alert">CRITICAL</span>
+<span class="change-tag tag-policy">政策变化</span>
+</div>
+</div>
+<div class="change-item">
+<div class="change-rank rank-3">3</div>
+<div class="change-content">
+<div class="change-title">宁德时代拿下锂电池行业首张碳足迹标识认证</div>
+<div class="change-desc">标志着国内动力电池碳足迹管理体系进入实质性落地阶段，产业链上下游企业需加速跟进碳足迹核算与认证。</div>
+<span class="change-tag tag-market">HIGH</span>
+<span class="change-tag tag-tech">竞品动作</span>
+</div>
+</div>
+<div class="change-item">
+<div class="change-rank rank-other">4</div>
+<div class="change-content">
+<div class="change-title">CBAM 正式实施后引入 50 吨豁免门槛</div>
+<div class="change-desc">年进口量低于 50 吨的货物可豁免 CBAM 申报，机加工产品排除规则同步生效，简化部分企业合规流程。</div>
+<span class="change-tag tag-policy">政策变化</span>
+</div>
+</div>
+<div class="change-item">
+<div class="change-rank rank-other">5</div>
+<div class="change-content">
+<div class="change-title">浙江省纺织产业链碳足迹数据库建成</div>
+<div class="change-desc">全国首个基于实景数据的纺织产业链碳足迹数据库，覆盖天然纤维、化纤纤维两大门类，入库 400+ 碳足迹因子。</div>
+<span class="change-tag tag-tech">技术突破</span>
+</div>
+</div>
+</div>
+</div>
 
-  <!-- One Sentence Judgment -->
-  <div class="judgment-banner">
-    <div class="judgment-icon">💡</div>
-    <div class="judgment-content">
-      <h2>本周一句话判断</h2>
-      <p id="judgment-text">加载中…</p>
-    </div>
-  </div>
+<div class="section-card">
+<div class="section-header">
+<div class="section-title"><span class="dot dot-orange"></span>政策倒计时</div>
+</div>
+<div class="countdown-list">
+<div class="countdown-item">
+<div class="countdown-header">
+<span class="countdown-name">CBAM 正式征收（取消免费配额）</span>
+<span class="countdown-status status-urgent">45天</span>
+</div>
+<div class="countdown-bar"><div class="countdown-bar-fill fill-red" style="width:85%"></div></div>
+<div class="countdown-meta"><span>Deadline: 2026-10-01</span><span>欧盟出口</span></div>
+</div>
+<div class="countdown-item">
+<div class="countdown-header">
+<span class="countdown-name">韩国电子电气碳标签过渡期结束</span>
+<span class="countdown-status status-soon">136天</span>
+</div>
+<div class="countdown-bar"><div class="countdown-bar-fill fill-orange" style="width:55%"></div></div>
+<div class="countdown-meta"><span>Deadline: 2026-12-31</span><span>电子电气</span></div>
+</div>
+<div class="countdown-item">
+<div class="countdown-header">
+<span class="countdown-name">欧盟电池法规碳足迹强制声明</span>
+<span class="countdown-status status-soon">185天</span>
+</div>
+<div class="countdown-bar"><div class="countdown-bar-fill fill-orange" style="width:35%"></div></div>
+<div class="countdown-meta"><span>Deadline: 2027-02-18</span><span>汽车</span></div>
+</div>
+<div class="countdown-item">
+<div class="countdown-header">
+<span class="countdown-name">CBAM 扩大至有机化学品、塑料</span>
+<span class="countdown-status status-soon">137天</span>
+</div>
+<div class="countdown-bar"><div class="countdown-bar-fill fill-orange" style="width:50%"></div></div>
+<div class="countdown-meta"><span>Deadline: 2027-01-01</span><span>化工</span></div>
+</div>
+</div>
+</div>
+</div>
 
-  <!-- Top Section: Radar + Countdown -->
-  <div class="grid-3">
-    <!-- Radar Top 5 -->
-    <div class="card" style="grid-column: span 2;">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-red);"></span>
-          本周重大变化 Top 5
-        </div>
-        <a href="evidence.html" class="page-link">查看全部 →</a>
-      </div>
-      <div class="card-body" id="radar-list"></div>
-    </div>
+<div class="section-card db-section">
+<div class="section-header">
+<div class="section-title"><span class="dot dot-orange"></span>碳足迹数据库全景</div>
+<span style="font-size:0.82rem;color:#64748b">覆盖国内外 12+ 核心数据库</span>
+</div>
+<div class="db-tabs">
+<button class="db-tab active" onclick="switchTab('cn',this)">🇨🇳 国内数据库</button>
+<button class="db-tab" onclick="switchTab('intl',this)">🌍 国际数据库</button>
+<button class="db-tab" onclick="switchTab('compare',this)">⚖️ 差异对比</button>
+<button class="db-tab" onclick="switchTab('timeline',this)">📅 政策时间线</button>
+</div>
 
-    <!-- Policy Countdown -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-amber);"></span>
-          政策倒计时
-        </div>
-      </div>
-      <div class="card-body" id="countdown-list"></div>
-    </div>
-  </div>
+<div id="tab-cn" class="db-panel active">
+<div class="db-grid">
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">国家温室气体排放因子数据库</div><div class="db-org">生态环境部 / 国家统计局</div></div>
+<span class="db-tag db-tag-red">官方</span>
+</div>
+<div class="db-desc">2026年3月发布第二版，因子总数增至 <strong>576个</strong>。2024年全国电力平均碳足迹因子 <strong>0.5777 kg CO₂e/kWh</strong>，较2023年下降6.9%。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">576因子</span>
+<span class="db-tag db-tag-green">动态更新</span>
+<span class="db-tag db-tag-orange">电力/能源/工业</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">CEADs 中国碳核算数据库</div><div class="db-org">清华大学 / 全球千余名学者共建</div></div>
+<span class="db-tag db-tag-purple">学术</span>
+</div>
+<div class="db-desc">数据累计下载超 <strong>1,000万次</strong>，支撑6,000余篇学术论文。覆盖城市与产业低碳转型、产业链碳足迹核算。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">1000万+下载</span>
+<span class="db-tag db-tag-green">开放科学</span>
+<span class="db-tag db-tag-orange">多尺度</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">CPCD 中国产品全生命周期排放系数库</div><div class="db-org">生态环境部规划研究院</div></div>
+<span class="db-tag db-tag-blue">政府</span>
+</div>
+<div class="db-desc">聚焦产品级碳足迹因子数据，提供碳足迹建模工具，服务于企业产品碳足迹核算与合规申报。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">产品级</span>
+<span class="db-tag db-tag-green">LCA建模</span>
+<span class="db-tag db-tag-orange">合规导向</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">CLCD 中国生命周期基础数据库</div><div class="db-org">四川大学 / 亿科环境</div></div>
+<span class="db-tag db-tag-purple">商业</span>
+</div>
+<div class="db-desc">涵盖基础能源、大宗原材料、运输、废弃物处置等 <strong>4,000余个</strong> 单元过程，广泛应用于产品碳足迹和LCA研究。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">4000+单元</span>
+<span class="db-tag db-tag-green">行业统计</span>
+<span class="db-tag db-tag-orange">LCA/EPD</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">天工 LCA 数据库</div><div class="db-org">清华大学</div></div>
+<span class="db-tag db-tag-purple">学术</span>
+</div>
+<div class="db-desc">AI模型整理入库，已提供 <strong>4,000余个</strong> 单元过程排放因子。数据格式符合ILCD标准，满足欧盟电池法要求。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">4000+单元</span>
+<span class="db-tag db-tag-green">AI整理</span>
+<span class="db-tag db-tag-orange">ILCD格式</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">碳阻迹 CCDB</div><div class="db-org">碳阻迹（北京）科技有限公司</div></div>
+<span class="db-tag db-tag-blue">商业</span>
+</div>
+<div class="db-desc">聚焦中国本土化排放因子，数据较符合中国实际生产特征。提供企业碳核算、产品碳足迹等数据服务。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">本土化</span>
+<span class="db-tag db-tag-green">企业级</span>
+<span class="db-tag db-tag-orange">SaaS</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">工信部锂电池碳足迹背景数据库</div><div class="db-org">工业和信息化部</div></div>
+<span class="db-tag db-tag-red">行业</span>
+</div>
+<div class="db-desc">专为动力电池行业建设，覆盖正极材料、负极材料、电解液、隔膜等核心原材料及制造过程。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">电池专用</span>
+<span class="db-tag db-tag-green">强制报送</span>
+<span class="db-tag db-tag-orange">2026试点</span>
+</div>
+</div>
+<div class="db-card cn">
+<div class="db-header">
+<div><div class="db-name">浙江省纺织产业链碳足迹数据库</div><div class="db-org">浙江省经信厅 / 科研机构</div></div>
+<span class="db-tag db-tag-green">地方</span>
+</div>
+<div class="db-desc">全国首个基于实景数据的纺织产业链碳足迹数据库，覆盖8个细分品类，入库 <strong>400+</strong> 碳足迹因子。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">400+因子</span>
+<span class="db-tag db-tag-green">实景数据</span>
+<span class="db-tag db-tag-orange">纺织业</span>
+</div>
+</div>
+</div>
+</div>
 
+<div id="tab-intl" class="db-panel">
+<div class="db-grid">
+<div class="db-card intl">
+<div class="db-header">
+<div><div class="db-name">Ecoinvent</div><div class="db-org">瑞士 Ecoinvent Centre</div></div>
+<span class="db-tag db-tag-blue">国际通用</span>
+</div>
+<div class="db-desc">全球最广泛使用的LCA数据库，约 <strong>23,000条</strong> 数据集。中国数据仅占约4%，部分数据源自2000年左右。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">23000数据集</span>
+<span class="db-tag db-tag-green">ILCD格式</span>
+<span class="db-tag db-tag-orange">中国数据偏少</span>
+</div>
+</div>
+<div class="db-card intl">
+<div class="db-header">
+<div><div class="db-name">GaBi</div><div class="db-org">德国 Sphera</div></div>
+<span class="db-tag db-tag-blue">商业</span>
+</div>
+<div class="db-desc">全球领先的商业化LCA数据库，约 <strong>20,000条</strong> 数据集。电力碳足迹因子多在 <strong>0.8-1.0 kgCO₂e/kWh</strong>。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">20000数据集</span>
+<span class="db-tag db-tag-green">商业级</span>
+<span class="db-tag db-tag-orange">电力因子偏高</span>
+</div>
+</div>
+<div class="db-card intl">
+<div class="db-header">
+<div><div class="db-name">欧盟环境足迹数据库 EF</div><div class="db-org">欧盟委员会 JRC</div></div>
+<span class="db-tag db-tag-red">法规强制</span>
+</div>
+<div class="db-desc">欧盟PEF/OEF法规体系核心数据库。ILCD/EF兼容格式，在欧盟电池法等法规中被列为 <strong>第一优先级</strong>。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">EF兼容</span>
+<span class="db-tag db-tag-green">法规优先</span>
+<span class="db-tag db-tag-orange">欧盟电池法</span>
+</div>
+</div>
+<div class="db-card intl">
+<div class="db-header">
+<div><div class="db-name">UK Government GHG Conversion Factors</div><div class="db-org">英国政府</div></div>
+<span class="db-tag db-tag-green">官方</span>
+</div>
+<div class="db-desc">英国企业碳核算法定参考数据源，覆盖能源、交通、废弃物等领域，更新频率较高。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">年度更新</span>
+<span class="db-tag db-tag-green">政府发布</span>
+<span class="db-tag db-tag-orange">英国法定</span>
+</div>
+</div>
+<div class="db-card intl">
+<div class="db-header">
+<div><div class="db-name">日本供应链排放系数数据库</div><div class="db-org">日本经济产业省</div></div>
+<span class="db-tag db-tag-green">官方</span>
+</div>
+<div class="db-desc">日本官方推动的供应链温室气体排放系数数据库，服务于日本企业范围三排放核算。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">供应链</span>
+<span class="db-tag db-tag-green">范围三</span>
+<span class="db-tag db-tag-orange">日本国内</span>
+</div>
+</div>
+<div class="db-card intl">
+<div class="db-header">
+<div><div class="db-name">USLCI / Federal LCA Commons</div><div class="db-org">美国 NREL / 联邦政府</div></div>
+<span class="db-tag db-tag-blue">官方</span>
+</div>
+<div class="db-desc">美国国家可再生能源实验室维护的LCA数据库，覆盖北美地区能源、化工、材料等行业。</div>
+<div class="db-meta">
+<span class="db-tag db-tag-blue">北美聚焦</span>
+<span class="db-tag db-tag-green">联邦平台</span>
+<span class="db-tag db-tag-orange">开放获取</span>
+</div>
+</div>
+</div>
+</div>
 
-  <!-- Intelligence Center Status -->
-  <h2 class="section-title" style="margin-top: 32px;">🤖 情报中心实时状态</h2>
-  <div class="grid-3">
-    <!-- Agent Status -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-green);"></span>
-          Agent 运行状态
-        </div>
-        <span style="font-size: 11px; color: var(--accent-green);">● 正常运行</span>
-      </div>
-      <div class="card-body">
-        <div style="display: flex; flex-direction: column; gap: 10px;" id="agent-status"></div>
-      </div>
-      <div class="card-footer">
-        <a href="intelligence.html" class="page-link">进入实时情报中心 →</a>
-      </div>
-    </div>
+<div id="tab-compare" class="db-panel">
+<div style="overflow-x:auto">
+<table class="compare-table">
+<thead>
+<tr><th>评估维度</th><th>国内数据库</th><th>国际数据库</th><th>对企业的影响</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>数据格式标准化</td>
+<td>天工、CLCD 支持 ILCD；国家因子库为排放因子格式</td>
+<td>Ecoinvent、EF 完全符合 ILCD/EF 标准</td>
+<td><span class="db-tag db-tag-red">出口欧盟需EF兼容格式</span></td>
+</tr>
+<tr>
+<td>中国数据代表性</td>
+<td><span class="score-bar"><span class="score-bar-fill score-high" style="width:90%"></span></span>高</td>
+<td><span class="score-bar"><span class="score-bar-fill score-low" style="width:25%"></span></span>低（仅占4%）</td>
+<td><span class="db-tag db-tag-orange">国际库算出的中国产品碳足迹可能偏高</span></td>
+</tr>
+<tr>
+<td>行业覆盖面</td>
+<td>能源、电力、钢铁、纺织、电池等重点行业</td>
+<td>覆盖全球主要行业，数据颗粒度细</td>
+<td><span class="db-tag db-tag-blue">国内库行业覆盖仍在扩展中</span></td>
+</tr>
+<tr>
+<td>更新频率</td>
+<td>国家库2026年3月更新第二版；部分库更新较慢</td>
+<td>Ecoinvent 约每2-3年大版本更新</td>
+<td><span class="db-tag db-tag-green">国家库已实现动态更新机制</span></td>
+</tr>
+<tr>
+<td>国际认可度</td>
+<td>正在推动国际互认；ISO框架下新注册352名专家</td>
+<td>已被全球广泛采信，欧盟法规直接引用</td>
+<td><span class="db-tag db-tag-red">出口合规目前仍优先使用国际库</span></td>
+</tr>
+<tr>
+<td>电力碳足迹因子</td>
+<td>0.5777 kgCO₂e/kWh（2024年全国平均）</td>
+<td>0.8-1.0 kgCO₂e/kWh（国际库中国电力）</td>
+<td><span class="db-tag db-tag-orange">差异达30-70%，直接影响产品竞争力</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
-    <!-- Stats -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-blue);"></span>
-          本周情报统计
-        </div>
-      </div>
-      <div class="card-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center;" id="intel-stats"></div>
-      </div>
-      <div class="card-footer" id="intel-freq"></div>
-    </div>
+<div id="tab-timeline" class="db-panel">
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-date">2024年</div>
+<div class="timeline-content">发布《温室气体 产品碳足迹量化要求和指南》（GB/T 24067-2024）；全国电力平均碳足迹因子 <strong>0.6205 kgCO₂e/kWh</strong></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2025年1月</div>
+<div class="timeline-content">四部门公布产品碳足迹标识认证试点名单，覆盖 <strong>25省57个地区</strong>，涵盖锂电池、光伏、钢铁等17种重点产品</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2025年12月</div>
+<div class="timeline-content">生态环境部等6部门印发《产品碳足迹因子数据库建设工作指引》，明确2027年初步构建、2030年基本建成目标</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2026年2月</div>
+<div class="timeline-content">《产品碳足迹核算标准目录（第三批）》新增42项产品核算标准；国家温室气体排放因子数据库第二版上线（576因子）</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2026年3月</div>
+<div class="timeline-content">国家温室气体排放因子数据库第二版正式上线，新增和更新291个排放因子，本土化因子达267个</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2026年6月</div>
+<div class="timeline-content">生态环境部发布《产品碳足迹管理体系建设进展报告（2026）》；中国进口废纸纸制品碳足迹认证要求生效</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2026年8月</div>
+<div class="timeline-content">欧盟新电池法碳足迹标签正式生效——电动汽车电池、可充电工业电池、LMT电池必须标示碳足迹性能等级</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-date">2027年</div>
+<div class="timeline-content">国家产品碳足迹因子数据库初步构建完成；工信部NEV电池碳足迹全面报送启动；纺织品DPP预计生效</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-    <!-- Latest Intel -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-cyan);"></span>
-          最新采集情报
-        </div>
-      </div>
-      <div class="card-body" style="padding: 0;" id="latest-intel"></div>
-    </div>
-  </div>
+<div class="footer">
+CarbSeek Insight · 碳产业研发情报智能体 · 实时情报中心 · 每周自动更新<br>
+数据来源：生态环境部、欧盟官方公报、Nature、ISO、CEADs、36氪、企业年报、行业协会 | 证据等级：A=官方/学术 B=行业报告 C=新闻推测<br>
+<span style="color:#334155">更新时间：2026-08-17</span>
+</div>
 
-  <!-- Industry Trends -->
-  <h2 class="section-title">行业热度趋势</h2>
-  <div class="grid-4" id="trend-grid"></div>
-
-  <!-- Top Opportunities -->
-  <h2 class="section-title">本周产品机会 Top 10</h2>
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <span class="card-title-icon" style="background: var(--accent-purple);"></span>
-        按商业价值 × 技术可行性排序
-      </div>
-      <a href="opportunities.html" class="page-link">进入机会库 →</a>
-    </div>
-    <div class="card-body" style="padding: 0;" id="opp-list"></div>
-  </div>
-
-  <!-- Competitor Intel + RD Suggestions -->
-  <div class="grid-2" style="margin-top: 20px;">
-    <!-- Competitor Dynamics -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-cyan);"></span>
-          竞品动态
-        </div>
-        <a href="evidence.html?filter=竞品" class="page-link">查看全部 →</a>
-      </div>
-      <div class="card-body" id="comp-list"></div>
-    </div>
-
-    <!-- RD Suggestions -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <span class="card-title-icon" style="background: var(--accent-green);"></span>
-          下周研发建议
-        </div>
-      </div>
-      <div class="card-body" id="rd-list"></div>
-    </div>
-  </div>
-
-  <!-- Product Impact Analysis -->
-  <h2 class="section-title">对 CarbSeek 产品影响分析</h2>
-  <div class="grid-3">
-    <div class="impact-card pro">
-      <div class="impact-title pro">
-        <span>🔷</span> CarbSeek Pro
-      </div>
-      <div class="impact-text" id="impact-pro"></div>
-    </div>
-    <div class="impact-card scan">
-      <div class="impact-title scan">
-        <span>🔶</span> CarbSeek Scan
-      </div>
-      <div class="impact-text" id="impact-scan"></div>
-    </div>
-    <div class="impact-card db">
-      <div class="impact-title db">
-        <span>🔮</span> 数据库建设
-      </div>
-      <div class="impact-text" id="impact-db"></div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div style="margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center; font-size: 12px; color: var(--text-secondary);">
-    <p>CarbSeek Insight · 碳产业研发情报智能体 · <a href="intelligence.html" style="color: var(--accent-blue);">实时情报中心</a> · 每周自动更新<span id="demo-badge"></span></p>
-    <p style="margin-top: 4px;">数据来源：欧盟官方公报、Nature、ISO、36氪、企业年报、行业协会 | 证据等级：A=官方/学术 B=行业报告 C=新闻推测</p>
-  </div>
-
-</main>
-
-<script src="assets/js/dashboard.js"></script>
-
+<script>
+function switchTab(tabName,btn){
+document.querySelectorAll('.db-panel').forEach(p=>p.classList.remove('active'));
+document.getElementById('tab-'+tabName).classList.add('active');
+document.querySelectorAll('.db-tab').forEach(t=>t.classList.remove('active'));
+btn.classList.add('active');
+}
+</script>
 </body>
 </html>
