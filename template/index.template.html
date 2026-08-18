@@ -436,7 +436,7 @@
         <div class="header">
             <div>
                 <h1>CarbSeek Insight</h1>
-                <div class="subtitle">碳产业研发情报驾驶舱 · WR-2026-W34 · 周一/周五自动更新</div>
+                <div class="subtitle">碳产业研发情报驾驶舱 · {{WEEK_TAG}} · 周一/周五自动更新</div>
             </div>
             <div class="badge badge-live">周一/周五 8:00 自动更新</div>
         </div>
@@ -445,13 +445,13 @@
         <div class="grid grid-4" id="sec-overview">
             <div class="card">
                 <div class="card-title">📊 本周情报统计</div>
-                <div class="card-value">—</div>
-                <div class="card-delta">等待首期自动更新</div>
+                <div class="card-value">{{STAT_COUNT}}</div>
+                <div class="card-delta">{{STAT_DELTA}}</div>
             </div>
             <div class="card">
                 <div class="card-title">🔥 行业热度指数</div>
-                <div class="card-value">—</div>
-                <div class="card-delta">等待首期自动更新</div>
+                <div class="card-value">{{HOT_INDEX}}</div>
+                <div class="card-delta">{{HOT_DELTA}}</div>
             </div>
             <div class="card">
                 <div class="card-title">📋 政策倒计时</div>
@@ -469,7 +469,7 @@
         <div class="highlight-box">
             <span class="icon">⚡</span>
             <div class="text">
-                <strong>最新动态：</strong>2026年3月，国家温室气体排放因子数据库第二版上线，因子总数增至 <strong>576个</strong>；欧盟CBAM已进入全面征收期，新电池法碳足迹标签已于2026年8月生效。
+                <strong>最新动态：</strong>{{ALERT_TEXT}}
             </div>
         </div>
 
@@ -481,7 +481,7 @@
                     <span class="icon" style="background: rgba(59,130,246,0.15);">📰</span>
                     本周情报速递
                 </div>
-                <span class="tag tag-blue">待启动 条收录</span>
+                <span class="tag tag-blue">{{NEWS_COUNT}} 条收录</span>
             </div>
             <table>
                 <thead>
@@ -493,9 +493,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="4" style="color:var(--text-muted);text-align:center;padding:28px">首期自动更新将由 GitHub Actions 于周一/周五 08:00（北京时间）运行，届时此处展示最新抓取情报</td>
-                    </tr>
+{{NEWS_ROWS}}
                 </tbody>
             </table>
         </div>
@@ -888,36 +886,7 @@
                     </tr>
                 </thead>
                 <tbody>
-<tr>
-                        <td><span class="tag tag-red">P0</span></td>
-                        <td>建设企业级本地化碳足迹因子库</td>
-                        <td>国家数据库第二版已上线，但行业覆盖仍有限；出口合规需平衡国际认可度与本土数据准确性</td>
-                        <td><span class="tag tag-blue">A</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-red">P0</span></td>
-                        <td>动力电池碳足迹核算系统</td>
-                        <td>工信部2026年试点报送已启动，欧盟电池法8月标签生效，双重要求叠加</td>
-                        <td><span class="tag tag-blue">A</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-orange">P1</span></td>
-                        <td>供应链碳数据自动采集工具</td>
-                        <td>范围三排放占比高，央企/跨国企业已将碳足迹纳入供应商评估；91家央企优先选用绿色低碳产品</td>
-                        <td><span class="tag tag-blue">A</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-orange">P1</span></td>
-                        <td>ILCD/EF兼容数据格式转换</td>
-                        <td>欧盟电池法要求ILCD格式数据；天工、CLCD已支持，需开发自动化转换中间件</td>
-                        <td><span class="tag tag-green">B</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="tag tag-green">P2</span></td>
-                        <td>AI辅助LCA建模与碳热点识别</td>
-                        <td>中国信通院报告：AI辅助LCA建模是未来三年三大趋势之一</td>
-                        <td><span class="tag tag-green">B</span></td>
-                    </tr>
+{{ADVICE_ROWS}}
                 </tbody>
             </table>
         </div>
@@ -940,66 +909,7 @@
                     </tr>
                 </thead>
                 <tbody>
-<tr>
-                        <td>1</td>
-                        <td>产品碳足迹 SaaS 核算平台</td>
-                        <td>2025年市场规模87.3亿元，同比增42.6%；从"合规导向"转向"价值导向"</td>
-                        <td><span class="tag tag-red">🔥🔥🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>电池全生命周期碳足迹管理系统</td>
-                        <td>工信部强制报送+欧盟电池法标签双重驱动</td>
-                        <td><span class="tag tag-red">🔥🔥🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>供应链碳数据协同平台</td>
-                        <td>巴斯夫等链主企业要求供应商提供PCF数据；范围三成管理重点</td>
-                        <td><span class="tag tag-orange">🔥🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>本地化碳足迹因子库定制服务</td>
-                        <td>国际库中国数据偏差大（电力因子差30-70%），企业急需本土可信数据</td>
-                        <td><span class="tag tag-orange">🔥🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>碳足迹标识认证咨询</td>
-                        <td>25省57地区试点已发放首批证书，市场进入放量期</td>
-                        <td><span class="tag tag-orange">🔥🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>数字产品护照（DPP）解决方案</td>
-                        <td>欧盟ESPR框架下，电子产品DPP已于2026年4月生效，纺织品预计2027年7月</td>
-                        <td><span class="tag tag-green">🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>碳足迹与绿色金融挂钩产品</td>
-                        <td>"碳数贷""碳易贷"等创新贷款产品涌现，金融机构需要碳数据风控模型</td>
-                        <td><span class="tag tag-green">🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>EPD（环境产品声明）预评估工具</td>
-                        <td>出口欧盟建材、纺织品需EPD；国内标准体系快速完善</td>
-                        <td><span class="tag tag-green">🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>CBAM合规申报自动化工具</td>
-                        <td>CBAM已进入全面征收期，进口商需按实际碳排放缴费</td>
-                        <td><span class="tag tag-green">🔥</span></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>碳足迹培训与人才认证</td>
-                        <td>LCA人才缺口大；碳迹方舟等公司已开展培训业务，市场需求旺盛</td>
-                        <td><span class="tag tag-green">🔥</span></td>
-                    </tr>
+{{OPP_ROWS}}
                 </tbody>
             </table>
         </div>
@@ -1008,7 +918,7 @@
         <div class="footer">
             CarbSeek Insight · 碳产业研发情报智能体 · 实时情报中心 · 每周自动更新<br>
             数据来源：生态环境部、欧盟官方公报、Nature、ISO、CEADs、36氪、企业年报、行业协会 | 证据等级：A=官方/学术 B=行业报告 C=新闻推测<br>
-            <span style="color: #4b5563;">更新时间：2026-08-18</span>
+            <span style="color: #4b5563;">更新时间：{{UPDATE_DATE}}</span>
         </div>
     </div>
 <script>
