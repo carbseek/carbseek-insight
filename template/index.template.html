@@ -409,6 +409,32 @@
         #sec-overview, .section { scroll-margin-top: 76px; }
         .news-link { color: var(--text); text-decoration: none; }
         .news-link:hover { color: #60a5fa; text-decoration: underline; }
+
+        /* Business model deep-dive cards */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+        @media (max-width: 640px) { .model-grid { grid-template-columns: 1fr; } }
+        .model-dim {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .model-dim-t {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 4px;
+        }
+        .model-dim-c {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
         @media (max-width: 860px) {
             .topnav-inner { gap: 14px; }
             .topnav-logo span { display: none; }
@@ -422,6 +448,8 @@
             <nav class="topnav-tabs">
                 <a class="topnav-tab active" href="#sec-overview" data-sec="overview">总览</a>
                 <a class="topnav-tab" href="#sec-news" data-sec="news">情报速递</a>
+                <a class="topnav-tab" href="#sec-orgs" data-sec="orgs">机构监测</a>
+                <a class="topnav-tab" href="#sec-models" data-sec="models">商业解构</a>
                 <a class="topnav-tab" href="#sec-cn" data-sec="cn">国内数据库</a>
                 <a class="topnav-tab" href="#sec-intl" data-sec="intl">国际数据库</a>
                 <a class="topnav-tab" href="#sec-compare" data-sec="compare">差异对比</a>
@@ -436,9 +464,9 @@
         <div class="header">
             <div>
                 <h1>CarbSeek Insight</h1>
-                <div class="subtitle">碳产业研发情报驾驶舱 · {{WEEK_TAG}} · 周一/周五自动更新</div>
+                <div class="subtitle">Carbon Intelligence Analyst · {{WEEK_TAG}} · 监测全球 12+ 重点机构</div>
             </div>
-            <div class="badge badge-live">周一/周五 8:00 自动更新</div>
+            <div class="badge badge-live">每日 9:00 自动更新</div>
         </div>
 
         <!-- Stats -->
@@ -489,6 +517,7 @@
                         <th>标题</th>
                         <th>来源</th>
                         <th>日期</th>
+                        <th>可信度</th>
                         <th>相关度</th>
                     </tr>
                 </thead>
@@ -496,6 +525,45 @@
 {{NEWS_ROWS}}
                 </tbody>
             </table>
+        </div>
+
+        <!-- Watched Organizations Matrix -->
+        <div class="section" id="sec-orgs">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(139,92,246,0.15);">🏢</span>
+                    全球重点机构监测矩阵
+                </div>
+                <span class="tag tag-purple">6 大维度持续追踪</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>机构</th>
+                        <th>地区</th>
+                        <th>类型</th>
+                        <th>监测重点</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+{{ORG_ROWS}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Business Model Deep Dives -->
+        <div class="section" id="sec-models">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(16,185,129,0.15);">🔬</span>
+                    商业模式深度解构
+                </div>
+                <span class="tag tag-green">基于公开信息整理 · 每月轮换</span>
+            </div>
+            <div class="db-grid">
+{{MODEL_CARDS}}
+            </div>
         </div>
 
         <!-- Carbon Footprint Database Section -->
