@@ -2,8 +2,8 @@ name: Weekly Content Update
 
 on:
   schedule:
-    # 北京时间每周一、周五 08:00（UTC 00:00）
-      - cron: '0 1 * * *'
+    # 北京时间每日 09:00（UTC 01:00）—— Carbon Intelligence Analyst 每日情报节奏
+    - cron: '0 1 * * *'
   workflow_dispatch:  # 支持手动触发：Actions 页面 → Weekly Content Update → Run workflow
 
 permissions:
