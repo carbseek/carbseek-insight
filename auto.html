@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarbSeek Insight | 碳产业研发情报驾驶舱</title>
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --card: #111827;
+            --card-hover: #1a2236;
+            --border: #1f2937;
+            --text: #e5e7eb;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59,130,246,0.15);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-live {
+            background: rgba(16,185,129,0.1);
+            color: var(--success);
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .badge-live::before {
+            content: "";
+            width: 6px; height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        @media (max-width: 1024px) {
+            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+        .card:hover {
+            border-color: #374151;
+            background: var(--card-hover);
+        }
+        .card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .card-delta {
+            font-size: 0.8rem;
+            color: var(--success);
+        }
+        .card-delta.negative { color: var(--danger); }
+
+        /* Section */
+        .section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        th {
+            text-align: left;
+            padding: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .tag-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+        .tag-green { background: rgba(16,185,129,0.15); color: #34d399; }
+        .tag-purple { background: rgba(139,92,246,0.15); color: #a78bfa; }
+        .tag-orange { background: rgba(245,158,11,0.15); color: #fbbf24; }
+        .tag-red { background: rgba(239,68,68,0.15); color: #f87171; }
+
+        /* Database Cards */
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 768px) { .db-grid { grid-template-columns: 1fr; } }
+        
+        .db-card {
+            background: linear-gradient(135deg, rgba(17,24,39,0.8), rgba(17,24,39,0.4));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .db-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .db-card:hover {
+            transform: translateY(-2px);
+            border-color: #374151;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .db-card.cn::before { background: linear-gradient(90deg, #ef4444, #f59e0b); }
+        .db-card.intl::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+        
+        .db-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .db-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .db-org {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .db-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .db-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .db-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-decoration: none;
+            margin-top: 12px;
+        }
+        .db-link:hover { text-decoration: underline; }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 16px;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -22px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--card);
+        }
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .timeline-content {
+            font-size: 0.875rem;
+            color: var(--text);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 20px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .highlight-box .icon {
+            font-size: 1.5rem;
+        }
+        .highlight-box .text {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .highlight-box .text strong {
+            color: #60a5fa;
+        }
+
+        /* Comparison table */
+        .compare-table th { background: rgba(255,255,255,0.02); }
+        .compare-table td:first-child { font-weight: 600; }
+        .score-bar {
+            display: inline-block;
+            width: 80px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .score-high { background: var(--success); }
+        .score-mid { background: var(--warning); }
+        .score-low { background: var(--danger); }
+
+        /* Top Navigation */
+        html { scroll-behavior: smooth; }
+        .topnav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,14,23,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .topnav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .topnav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.02rem;
+            color: var(--text);
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .topnav-tabs {
+            display: flex;
+            gap: 2px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .topnav-tabs::-webkit-scrollbar { display: none; }
+        .topnav-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .topnav-tab:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+        .topnav-tab.active { color: #60a5fa; background: var(--accent-glow); font-weight: 600; }
+        #sec-overview, .section { scroll-margin-top: 76px; }
+        .news-link { color: var(--text); text-decoration: none; }
+        .news-link:hover { color: #60a5fa; text-decoration: underline; }
+
+        /* Business model deep-dive cards */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+        @media (max-width: 640px) { .model-grid { grid-template-columns: 1fr; } }
+        .model-dim {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .model-dim-t {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 4px;
+        }
+        .model-dim-c {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+        @media (max-width: 860px) {
+            .topnav-inner { gap: 14px; }
+            .topnav-logo span { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <div class="topnav-inner">
+            <a class="topnav-logo" href="#sec-overview">🌿 <span>CarbSeek Insight</span></a>
+            <nav class="topnav-tabs">
+                <a class="topnav-tab active" href="#sec-overview" data-sec="overview">总览</a>
+                <a class="topnav-tab" href="#sec-news" data-sec="news">情报速递</a>
+                <a class="topnav-tab" href="#sec-orgs" data-sec="orgs">机构监测</a>
+                <a class="topnav-tab" href="#sec-models" data-sec="models">商业解构</a>
+                <a class="topnav-tab" href="#sec-cn" data-sec="cn">国内数据库</a>
+                <a class="topnav-tab" href="#sec-intl" data-sec="intl">国际数据库</a>
+                <a class="topnav-tab" href="#sec-compare" data-sec="compare">差异对比</a>
+                <a class="topnav-tab" href="#sec-timeline" data-sec="timeline">政策时间线</a>
+                <a class="topnav-tab" href="#sec-advice" data-sec="advice">研发建议</a>
+                <a class="topnav-tab" href="#sec-opp" data-sec="opp">机会 Top 10</a>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>CarbSeek Insight</h1>
+                <div class="subtitle">Carbon Intelligence Analyst · WR-2026-W40 · 监测全球 12+ 重点机构</div>
+            </div>
+            <div class="badge badge-live">每日 9:00 自动更新</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-4" id="sec-overview">
+            <div class="card">
+                <div class="card-title">📊 本周情报统计</div>
+                <div class="card-value">12</div>
+                <div class="card-delta">↑ 0.0% 较上期</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🔥 行业热度指数</div>
+                <div class="card-value">94.4</div>
+                <div class="card-delta">↑ 0.0% 较上期</div>
+            </div>
+            <div class="card">
+                <div class="card-title">📋 政策倒计时</div>
+                <div class="card-value" style="font-size: 1.5rem; margin-top: 6px;">CBAM 全面征收期</div>
+                <div class="card-delta">已于 2026年 生效</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🌍 数据库覆盖</div>
+                <div class="card-value">12+</div>
+                <div class="card-delta">国内外主流数据库</div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div class="highlight-box">
+            <span class="icon">⚡</span>
+            <div class="text">
+                <strong>最新动态：</strong>本期收录碳产业情报 12 条。重点关注：欧盟《新电池法》碳足迹等级标签于8月18日强制落地 宁德时代宣布已实现核心运营碳中和；前瞻性生命周期评价（prospective LCA）支持创新电池级碳酸锂（Li。
+            </div>
+        </div>
+
+
+        <!-- Weekly Intelligence Feed (auto-generated) -->
+        <div class="section" id="sec-news">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(59,130,246,0.15);">📰</span>
+                    本周情报速递
+                </div>
+                <span class="tag tag-blue">12 条收录</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>来源</th>
+                        <th>日期</th>
+                        <th>可信度</th>
+                        <th>相关度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE1BYll0RHBxLU13bTJOTTEtX3Izeno3cU5zd3dmZldZekxPbEprbGtleEloY1RvU3FodjlkdEtvQ3ExUVBpdlFlY0xwRWR5cWxJcmUydWlKMHBOSmlG?oc=5" target="_blank" rel="noopener">欧盟《新电池法》碳足迹等级标签于8月18日强制落地 宁德时代宣布已实现核心运营碳中和</a></td>
+                        <td><span class="tag tag-blue">网通社</span></td>
+                        <td>2026-09-08</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5rOWVmS3Z3SDQ3VUo4N1NBV0tyRXZvRkZXSFppQlAtUlhJbVZGTDVTUTFvZ0tFck5EZ0RiOTNOdG55T19TSWprN2JKTXotSmlsczZXXzhVZUVKc3NSZEZiRFhRR1hXOTExS292NXVn?oc=5" target="_blank" rel="noopener">前瞻性生命周期评价（prospective LCA）支持创新电池级碳酸锂（Li</a></td>
+                        <td><span class="tag tag-blue">生物通</span></td>
+                        <td>2026-10-01</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5VZ1pBM3FpRE96a2dRdWNVZTEyaE1DM1JkRHJscWlYNmVoVXFkVU80c2Y0ZURMOGcwUzBpbl9kWFVScFJaSVRKWW9vS0RYcWNwTkpOZjktb3M0OXgwbHM0dFVEZU1yWXktbXNLVXZn?oc=5" target="_blank" rel="noopener">基于生命周期评价（LCA）的汽车部件材料选择：考虑材料特定制造路线、工装投入与回收效应</a></td>
+                        <td><span class="tag tag-blue">生物通</span></td>
+                        <td>2026-10-01</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE96aUV1RDJNWmJVbi1RMnFyTDB2TUNNMHF2cnU3V1ZNbnRkV183MG9vNzBaUEllNGRZS2p0RXpXY2VvQS1pckpJamdVLTBlcWFhelZCSlJraUE3d2s2WmxiUFlsaUxNRTB4RVhNdw?oc=5" target="_blank" rel="noopener">欧盟新电池法规进入分阶段施行关键期，Kiwa（琦威）深度拆解中国企业出海合规路径方向</a></td>
+                        <td><span class="tag tag-blue">hea.china.com</span></td>
+                        <td>2026-09-30</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE9FSnFVaW95SkJxR290X2duV2V4ZnJhYkpTUm5UUmg1TGxhQ24tRGFqSFNMdHJtUVdlQmZnUHMtLVQ0NXR6Wkc1U3d2RG9xUQ?oc=5" target="_blank" rel="noopener">360不晚于2026年实现儿童手表全系碳中和：顺丰国际快递收费首获碳足迹认证-体坛网_体坛+</a></td>
+                        <td><span class="tag tag-blue">体坛加</span></td>
+                        <td>2026-09-29</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE9DenptczBJRjBtbVI4MjREY0JacnpTRVZ3Qmo2MXE4Q3VPb3p1ajNmam43X2R4TzYtQWIzS2d6SUt2UFBiRzdwOGVYNnloTWRyalFfX055V3FyVm1Lb3BrLTlpNWQyQQ?oc=5" target="_blank" rel="noopener">Dow synthetic latex earns carbon labels, supporting businesses towards net zero</a></td>
+                        <td><span class="tag tag-blue">Nation Thailand</span></td>
+                        <td>2026-09-30</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9NNFNLR2pWaWlFZk9hWWlrbzFfZTA5LUJDUHRiOG1nWnZGVlU3NEJGVW5Vc0wwWk5nSmNzYjhwd2w1b19qcXBWYTEzbS1NdlUtdldv?oc=5" target="_blank" rel="noopener">国轩大众32亿欧元共建电池厂 获欧洲市场入场券 碳足迹合规挑战才刚启动</a></td>
+                        <td><span class="tag tag-blue">36 Kr</span></td>
+                        <td>2026-09-29</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1CYXV3ZDFqWjd3QUJrSm9xNXBxQ0dmWTVKdExGV0VTd2JUQmY2azVlRGNBUDdrWkh1LWNUSEJfWDVWRFZWV1ZQZDFJbmtUeW5xSVVVRGZmYkI0ZzFHdHVsejcwdVNiYTF6MlE?oc=5" target="_blank" rel="noopener">不同年龄组饮食碳足迹及饮食质量与环境影响的生命周期研究</a></td>
+                        <td><span class="tag tag-blue">生物通</span></td>
+                        <td>2026-09-27</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxNb2FZNVF1WjEwWTQzS3VHWDd3ZzBaajVLYU1FcUFKYnJpRVBGZzRGTFFoYU9sMTVkOTlaV1g4MVdRd01NWFhkdGRpRWNHSlphS0xSLW1pclhhNklWSjdGZGJsamEtekduaktWZ0dlTFVnVzVwRzNHaHloMERFYmhPM2VLZkZyVkRrVEtKbHZnQVc1eGtUN1JXMmpBb2ZPdHlDZkNXNFFEU3QwUHFwY0xxN3BuTWFnNXJrUkdUUU1aVUh3N1Z4alpWZW4zS3hTVE5kM3hRT2t6cHI?oc=5" target="_blank" rel="noopener">Life Cycle Assessment (LCA): Enabling Faster Access to Product Carbon Footprint Information</a></td>
+                        <td><span class="tag tag-blue">marketscreener.com</span></td>
+                        <td>2026-09-23</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE5GS1hGSS10blI2LVI5RUhoZW1OTk8zdW5MVEpPOXYyMU5PczQwQkxDcTlGbHh0TnRZTTMzaXMzVkgtVE1RMDVNSUpwVFdOLUdIdmpFUE1pcWhpaUNYUHFSajdXbmk?oc=5" target="_blank" rel="noopener">“支持摩洛哥碳中和”……现代汽车供应15辆环保电动巴士- 阿视亚经济</a></td>
+                        <td><span class="tag tag-blue">아시아경제</span></td>
+                        <td>2026-09-21</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMiXkFVX3lxTFBNSGN2dlZ5NFBRYlljd0VhM3FiVUVPY0trQnRHTnhpT1U5Qk1CQ21ta2gwRUwtYVpyVFJDQ1hKWTdFck9qTDhxbzRqU2wtZXh2OU5nSTNKM3I3Umh4TXc?oc=5" target="_blank" rel="noopener">WTO正式设立专家组审查欧盟碳边境税，CBAM首次进入争端程序</a></td>
+                        <td><span class="tag tag-blue">ideacarbon.org</span></td>
+                        <td>2026-09-30</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                    <tr>
+                        <td><a class="news-link" href="https://news.google.com/rss/articles/CBMickFVX3lxTE1kZWs0bjhKbnJyTW5VZzVTaVNjWUIwQkZNQ3dPMjE1ZzdDN0Z6QWhiWnBmeEFXUlR4VWVaLXk5TExjVFZvLXpCSTZtUFY5V0x2ZjF4Mk90OExhS3p0TEJmZnA0dTlGNGVMX3VrV2VOVVdrZw?oc=5" target="_blank" rel="noopener">国际钢铁周 | 开阑公司联合创始人保罗·马林斯：以开放协作对冲CBAM等新规则挑战</a></td>
+                        <td><span class="tag tag-blue">csteelnews.com</span></td>
+                        <td>2026-09-29</td>
+                        <td><span class="tag tag-red">🟠 待核实</span></td>
+                        <td><span class="tag tag-red">高</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Watched Organizations Matrix -->
+        <div class="section" id="sec-orgs">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(139,92,246,0.15);">🏢</span>
+                    全球重点机构监测矩阵
+                </div>
+                <span class="tag tag-purple">6 大维度持续追踪</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>机构</th>
+                        <th>地区</th>
+                        <th>类型</th>
+                        <th>监测重点</th>
+                        <th>优先级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Carbon Trust</strong><div style="font-size:0.75rem;color:var(--text-muted)">碳信托</div></td>
+                        <td>🇬🇧 英国</td>
+                        <td><span class="tag tag-green">非营利/混合</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">碳标签认证 · PAS标准 · 产品碳足迹</td>
+                        <td><span class="tag tag-red">核心</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>South Pole</strong><div style="font-size:0.75rem;color:var(--text-muted)">南极公司</div></td>
+                        <td>🇨🇭 瑞士</td>
+                        <td><span class="tag tag-blue">营利企业</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">碳信用开发 · 气候咨询 · SBTi</td>
+                        <td><span class="tag tag-red">核心</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClimatePartner</strong><div style="font-size:0.75rem;color:var(--text-muted)">气候伙伴</div></td>
+                        <td>🇩🇪 德国</td>
+                        <td><span class="tag tag-blue">营利企业</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">气候中和标签 · 消费品抵消 · SaaS</td>
+                        <td><span class="tag tag-red">核心</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>SGS</strong><div style="font-size:0.75rem;color:var(--text-muted)">通标标准</div></td>
+                        <td>🇨🇭 瑞士</td>
+                        <td><span class="tag tag-orange">综合认证巨头</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">ISO 14067核查 · 全链条检验认证</td>
+                        <td><span class="tag tag-red">核心</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TÜV 莱茵/南德</strong></td>
+                        <td>🇩🇪 德国</td>
+                        <td><span class="tag tag-orange">综合认证巨头</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">碳足迹核查 · 电池法合规 · EPD</td>
+                        <td><span class="tag tag-orange">重点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>BSI</strong><div style="font-size:0.75rem;color:var(--text-muted)">英国标准协会</div></td>
+                        <td>🇬🇧 英国</td>
+                        <td><span class="tag tag-green">国家标准机构</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">PAS 2050/2060 · 标准制定话语权</td>
+                        <td><span class="tag tag-orange">重点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Carbon Footprint Ltd</strong></td>
+                        <td>🇬🇧 英国</td>
+                        <td><span class="tag tag-blue">专业认证机构</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">碳核算 · 碳中和认证 · 中小企业市场</td>
+                        <td><span class="tag tag-green">观察</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>CQC</strong><div style="font-size:0.75rem;color:var(--text-muted)">中国质量认证中心</div></td>
+                        <td>🇨🇳 中国</td>
+                        <td><span class="tag tag-green">国有认证机构</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">产品碳足迹认证试点 · 碳标识制度</td>
+                        <td><span class="tag tag-red">核心</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>中环联合认证</strong></td>
+                        <td>🇨🇳 中国</td>
+                        <td><span class="tag tag-green">部委背景机构</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">环境标志 · 碳足迹认证 · 政策对接</td>
+                        <td><span class="tag tag-orange">重点</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Watershed</strong></td>
+                        <td>🇺🇸 美国</td>
+                        <td><span class="tag tag-purple">碳管理SaaS</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">企业碳平台 · 供应链数据 · 融资动态</td>
+                        <td><span class="tag tag-green">观察</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Persefoni</strong></td>
+                        <td>🇺🇸 美国</td>
+                        <td><span class="tag tag-purple">碳核算SaaS</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">碳会计平台 · 金融行业合作</td>
+                        <td><span class="tag tag-green">观察</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sweep</strong></td>
+                        <td>🇫🇷 法国</td>
+                        <td><span class="tag tag-purple">碳数据平台</span></td>
+                        <td style="font-size:0.82rem;color:var(--text-muted)">碳数据管理 · 欧洲企业市场</td>
+                        <td><span class="tag tag-green">观察</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Business Model Deep Dives -->
+        <div class="section" id="sec-models">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(16,185,129,0.15);">🔬</span>
+                    商业模式深度解构
+                </div>
+                <span class="tag tag-green">基于公开信息整理 · 每月轮换</span>
+            </div>
+            <div class="db-grid">
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">Carbon Trust 碳信托</div>
+                            <div class="db-org">🇬🇧 英国 · 2001年创立 · 深度解构 №1</div>
+                        </div>
+                        <span class="tag tag-green">非营利混合</span>
+                    </div>
+                    <div class="db-desc">全球产品碳标签体系的开创者，PAS 2050 共同制定者，以“标准+认证+咨询”三位一体的模式占据碳认证生态的公信力高地。</div>
+                    <div class="model-grid">
+                    <div class="model-dim">
+                        <div class="model-dim-t">🏛 组织架构</div>
+                        <div class="model-dim-c">非营利担保有限公司 + 商业子公司混合架构：认证与咨询业务商业化运营，盈余反哺使命，兼顾公信力与市场化能力。</div>
+                    </div>
+                    <div class="model-dim">
+                        <div class="model-dim-t">🌐 国际业务</div>
+                        <div class="model-dim-c">总部位于伦敦，通过海外办公室与本地合作伙伴网络交付；碳标签在多国市场获得零售商与品牌方采信，形成事实上的跨国互认。</div>
+                    </div>
+                    <div class="model-dim">
+                        <div class="model-dim-t">💰 收入模型</div>
+                        <div class="model-dim-c">认证服务年费 + 企业/政府咨询项目 + 政府委托研究；非营利属性带来公信力溢价，客户为品牌背书付费意愿强。</div>
+                    </div>
+                    <div class="model-dim">
+                        <div class="model-dim-t">🛡 核心能力</div>
+                        <div class="model-dim-c">标准制定话语权（PAS 系列）、20余年品牌积累、与英国及欧盟政策圈深度绑定、方法学人才密度高。</div>
+                    </div>
+                    </div>
+                    <div class="db-desc" style="margin-top:12px;margin-bottom:0"><strong style="color:#60a5fa">💡 战略启示：</strong>其护城河在“标准发源地”身份而非技术本身。CarbSeek 应跟踪其标签规则迭代，在本土市场抢占“中国版碳标签”的标准话语权空白。</div>
+                </div>
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">South Pole 南极公司</div>
+                            <div class="db-org">🇨🇭 瑞士 · 2006年创立 · 深度解构 №2</div>
+                        </div>
+                        <span class="tag tag-blue">营利企业</span>
+                    </div>
+                    <div class="db-desc">全球最大私营碳减排项目开发商之一，从碳信用开发起家，延伸至 SBTi 咨询、气候中和认证与数字化平台的全链条气候解决方案商。</div>
+                    <div class="model-grid">
+                    <div class="model-dim">
+                        <div class="model-dim-t">🏛 组织架构</div>
+                        <div class="model-dim-c">瑞士营利性公司，全球数十个国家设有法律实体与团队，员工规模逾千人，投资人包括国际私募与战略资本。</div>
+                    </div>
+                    <div class="model-dim">
+                        <div class="model-dim-t">🌐 国际业务</div>
+                        <div class="model-dim-c">直营全球化网络：在新兴市场开发碳减排项目（造林、可再生能源、灶具等），碳信用主要销往欧美合规与自愿市场。</div>
+                    </div>
+                    <div class="model-dim">
+                        <div class="model-dim-t">💰 收入模型</div>
+                        <div class="model-dim-c">碳信用开发与销售分成（核心利润源）+ 企业气候咨询（碳中和路径/SBTi）+ 数字工具订阅；受碳价波动影响显著。</div>
+                    </div>
+                    <div class="model-dim">
+                        <div class="model-dim-t">🛡 核心能力</div>
+                        <div class="model-dim-c">海量项目管线与端到端开发能力、全球买方网络、项目风险定价经验、近年来向数据平台化转型。</div>
+                    </div>
+                    </div>
+                    <div class="db-desc" style="margin-top:12px;margin-bottom:0"><strong style="color:#60a5fa">💡 战略启示：</strong>其“项目开发+买方网络”双边模式难以复制，但碳信用市场信任危机暴露了重资产模式的脆弱性。CarbSeek 可学习其咨询产品化能力，避开重资产端。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carbon Footprint Database Section -->
+        <div class="section" id="sec-cn">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(239,68,68,0.15);">🇨🇳</span>
+                    国内碳足迹数据库全景
+                </div>
+                <span class="tag tag-red">政策驱动 · 快速建设中</span>
+            </div>
+            <div class="db-grid">
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">国家温室气体排放因子数据库</div>
+                            <div class="db-org">生态环境部 / 国家统计局</div>
+                        </div>
+                        <span class="tag tag-red">官方</span>
+                    </div>
+                    <div class="db-desc">
+                        2026年3月发布第二版，因子总数增至 <strong>576个</strong>，新增能源活动、工业生产过程、农业等领域直接排放因子和电力消费间接排放因子。2024年全国电力平均碳足迹因子为 <strong>0.5777 kg CO₂e/kWh</strong>，较2023年下降6.9%。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">576因子</span>
+                        <span class="tag tag-green">动态更新</span>
+                        <span class="tag tag-orange">电力/能源/工业</span>
+                    </div>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">CEADs 中国碳核算数据库</div>
+                            <div class="db-org">清华大学 / 全球千余名学者共建</div>
+                        </div>
+                        <span class="tag tag-purple">学术</span>
+                    </div>
+                    <div class="db-desc">
+                        秉持"众源共建、开放共享"原则，汇聚22个国家学者参与。数据累计下载超 <strong>1,000万次</strong>，支撑6,000余篇学术论文。覆盖城市与产业低碳转型、产业链碳足迹核算等领域，在联合国气候变化大会定期发布年度排放报告。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">1000万+下载</span>
+                        <span class="tag tag-green">开放科学</span>
+                        <span class="tag tag-orange">多尺度</span>
+                    </div>
+                    <a class="db-link" href="https://www.ceads.net.cn/" target="_blank">访问官网 →</a>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">CPCD 中国产品全生命周期排放系数库</div>
+                            <div class="db-org">生态环境部规划研究院</div>
+                        </div>
+                        <span class="tag tag-blue">政府</span>
+                    </div>
+                    <div class="db-desc">
+                        中国产品全生命周期温室气体排放系数库（China Products Carbon Footprint Factors Database），提供碳足迹建模工具，聚焦产品级碳足迹因子数据，服务于企业产品碳足迹核算与合规申报。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">产品级</span>
+                        <span class="tag tag-green">LCA建模</span>
+                        <span class="tag tag-orange">合规导向</span>
+                    </div>
+                    <a class="db-link" href="https://lca.cityghg.com/" target="_blank">访问官网 →</a>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">CLCD 中国生命周期基础数据库</div>
+                            <div class="db-org">四川大学 / 亿科环境</div>
+                        </div>
+                        <span class="tag tag-purple">商业</span>
+                    </div>
+                    <div class="db-desc">
+                        涵盖基础能源、大宗原材料、运输、废弃物处置等 <strong>4,000余个</strong> 单元过程。数据来源于行业统计和企业报告，是国内较早建立的商业化生命周期数据库之一，广泛应用于产品碳足迹和LCA研究。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">4000+单元</span>
+                        <span class="tag tag-green">行业统计</span>
+                        <span class="tag tag-orange">LCA/EPD</span>
+                    </div>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">天工 LCA 数据库</div>
+                            <div class="db-org">清华大学</div>
+                        </div>
+                        <span class="tag tag-purple">学术</span>
+                    </div>
+                    <div class="db-desc">
+                        依托人工采集文献数据，由AI模型整理入库，已提供 <strong>4,000余个</strong> 单元过程排放因子，支持省市级数据应用。数据格式符合ILCD标准，满足欧盟电池法等国际标准对数据库格式的要求。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">4000+单元</span>
+                        <span class="tag tag-green">AI整理</span>
+                        <span class="tag tag-orange">ILCD格式</span>
+                    </div>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">碳阻迹 CCDB</div>
+                            <div class="db-org">碳阻迹（北京）科技有限公司</div>
+                        </div>
+                        <span class="tag tag-blue">商业</span>
+                    </div>
+                    <div class="db-desc">
+                        中国碳排放因子数据库（China Carbon Database），聚焦中国本土化排放因子，数据较符合中国实际生产特征。提供企业碳核算、产品碳足迹等数据服务，是国内较早从事碳数据商业化的平台之一。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">本土化</span>
+                        <span class="tag tag-green">企业级</span>
+                        <span class="tag tag-orange">SaaS</span>
+                    </div>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">工信部锂电池碳足迹背景数据库</div>
+                            <div class="db-org">工业和信息化部</div>
+                        </div>
+                        <span class="tag tag-red">行业</span>
+                    </div>
+                    <div class="db-desc">
+                        专为动力电池行业建设，覆盖正极材料、负极材料、电解液、隔膜等核心原材料及制造过程。2026年起工信部要求NEV电池制造商报送产品碳足迹数据，该数据库为行业提供统一背景数据支撑。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">电池专用</span>
+                        <span class="tag tag-green">强制报送</span>
+                        <span class="tag tag-orange">2026试点</span>
+                    </div>
+                </div>
+                <div class="db-card cn">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">浙江省纺织产业链碳足迹数据库</div>
+                            <div class="db-org">浙江省经信厅 / 科研机构</div>
+                        </div>
+                        <span class="tag tag-green">地方</span>
+                    </div>
+                    <div class="db-desc">
+                        全国首个基于实景数据的纺织产业链碳足迹数据库，覆盖天然纤维、化纤纤维两大门类和8个细分品类，研发入库 <strong>400+</strong> 碳足迹因子。为纺织服装产业集群绿色升级提供数据支撑。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">400+因子</span>
+                        <span class="tag tag-green">实景数据</span>
+                        <span class="tag tag-orange">纺织业</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- International Database Section -->
+        <div class="section" id="sec-intl">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(59,130,246,0.15);">🌍</span>
+                    国际碳足迹数据库全景
+                </div>
+                <span class="tag tag-blue">成熟体系 · 国际互认</span>
+            </div>
+            <div class="db-grid">
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">Ecoinvent</div>
+                            <div class="db-org">瑞士 Ecoinvent Centre</div>
+                        </div>
+                        <span class="tag tag-blue">国际通用</span>
+                    </div>
+                    <div class="db-desc">
+                        全球最广泛使用的生命周期清单数据库之一，包含约 <strong>23,000条</strong> 数据集。但标注为中国的数据仅占约4%，且大量使用欧洲或全球平均数据近似替代中国实际情况，部分数据源自2000年左右的样本。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">23000数据集</span>
+                        <span class="tag tag-green">ILCD格式</span>
+                        <span class="tag tag-orange">中国数据偏少</span>
+                    </div>
+                </div>
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">GaBi</div>
+                            <div class="db-org">德国 Sphera (原 thinkstep)</div>
+                        </div>
+                        <span class="tag tag-blue">商业</span>
+                    </div>
+                    <div class="db-desc">
+                        全球领先的商业化LCA数据库，约 <strong>20,000条</strong> 数据集。中国相关数据同样存在量少、年份久远、溯源性差的问题。电力碳足迹因子大多在 <strong>0.8-1.0 kgCO₂e/kWh</strong> 之间，显著高于中国官方数据。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">20000数据集</span>
+                        <span class="tag tag-green">商业级</span>
+                        <span class="tag tag-orange">电力因子偏高</span>
+                    </div>
+                </div>
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">欧盟环境足迹数据库 EF</div>
+                            <div class="db-org">欧盟委员会 JRC</div>
+                        </div>
+                        <span class="tag tag-red">法规强制</span>
+                    </div>
+                    <div class="db-desc">
+                        欧盟官方环境足迹数据库（Environmental Footprint Database），是欧盟PEF/OEF法规体系下的核心数据库。数据格式为ILCD/EF兼容格式，在欧盟电池法等法规中被列为 <strong>第一优先级</strong> 数据来源。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">EF兼容</span>
+                        <span class="tag tag-green">法规优先</span>
+                        <span class="tag tag-orange">欧盟电池法</span>
+                    </div>
+                </div>
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">UK Government GHG Conversion Factors</div>
+                            <div class="db-org">英国政府</div>
+                        </div>
+                        <span class="tag tag-green">官方</span>
+                    </div>
+                    <div class="db-desc">
+                        英国政府发布的温室气体排放转换因子数据库，主要用于企业温室气体盘查和报告。数据更新频率较高，覆盖能源、交通、废弃物等多个领域，是英国企业碳核算的法定参考数据源。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">年度更新</span>
+                        <span class="tag tag-green">政府发布</span>
+                        <span class="tag tag-orange">英国法定</span>
+                    </div>
+                </div>
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">日本供应链排放系数数据库</div>
+                            <div class="db-org">日本经济产业省 / 供应链倡议组织</div>
+                        </div>
+                        <span class="tag tag-green">官方</span>
+                    </div>
+                    <div class="db-desc">
+                        日本官方推动的供应链温室气体排放系数数据库，服务于日本企业的范围三排放核算。数据覆盖日本国内主要行业和原材料，是日本企业开展供应链碳管理的重要工具。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">供应链</span>
+                        <span class="tag tag-green">范围三</span>
+                        <span class="tag tag-orange">日本国内</span>
+                    </div>
+                </div>
+                <div class="db-card intl">
+                    <div class="db-header">
+                        <div>
+                            <div class="db-name">USLCI / Federal LCA Commons</div>
+                            <div class="db-org">美国 NREL / 联邦政府</div>
+                        </div>
+                        <span class="tag tag-blue">官方</span>
+                    </div>
+                    <div class="db-desc">
+                        美国国家可再生能源实验室（NREL）维护的美国生命周期清单数据库（USLCI），以及联邦LCA共享平台。主要覆盖北美地区能源、化工、材料等行业的生命周期数据。
+                    </div>
+                    <div class="db-meta">
+                        <span class="tag tag-blue">北美聚焦</span>
+                        <span class="tag tag-green">联邦平台</span>
+                        <span class="tag tag-orange">开放获取</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Comparison -->
+        <div class="section" id="sec-compare">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(245,158,11,0.15);">⚖️</span>
+                    国内外数据库核心差异对比
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>评估维度</th>
+                            <th>国内数据库</th>
+                            <th>国际数据库</th>
+                            <th>对企业的影响</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>数据格式标准化</td>
+                            <td>天工、CLCD 支持 ILCD；国家因子库为排放因子格式</td>
+                            <td>Ecoinvent、EF 完全符合 ILCD/EF 标准</td>
+                            <td><span class="tag tag-red">出口欧盟需EF兼容格式</span></td>
+                        </tr>
+                        <tr>
+                            <td>中国数据代表性</td>
+                            <td><span class="score-bar"><span class="score-bar-fill score-high" style="width: 90%;"></span></span>高</td>
+                            <td><span class="score-bar"><span class="score-bar-fill score-low" style="width: 25%;"></span></span>低（仅占4%）</td>
+                            <td><span class="tag tag-orange">国际库算出的中国产品碳足迹可能偏高</span></td>
+                        </tr>
+                        <tr>
+                            <td>行业覆盖面</td>
+                            <td>能源、电力、钢铁、纺织、电池等重点行业</td>
+                            <td>覆盖全球主要行业，数据颗粒度细</td>
+                            <td><span class="tag tag-blue">国内库行业覆盖仍在扩展中</span></td>
+                        </tr>
+                        <tr>
+                            <td>更新频率</td>
+                            <td>国家库2026年3月刚更新第二版；部分库更新较慢</td>
+                            <td>Ecoinvent 约每2-3年大版本更新</td>
+                            <td><span class="tag tag-green">国家库已实现动态更新机制</span></td>
+                        </tr>
+                        <tr>
+                            <td>国际认可度</td>
+                            <td>正在推动国际互认；ISO框架下新注册352名专家</td>
+                            <td>已被全球广泛采信，欧盟法规直接引用</td>
+                            <td><span class="tag tag-red">出口合规目前仍优先使用国际库</span></td>
+                        </tr>
+                        <tr>
+                            <td>电力碳足迹因子</td>
+                            <td>0.5777 kgCO₂e/kWh（2024年全国平均）</td>
+                            <td>0.8-1.0 kgCO₂e/kWh（国际库中国电力）</td>
+                            <td><span class="tag tag-orange">差异达30-70%，直接影响产品竞争力</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Policy Timeline -->
+        <div class="section" id="sec-timeline">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(16,185,129,0.15);">📅</span>
+                    碳足迹政策与数据库建设时间线
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年</div>
+                    <div class="timeline-content">发布《温室气体 产品碳足迹量化要求和指南》（GB/T 24067-2024）；全国电力平均碳足迹因子 <strong>0.6205 kgCO₂e/kWh</strong></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年1月</div>
+                    <div class="timeline-content">四部门公布产品碳足迹标识认证试点名单，覆盖 <strong>25省57个地区</strong>，涵盖锂电池、光伏、钢铁等17种重点产品</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年12月</div>
+                    <div class="timeline-content">生态环境部等6部门印发《产品碳足迹因子数据库建设工作指引》，明确2027年初步构建、2030年基本建成目标</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026年2月</div>
+                    <div class="timeline-content">《产品碳足迹核算标准目录（第三批）》新增42项产品核算标准；国家温室气体排放因子数据库第二版上线（576因子）</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026年3月</div>
+                    <div class="timeline-content">国家温室气体排放因子数据库第二版正式上线，新增和更新291个排放因子，本土化因子达267个</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026年6月</div>
+                    <div class="timeline-content">生态环境部发布《产品碳足迹管理体系建设进展报告（2026）》；中国进口废纸纸制品碳足迹认证要求生效</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026年8月</div>
+                    <div class="timeline-content">欧盟新电池法碳足迹标签正式生效——电动汽车电池、可充电工业电池、LMT电池必须标示碳足迹性能等级</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2027年</div>
+                    <div class="timeline-content">国家产品碳足迹因子数据库初步构建完成；工信部NEV电池碳足迹全面报送启动；纺织品DPP预计生效</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- R&D Recommendations -->
+        <div class="section" id="sec-advice">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(139,92,246,0.15);">🔮</span>
+                    下周研发建议
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>优先级</th>
+                        <th>方向</th>
+                        <th>依据</th>
+                        <th>证据等级</th>
+                    </tr>
+                </thead>
+                <tbody>
+<tr>
+                        <td><span class="tag tag-red">P0</span></td>
+                        <td>建设企业级本地化碳足迹因子库</td>
+                        <td>国家数据库第二版已上线，但行业覆盖仍有限；出口合规需平衡国际认可度与本土数据准确性</td>
+                        <td><span class="tag tag-blue">A</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-red">P0</span></td>
+                        <td>动力电池碳足迹核算系统</td>
+                        <td>工信部2026年试点报送已启动，欧盟电池法8月标签生效，双重要求叠加</td>
+                        <td><span class="tag tag-blue">A</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-orange">P1</span></td>
+                        <td>供应链碳数据自动采集工具</td>
+                        <td>范围三排放占比高，央企/跨国企业已将碳足迹纳入供应商评估；91家央企优先选用绿色低碳产品</td>
+                        <td><span class="tag tag-blue">A</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-orange">P1</span></td>
+                        <td>ILCD/EF兼容数据格式转换</td>
+                        <td>欧盟电池法要求ILCD格式数据；天工、CLCD已支持，需开发自动化转换中间件</td>
+                        <td><span class="tag tag-green">B</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag tag-green">P2</span></td>
+                        <td>AI辅助LCA建模与碳热点识别</td>
+                        <td>中国信通院报告：AI辅助LCA建模是未来三年三大趋势之一</td>
+                        <td><span class="tag tag-green">B</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Product Opportunities -->
+        <div class="section" id="sec-opp">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon" style="background: rgba(245,158,11,0.15);">🏆</span>
+                    本周产品机会 Top 10
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>产品/服务</th>
+                        <th>市场驱动力</th>
+                        <th>热度</th>
+                    </tr>
+                </thead>
+                <tbody>
+<tr>
+                        <td>1</td>
+                        <td>产品碳足迹 SaaS 核算平台</td>
+                        <td>2025年市场规模87.3亿元，同比增42.6%；从"合规导向"转向"价值导向"</td>
+                        <td><span class="tag tag-red">🔥🔥🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>电池全生命周期碳足迹管理系统</td>
+                        <td>工信部强制报送+欧盟电池法标签双重驱动</td>
+                        <td><span class="tag tag-red">🔥🔥🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>供应链碳数据协同平台</td>
+                        <td>巴斯夫等链主企业要求供应商提供PCF数据；范围三成管理重点</td>
+                        <td><span class="tag tag-orange">🔥🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>本地化碳足迹因子库定制服务</td>
+                        <td>国际库中国数据偏差大（电力因子差30-70%），企业急需本土可信数据</td>
+                        <td><span class="tag tag-orange">🔥🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>碳足迹标识认证咨询</td>
+                        <td>25省57地区试点已发放首批证书，市场进入放量期</td>
+                        <td><span class="tag tag-orange">🔥🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>数字产品护照（DPP）解决方案</td>
+                        <td>欧盟ESPR框架下，电子产品DPP已于2026年4月生效，纺织品预计2027年7月</td>
+                        <td><span class="tag tag-green">🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>碳足迹与绿色金融挂钩产品</td>
+                        <td>"碳数贷""碳易贷"等创新贷款产品涌现，金融机构需要碳数据风控模型</td>
+                        <td><span class="tag tag-green">🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>EPD（环境产品声明）预评估工具</td>
+                        <td>出口欧盟建材、纺织品需EPD；国内标准体系快速完善</td>
+                        <td><span class="tag tag-green">🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>CBAM合规申报自动化工具</td>
+                        <td>CBAM已进入全面征收期，进口商需按实际碳排放缴费</td>
+                        <td><span class="tag tag-green">🔥</span></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>碳足迹培训与人才认证</td>
+                        <td>LCA人才缺口大；碳迹方舟等公司已开展培训业务，市场需求旺盛</td>
+                        <td><span class="tag tag-green">🔥</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            CarbSeek Insight · 碳产业研发情报智能体 · 实时情报中心 · 每周自动更新<br>
+            数据来源：生态环境部、欧盟官方公报、Nature、ISO、CEADs、36氪、企业年报、行业协会 | 证据等级：A=官方/学术 B=行业报告 C=新闻推测<br>
+            <span style="color: #4b5563;">更新时间：2026-10-01</span>
+        </div>
+    </div>
+<script>
+(function(){
+var tabs=document.querySelectorAll('.topnav-tab');
+var secs={};
+tabs.forEach(function(t){secs[t.dataset.sec]=document.getElementById('sec-'+t.dataset.sec)});
+var lockUntil=0;
+function setActive(name){
+tabs.forEach(function(t){t.classList.toggle('active',t.dataset.sec===name)});
+}
+tabs.forEach(function(t){
+t.addEventListener('click',function(){
+lockUntil=Date.now()+1500;
+setActive(t.dataset.sec);
+});
+});
+function spy(){
+if(Date.now()<lockUntil)return;
+var pos=window.scrollY+90;
+var current='overview';
+for(var name in secs){
+if(secs[name]&&secs[name].offsetTop<=pos)current=name;
+}
+if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4)current='opp';
+setActive(current);
+}
+window.addEventListener('scroll',spy,{passive:true});
+spy();
+window.addEventListener('load',function(){
+var id=location.hash.slice(1);
+var el=id&&document.getElementById(id);
+if(el){
+var root=document.documentElement;
+root.style.scrollBehavior='auto';
+el.scrollIntoView();
+root.style.scrollBehavior='';
+lockUntil=Date.now()+1500;
+setActive(id.replace('sec-',''));
+}
+});
+})();
+</script>
+</body>
+</html>

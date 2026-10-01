@@ -31,7 +31,7 @@ from email.utils import parsedate_to_datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = os.path.join(ROOT, "template", "index.template.html")
 DEFAULTS = os.path.join(ROOT, "template", "defaults.json")
-OUTPUT = os.path.join(ROOT, "index.html")
+OUTPUT = os.environ.get("AUTO_OUTPUT", os.path.join(ROOT, "index.html"))
 ARCHIVE_DIR = os.path.join(ROOT, "data", "auto")
 STATE = os.path.join(ARCHIVE_DIR, "state.json")
 

@@ -1,26 +1,42 @@
 [
   {
-    "policy": "CBAM 正式征收（取消免费配额）",
-    "deadline": "2026-10-01",
-    "days_left": 54,
+    "policy": "CBAM Q3 证书价格公布",
+    "deadline": "2026-10-05",
     "urgency": "critical"
+  },
+  {
+    "policy": "工信部动力电池碳足迹申报试运行截止（不少于5款电池包）",
+    "deadline": "2026-12-31",
+    "urgency": "critical"
+  },
+  {
+    "policy": "欧盟零毁林产品法规 EUDR 实施",
+    "deadline": "2026-12-30",
+    "urgency": "high"
   },
   {
     "policy": "韩国电子电气碳标签过渡期结束",
     "deadline": "2026-12-31",
-    "days_left": 145,
     "urgency": "high"
   },
   {
-    "policy": "欧盟电池法规碳足迹强制声明",
-    "deadline": "2027-02-18",
-    "days_left": 194,
-    "urgency": "critical"
+    "policy": "英国CBAM生效（8行业）",
+    "deadline": "2027-01-01",
+    "urgency": "high"
   },
   {
     "policy": "CBAM 扩大至有机化学品、塑料",
     "deadline": "2027-01-01",
-    "days_left": 146,
     "urgency": "high"
+  },
+  {
+    "policy": "首批7项电力产品碳足迹量化国家标准实施",
+    "deadline": "2027-02-01",
+    "urgency": "high"
+  },
+  {
+    "policy": "欧盟数字电池护照（DPP）强制实施",
+    "deadline": "2027-02-18",
+    "urgency": "critical"
   }
 ]

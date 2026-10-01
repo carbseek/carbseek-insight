@@ -1,24 +1,24 @@
 {
-  "demo": true,
+  "demo": false,
   "overall_status": "正常运行",
   "update_frequency": "每周一/五 10:00 自动采集",
   "agents": [
     { "icon": "📰", "name": "BaiduNews-Agent", "status": "✓ 今日已更新" },
     { "icon": "📚", "name": "CNKI-Agent", "status": "✓ 今日已更新" },
-    { "icon": "🔬", "name": "Patent-Agent", "status": "✓ 今日已更新" },
+    { "icon": "🔬", "name": "Patent-Agent", "status": "✓ 本周已更新" },
     { "icon": "🏭", "name": "Industry-Agent", "status": "✓ 今日已更新" },
     { "icon": "📋", "name": "Policy-Agent", "status": "✓ 今日已更新" }
   ],
   "stats": [
-    { "value": 24, "label": "总情报数", "color": "blue" },
-    { "value": 17, "label": "高价值情报", "color": "green" },
-    { "value": 6, "label": "政策更新", "color": "purple" },
-    { "value": 2, "label": "专利动态", "color": "amber" }
+    { "value": 43, "label": "总情报数", "color": "blue" },
+    { "value": 16, "label": "本周新增", "color": "green" },
+    { "value": 20, "label": "政策更新", "color": "purple" },
+    { "value": 5, "label": "竞品动态", "color": "amber" }
   ],
   "latest": [
-    { "title": "生态环境部：产品碳足迹管理体系建设进展报告", "tag": "政策", "meta": "20+省市已编制方案" },
-    { "title": "欧盟CBAM Q3申报指南：新增铝制品追溯", "tag": "CBAM", "meta": "12类产品新增要求" },
-    { "title": "宁德时代电池碳足迹降低18%", "tag": "行业", "meta": "年度可持续发展报告" },
-    { "title": "韩国K-碳标签新增家电类别", "tag": "碳标签", "meta": "2027年1月强制实施" }
+    { "title": "生态环境部：国家产品碳足迹因子数据库数据入库专家评审会", "tag": "政策", "meta": "9月16日召开 9/30刊发" },
+    { "title": "欧盟海关强制抽检电池碳足迹声明与护照数据", "tag": "电池法规", "meta": "鹿特丹港扣留中国电池" },
+    { "title": "CBAM Q3证书价格10月5日公布", "tag": "CBAM", "meta": "Q2价格75.28欧元/吨" },
+    { "title": "碳阻迹Carbon Agent千元级核算+中科院磐石·禹衡转化", "tag": "竞品", "meta": "AI核算赛道升温" }
   ]
 }

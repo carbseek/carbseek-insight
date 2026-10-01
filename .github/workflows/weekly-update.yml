@@ -33,6 +33,8 @@ jobs:
       - name: Fetch news & generate page
         env:
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          # 自动日报输出到 auto.html，index.html 为策展版数据驾驶舱（JSON 驱动）
+          AUTO_OUTPUT: auto.html
         run: python3 scripts/weekly_update.py
 
       - name: Commit and push
@@ -40,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html data/auto/
+          git add auto.html data/auto/
           if git diff --staged --quiet; then
             echo "committed=false" >> "$GITHUB_OUTPUT"
             echo "无内容变化，跳过提交"

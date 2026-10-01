@@ -7,7 +7,7 @@
   'use strict';
 
   var DATA = {
-    report: 'data/reports/WR-2026-W30.json',
+    report: 'data/reports/WR-2026-W40.json',
     radar: 'data/radar/this_week.json',
     countdown: 'data/policy_countdown.json',
     trends: 'data/industries/trends.json',
