@@ -1,16 +1,26 @@
-# 敏感配置
-.env
-*.env
-
-# 运行产物
-*.log
+# 依赖与构建产物
+node_modules/
+admin/node_modules/
+server/node_modules/
 __pycache__/
 *.pyc
-*.pyo
+.vite/
 
-# 依赖目录（应通过 npm install 还原，不入库）
-node_modules/
+# 数据库与运行数据（保留 data/auto 情报档案与 JSON 数据）
+server/data/*.db
+server/data/*.db-shm
+server/data/*.db-wal
+*.sqlite
+*.sqlite3
+
+# 日志与临时文件
+*.log
+logs/
+tmp/
+runs*.json
+jobs.json
+joblog.txt
 
 # 系统文件
-.DS_Store
 Thumbs.db
+.DS_Store
